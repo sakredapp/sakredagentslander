@@ -198,21 +198,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Already Selling Life? — its own section, not the lead */}
-      <section className="py-24 bg-[#0F172A] text-white">
+      {/* Already Selling Life? — clean, on-brand */}
+      <section className="py-24 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <div className="text-xs font-medium tracking-[0.25em] text-[#D4B76E] uppercase">For Life Insurance Agents</div>
+            <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase">For Life Insurance Agents</div>
             <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
               Already selling life?
             </h2>
-            <p className="text-white/50 text-lg leading-relaxed max-w-2xl mx-auto">
-              We are not a life insurance platform and we don't onboard for life. Your current book, your current upline, your current carriers — all of that stays exactly where it is.
+            <p className="text-[#0F172A]/55 text-lg leading-relaxed max-w-2xl mx-auto">
+              Keep your book, your upline, your carriers. We're not a life platform. We give you healthcare carrier access and infrastructure so you can add a recurring-commission line — without disrupting anything.
             </p>
-            <p className="text-white/50 text-lg leading-relaxed max-w-2xl mx-auto">
-              What we do is give you access to private healthcare carriers and the infrastructure to help your clients (or new ones) secure health coverage — through you. It's an additional line of business that generates recurring commissions without disrupting anything you're already doing.
-            </p>
-            <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="pt-4">
               <Dialog>
                 <DialogTrigger asChild>
                   <GoldButton data-testid="button-apply-life-agents" className="text-base min-w-[220px]">
