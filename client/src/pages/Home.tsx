@@ -199,7 +199,7 @@ export default function Home() {
       </section>
 
       {/* Already Selling Life? — clean, on-brand */}
-      <section className="py-24 bg-[#F9F9F7]">
+      <section className="py-24 bg-white border-y border-[#C5A059]/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase">For Life Insurance Agents</div>
