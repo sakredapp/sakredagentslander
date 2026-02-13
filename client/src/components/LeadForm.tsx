@@ -197,9 +197,9 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                       <FormLabel>States Licensed In</FormLabel>
                       <div
                         data-testid="select-states"
-                        className="max-h-40 overflow-y-auto rounded-md border border-gray-200 bg-white/50 p-2"
+                        className="max-h-44 overflow-y-auto rounded-md border border-gray-200 bg-white/50 p-3"
                       >
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="grid grid-cols-8 sm:grid-cols-10 gap-1.5">
                           {US_STATES.map((st) => {
                             const isSelected = selected.includes(st);
                             return (
@@ -208,10 +208,10 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                                 type="button"
                                 data-testid={`chip-state-${st}`}
                                 onClick={() => toggle(st)}
-                                className={`px-2 py-0.5 text-xs font-medium rounded border transition-colors ${
+                                className={`py-1.5 text-[11px] font-medium rounded-md border text-center transition-colors ${
                                   isSelected
-                                    ? "bg-[#C5A059]/15 border-[#C5A059]/40 text-[#A68A4A]"
-                                    : "bg-transparent border-[#C5A059]/20 text-gray-500"
+                                    ? "bg-[#C5A059]/20 border-[#C5A059]/50 text-[#8B7340]"
+                                    : "bg-white border-gray-200 text-gray-400 hover:border-[#C5A059]/30 hover:text-gray-500"
                                 }`}
                               >
                                 {st}
