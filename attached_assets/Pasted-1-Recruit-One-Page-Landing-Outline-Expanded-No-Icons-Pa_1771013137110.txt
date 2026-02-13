@@ -1,0 +1,306 @@
+1) Recruit One-Page Landing Outline (Expanded, No Icons)
+Page goals (what the UI must accomplish)
+
+Make the opportunity legible in 10 seconds
+
+Get them to calculator → apply
+
+Route them to Calendly weekly call
+
+Collect phone number (required) + licensing/contracting context
+
+Keep tone: premium, calm, adult
+
+A) Top Nav (minimal)
+
+Left: wordmark (whatever final brand name becomes)
+
+Right: text links
+
+Opportunity
+
+Calculator
+
+Process
+
+FAQ
+
+Apply (button style)
+
+No icons. No extra junk.
+
+B) Hero (above fold)
+
+Headline (pick one later):
+
+“Build a recurring-income book in private healthcare.”
+
+“Sell private healthcare. Stack renewals over time.”
+
+Subhead (1–2 lines):
+“Independent agent model. Structured onboarding. Weekly recruiting call. You can keep selling life wherever you are.”
+
+CTAs
+
+Primary button: Apply to Join
+
+Secondary text button: View Income Calculator
+
+Micro-copy
+“Phone number required — if you register and miss the call, we’ll give you a ring to reschedule.”
+
+Optional: Right-side visual (not an icon)
+A text-only “3-step strip” in a bordered card:
+
+Apply → Weekly Call → Onboarding
+
+C) “What This Is” (clarity section)
+
+Use 3 short paragraphs (not bullets), each with a bold lead-in.
+
+Private Healthcare Division
+We focus on private healthcare solutions for individuals, families, and self-employed clients.
+
+Independent Agent Model
+You remain independent and can keep selling life or other lines with your current setup.
+
+Recurring Commissions
+Your book can compound over time through renewals and consistent production.
+
+D) “Who This Is For” (two-lane)
+
+Two side-by-side cards.
+
+Licensed Agents (Life & Health)
+
+Fast track onboarding
+
+Carrier contracting guidance (where applicable)
+
+Quoting + enrollment workflow
+
+Weekly call cadence
+
+Not Licensed Yet
+
+Clear steps to get licensed
+
+Pre-training access and expectations
+
+Route into onboarding once licensed
+
+CTA under cards: Apply to Join
+
+E) Income Calculator (centerpiece module)
+
+This should feel like a “financial tool,” not marketing.
+
+Inputs (left column)
+
+Avg monthly premium ($)
+
+Policies per month
+
+Avg retention (months)
+
+Commission rate (%)
+
+Toggle: “Building a team?” (optional)
+
+Team size
+
+Avg policies/agent/month
+
+Override %
+
+Outputs (right column, big numbers)
+
+Month 1
+
+Month 6 run-rate
+
+Month 12 run-rate
+
+12-month total
+
+Renewal run-rate
+
+Footer note
+“Estimates only. Actual comp varies by carrier, persistency, and contracting.”
+
+CTA: Apply & Get the Full Comp Plan
+
+F) Process (simple, text-only)
+
+Title: “How It Works”
+
+Three stacked rows in a thin bordered container:
+
+Apply (5 minutes)
+
+Join Weekly Call (expectations + structure)
+
+Start Onboarding (contracting + workflow + training)
+
+No icons. Just text and spacing.
+
+G) “What You Get” (enablement, no hype)
+
+Title: “Agent Infrastructure”
+
+Use clean, short bullets inside a single card:
+
+Scripts + objection handling
+
+Quoting workflow
+
+Weekly training / recruiting cadence
+
+Manager visibility + support
+
+Clear expectations + path by experience level
+
+Avoid promising leads unless you truly provide them.
+
+H) Requirements (filters unserious people)
+
+Title: “Requirements”
+
+Must be licensed or committed to licensing
+
+Professional communication + follow-up discipline
+
+Willingness to follow the process
+
+Compliance-first behavior
+
+I) FAQ (8 questions max)
+
+Make these blunt and short:
+
+Can I keep selling life with my current upline? (Yes.)
+
+Do I need to be licensed? (Preferred; otherwise start licensing track.)
+
+What’s the weekly call? (Overview + next steps.)
+
+How fast can I start? (Depends on licensing/contracting.)
+
+Do you provide leads? (Careful answer.)
+
+Which states do you operate in? (List or “varies.”)
+
+Is this part-time possible? (Yes.)
+
+What happens after I apply? (Calendly + follow-up.)
+
+J) Final CTA (bottom close)
+
+Title: “Apply to Join the Weekly Call”
+Buttons:
+
+Apply (primary)
+
+View Calculator (secondary)
+
+Micro-copy repeated:
+“If you register and don’t attend, we’ll call to reschedule.”
+
+2) Exact Brand Tokens → Web Implementation Spec
+
+You gave exact values. Here’s how to implement them cleanly.
+
+A) CSS variables (global)
+
+Use this in globals.css (or similar):
+
+:root {
+  /* Fonts */
+  --font-body: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-headline: "Playfair Display", Georgia, serif;
+
+  /* Light mode surfaces */
+  --bg-root: #F9F9F7;
+  --bg-card: #FFFFFF;
+  --bg-input: #FFFEFA;
+
+  /* Text */
+  --text-primary: #0F172A;
+
+  /* Gold system */
+  --gold: #C5A059;
+  --gold-light: #EBD598;
+  --gold-dark: #A68A4A;
+  --gold-subtle: rgba(197, 160, 89, 0.1);
+  --gold-medium: rgba(197, 160, 89, 0.2);
+  --gold-border: rgba(197, 160, 89, 0.3);
+
+  /* Status */
+  --success: #4A7C59;
+  --error: #9B3B3B;
+  --warning: #C5A059;
+
+  /* Gradient */
+  --gold-grad-start: #C5A059;
+  --gold-grad-mid: #D4B76E;
+  --gold-grad-end: #EBD598;
+}
+
+B) Tailwind mapping (recommended)
+
+In tailwind.config.js, map to your system so dev doesn’t freestyle colors:
+
+theme: {
+  extend: {
+    fontFamily: {
+      sans: ['var(--font-body)'],
+      serif: ['var(--font-headline)'],
+    },
+    colors: {
+      bg: {
+        root: 'var(--bg-root)',
+        card: 'var(--bg-card)',
+        input: 'var(--bg-input)',
+      },
+      text: {
+        primary: 'var(--text-primary)',
+      },
+      gold: {
+        DEFAULT: 'var(--gold)',
+        light: 'var(--gold-light)',
+        dark: 'var(--gold-dark)',
+        subtle: 'var(--gold-subtle)',
+        medium: 'var(--gold-medium)',
+        border: 'var(--gold-border)',
+      },
+      success: 'var(--success)',
+      error: 'var(--error)',
+      warning: 'var(--warning)',
+    },
+    backgroundImage: {
+      'gold-gradient': 'linear-gradient(90deg, var(--gold-grad-start), var(--gold-grad-mid), var(--gold-grad-end))',
+    },
+  },
+}
+
+C) UI rules (so it looks like your app, not a random landing page)
+
+Background: bg-bg-root
+
+Cards: bg-bg-card border border-gold-border rounded-2xl
+
+Primary button:
+
+bg: gold
+
+hover: gold-dark
+
+text: #0F172A (your Primary)
+
+Secondary action: text-only link in gold-dark with underline on hover
+
+Headline font: Playfair Display only for H1/H2
+
+Body font: DM Sans for everything else
+
+No icons anywhere (buttons, bullets, feature lists)
