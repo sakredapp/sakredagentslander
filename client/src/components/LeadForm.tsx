@@ -208,7 +208,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                                 type="button"
                                 data-testid={`chip-state-${st}`}
                                 onClick={() => toggle(st)}
-                                className={`py-1.5 text-[11px] font-medium rounded-md border text-center transition-colors ${
+                                className={`py-1.5 text-[11px] font-medium rounded-full border text-center transition-colors ${
                                   isSelected
                                     ? "bg-[#C5A059]/20 border-[#C5A059]/50 text-[#8B7340]"
                                     : "bg-white border-gray-200 text-gray-400 hover:border-[#C5A059]/30 hover:text-gray-500"
