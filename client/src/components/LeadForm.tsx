@@ -152,7 +152,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
             <FormItem>
               <FormLabel>Current Occupation / Context</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Real Estate Agent, Teacher, Sales..." {...field} data-testid="input-context" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                <Input placeholder="e.g. Real Estate Agent, Teacher, Sales..." {...field} value={field.value ?? ""} data-testid="input-context" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -1,0 +1,38 @@
+SYSTEM OVERRIDE: STRICT UI & BRANDING DIRECTIVE
+
+You are to completely rebuild the UI of this Sakred recruiting landing page. Stop using default templates, flat designs, and chunky typography. This is a premium, high-stakes wealth-building platform for private healthcare agents. It must look expensive, elegant, and editorial.
+
+1. STRICT COLOR PALETTE (IMPLEMENT AS CSS VARIABLES OR TAILWIND CONFIG):
+You must strictly use these exact values. No deviations.
+
+Golds: Primary #C5A059, Light #EBD598, Dark #A68A4A.
+
+Gold Alphas (For Glows/Borders): Subtle rgba(197, 160, 89, 0.1), Medium rgba(197, 160, 89, 0.2), Border rgba(197, 160, 89, 0.3).
+
+The Gold Gradient (For Buttons/Accents): linear-gradient(to right, #C5A059, #D4B76E, #EBD598).
+
+Light Mode: Background #F9F9F7, Cards #FFFFFF, Text #0F172A.
+
+Dark Mode (If toggled): Background #0F172A, Cards #1E293B, Text #F9F9F7.
+
+2. TYPOGRAPHY RULES (CRITICAL):
+
+ABSOLUTELY NO HEAVY BOLD FONTS. Do not use font-weight: 700, 800, or 900. It looks cheap and ugly.
+
+Headlines/Serif: Use Playfair Display. Max weight is 500 (Medium) or 600 (Semi-bold) for large text, 400 (Regular) for standard headers.
+
+Body/Sans: Use DM Sans. Max weight is 400 or 500.
+
+Execution: Increase letter-spacing slightly on uppercase subheaders to create an airy, elegant, editorial look.
+
+3. ELEVATION, DEPTH, AND LAYOUT (NO MORE FLAT LISTS):
+
+Cards over Lists: Sections like "Agent Infrastructure," "Requirements," and "Who This Is For" MUST NOT be flat text lists. Turn them into elevated UI cards (Bento Box style).
+
+Card Styling: Every card must have a background color (#FFFFFF in light mode), a subtle 1px border using the Gold Border variable rgba(197, 160, 89, 0.3), and a soft drop shadow.
+
+Hover States (Depth): When a user hovers over a card, it must lift up (translate-y: -4px) and project a soft gold glow using the Subtle Gold Alpha box-shadow: 0 10px 30px rgba(197, 160, 89, 0.1).
+
+Buttons: Apply the Gold Gradient. On hover, the gradient should shift or shimmer, and the button should have a slight glow.
+
+Immediate Task: Apply these exact color tokens and typography rules to the global stylesheet. Then, rewrite the "Agent Infrastructure" and "Requirements" sections into a sleek grid of 3D cards using these exact borders and hover glows. Show me the updated code.

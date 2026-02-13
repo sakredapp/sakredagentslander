@@ -49,7 +49,7 @@ export function CommissionCalculator() {
           <div className="space-y-3">
             <div className="flex justify-between gap-4 flex-wrap">
               <span className="text-sm font-medium text-[#0F172A]/70">Avg Monthly Premium</span>
-              <span className="text-sm font-bold text-[#C5A059] tabular-nums">{formatCurrency(premium)}</span>
+              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{formatCurrency(premium)}</span>
             </div>
             <Slider
               value={[premium]}
@@ -65,7 +65,7 @@ export function CommissionCalculator() {
           <div className="space-y-3">
             <div className="flex justify-between gap-4 flex-wrap">
               <span className="text-sm font-medium text-[#0F172A]/70">Policies Per Month</span>
-              <span className="text-sm font-bold text-[#C5A059] tabular-nums">{policies}</span>
+              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{policies}</span>
             </div>
             <Slider
               value={[policies]}
@@ -81,7 +81,7 @@ export function CommissionCalculator() {
           <div className="space-y-3">
             <div className="flex justify-between gap-4 flex-wrap">
               <span className="text-sm font-medium text-[#0F172A]/70">Avg Retention (months)</span>
-              <span className="text-sm font-bold text-[#C5A059] tabular-nums">{retention}</span>
+              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{retention}</span>
             </div>
             <Slider
               value={[retention]}
@@ -97,7 +97,7 @@ export function CommissionCalculator() {
           <div className="space-y-3">
             <div className="flex justify-between gap-4 flex-wrap">
               <span className="text-sm font-medium text-[#0F172A]/70">Commission Rate</span>
-              <span className="text-sm font-bold text-[#C5A059] tabular-nums">{commission}%</span>
+              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{commission}%</span>
             </div>
             <Slider
               value={[commission]}
@@ -118,13 +118,13 @@ export function CommissionCalculator() {
           <div className="grid grid-cols-2 gap-6">
             <div>
               <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">Month 1</div>
-              <div className="text-2xl font-bold tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <div className="text-2xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
                 {formatCurrency(calculate.month1)}
               </div>
             </div>
             <div>
               <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">Month 6 Run-Rate</div>
-              <div className="text-2xl font-bold tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <div className="text-2xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
                 {formatCurrency(calculate.month6)}
               </div>
             </div>
@@ -132,7 +132,7 @@ export function CommissionCalculator() {
 
           <div className="border-t border-[#C5A059]/10 pt-6">
             <div className="text-xs font-semibold tracking-[0.15em] text-[#C5A059] uppercase mb-2">Month 12 Run-Rate</div>
-            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#C5A059] via-[#D4B76E] to-[#A68A4A] bg-clip-text text-transparent tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <div className="text-4xl md:text-5xl font-medium bg-gradient-to-r from-[#C5A059] via-[#D4B76E] to-[#A68A4A] bg-clip-text text-transparent tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
               {formatCurrency(calculate.month12)}
               <span className="text-lg text-[#0F172A]/30 ml-2" style={{ fontFamily: "'DM Sans', sans-serif", WebkitTextFillColor: 'initial' }}>/mo</span>
             </div>
@@ -141,13 +141,13 @@ export function CommissionCalculator() {
           <div className="grid grid-cols-2 gap-6 border-t border-[#C5A059]/10 pt-6">
             <div>
               <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">12-Month Total</div>
-              <div className="text-xl font-bold tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <div className="text-xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
                 {formatCurrency(calculate.total12)}
               </div>
             </div>
             <div>
               <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">Renewal Run-Rate</div>
-              <div className="text-xl font-bold tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <div className="text-xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
                 {formatCurrency(calculate.renewalRunRate)}
               </div>
             </div>

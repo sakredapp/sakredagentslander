@@ -36,7 +36,6 @@ export function Navigation() {
   const navLinks = [
     { label: "Opportunity", id: "opportunity" },
     { label: "Calculator", id: "calculator" },
-    { label: "Process", id: "process" },
     { label: "FAQ", id: "faq" },
   ];
 
@@ -52,7 +51,7 @@ export function Navigation() {
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2 z-50" data-testid="link-home">
           <img src={logoSrc} alt="Sakred Advisors" className="h-10 w-10 object-contain" />
-          <span className="text-xl font-serif font-bold tracking-tight text-[#0F172A]">
+          <span className="text-xl font-serif font-medium tracking-tight text-[#0F172A]">
             Sakred
           </span>
         </Link>
@@ -71,12 +70,12 @@ export function Navigation() {
           
           <Dialog>
             <DialogTrigger asChild>
-              <Button
+              <button
                 data-testid="button-apply-nav"
-                className="bg-gradient-to-r from-[#C5A059] via-[#D4B76E] to-[#C5A059] text-[#0F172A] font-semibold tracking-wide border border-[#A68A4A]/40 shadow-sm hover:shadow-md hover:from-[#B8933F] hover:via-[#C5A059] hover:to-[#B8933F] transition-all duration-300"
+                className="gold-glow-btn text-[#0F172A] font-medium tracking-wide"
               >
                 Apply to Join
-              </Button>
+              </button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
               <DialogHeader>
@@ -121,12 +120,12 @@ export function Navigation() {
               ))}
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button
+                  <button
                     data-testid="button-apply-mobile"
-                    className="w-full mt-4 bg-gradient-to-r from-[#C5A059] via-[#D4B76E] to-[#C5A059] text-[#0F172A] font-semibold border border-[#A68A4A]/40"
+                    className="w-full mt-4 gold-glow-btn text-[#0F172A] font-medium tracking-wide"
                   >
                     Apply to Join
-                  </Button>
+                  </button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[500px]">
                   <DialogHeader>
