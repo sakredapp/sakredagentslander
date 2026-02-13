@@ -56,7 +56,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
           className="flex flex-col items-center justify-center py-10 text-center space-y-6"
         >
           <div className="space-y-2">
-            <h3 className="text-2xl font-serif text-[#0F172A]">Application Received</h3>
+            <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Application Received</h3>
             <p className="text-muted-foreground">Thank you for your interest. Please schedule your intro call below.</p>
           </div>
           
@@ -64,6 +64,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
             variant="gold" 
             size="lg" 
             className="w-full sm:w-auto"
+            data-testid="button-schedule-call"
             onClick={() => window.open("https://calendly.com", "_blank")}
           >
             Schedule Intro Call
@@ -83,7 +84,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                <Input placeholder="John Doe" {...field} data-testid="input-name" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -98,7 +99,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="john@example.com" {...field} className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                  <Input placeholder="john@example.com" {...field} data-testid="input-email" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -111,7 +112,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
               <FormItem>
                 <FormLabel>Phone</FormLabel>
                 <FormControl>
-                  <Input placeholder="(555) 000-0000" {...field} className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                  <Input placeholder="(555) 000-0000" {...field} data-testid="input-phone" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -130,7 +131,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                 defaultValue={field.value ? "yes" : "no"}
               >
                 <FormControl>
-                  <SelectTrigger className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20">
+                  <SelectTrigger className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" data-testid="select-licensed">
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
                 </FormControl>
@@ -151,7 +152,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
             <FormItem>
               <FormLabel>Current Occupation / Context</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Real Estate Agent, Teacher, Sales..." {...field} className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                <Input placeholder="e.g. Real Estate Agent, Teacher, Sales..." {...field} data-testid="input-context" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -159,7 +160,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
         />
 
         <DialogFooter className="pt-4">
-          <Button type="submit" variant="navy" size="lg" className="w-full" disabled={isPending}>
+          <Button type="submit" variant="navy" size="lg" className="w-full" data-testid="button-submit-application" disabled={isPending}>
             {isPending ? "Submitting..." : "Submit Application"}
           </Button>
         </DialogFooter>

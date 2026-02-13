@@ -1,36 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Cream Background */
-  --background: 60 9% 97%; 
-  /* Navy Foreground */
+  --background: 48 33% 97%;
   --foreground: 222 47% 11%;
-  
-  /* Gold Primary */
-  --primary: 40 47% 56%;
-  --primary-foreground: 222 47% 11%;
-  
-  /* Light Gold Secondary/Muted */
-  --secondary: 40 47% 96%;
-  --secondary-foreground: 40 47% 30%;
-  
-  --muted: 40 20% 90%;
-  --muted-foreground: 215 16% 47%;
-  
-  --accent: 40 47% 56%;
-  --accent-foreground: 222 47% 11%;
-  
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
 
-  --border: 40 30% 85%;
-  --input: 40 30% 85%;
-  --ring: 40 47% 56%;
-  
+  --primary: 41 44% 55%;
+  --primary-foreground: 222 47% 11%;
+
+  --secondary: 43 30% 94%;
+  --secondary-foreground: 41 44% 35%;
+
+  --muted: 43 15% 90%;
+  --muted-foreground: 215 16% 47%;
+
+  --accent: 41 44% 55%;
+  --accent-foreground: 222 47% 11%;
+
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+
+  --border: 41 25% 82%;
+  --input: 41 25% 82%;
+  --ring: 41 44% 55%;
+
   --radius: 0.5rem;
 }
 
@@ -39,37 +41,24 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/30;
-    font-family: 'DM Sans', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', Georgia, serif;
   }
 }
 
-.text-gold {
-  color: hsl(40 47% 56%);
-}
-
-.bg-gold {
-  background-color: hsl(40 47% 56%);
-}
-
-.border-gold {
-  border-color: hsl(40 47% 56%);
-}
-
-/* Custom Scrollbar for a premium feel */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--border));
-  border-radius: 4px;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
+  background: #C5A059;
 }

@@ -4,13 +4,16 @@ import * as schema from "@shared/schema";
 
 const { Pool } = pg;
 
-const connectionString = process.env.SUPABASE_DATABASE_URL;
+const connectionString = process.env.SUPABASE_POOLER_URL || process.env.SUPABASE_DATABASE_URL;
 
 if (!connectionString) {
   throw new Error(
-    "SUPABASE_DATABASE_URL must be set. Did you forget to add your Supabase connection string?",
+    "SUPABASE_POOLER_URL must be set.",
   );
 }
 
-export const pool = new Pool({ connectionString });
+export const pool = new Pool({ 
+  connectionString,
+  ssl: { rejectUnauthorized: false }
+});
 export const db = drizzle(pool, { schema });
