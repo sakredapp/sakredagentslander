@@ -34,9 +34,12 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
       email: "",
       phone: "",
       isLicensed: false,
+      npn: "",
       licensingContext: "",
     },
   });
+
+  const isLicensed = form.watch("isLicensed");
 
   function onSubmit(data: InsertLead) {
     mutate(data, {
@@ -144,6 +147,31 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
             </FormItem>
           )}
         />
+
+        <AnimatePresence>
+          {isLicensed && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <FormField
+                control={form.control}
+                name="npn"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>NPN (National Producer Number)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. 12345678" {...field} value={field.value ?? ""} data-testid="input-npn" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <FormField
           control={form.control}

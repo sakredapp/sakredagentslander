@@ -8,7 +8,8 @@ export const leads = pgTable("leads", {
   email: text("email").notNull(),
   phone: text("phone").notNull(),
   isLicensed: boolean("is_licensed").default(false),
-  licensingContext: text("licensing_context"), // For "contracting context" if needed
+  npn: text("npn"),
+  licensingContext: text("licensing_context"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -17,6 +18,7 @@ export const insertLeadSchema = createInsertSchema(leads).pick({
   email: true,
   phone: true,
   isLicensed: true,
+  npn: true,
   licensingContext: true,
 });
 
