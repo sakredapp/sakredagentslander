@@ -30,7 +30,7 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.15
     }
   }
 };
@@ -40,7 +40,7 @@ const GoldButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTML
     return (
       <button
         ref={ref}
-        className={`gold-glow-btn inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold tracking-wide disabled:pointer-events-none disabled:opacity-50 ${className}`}
+        className={`gold-glow-btn inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium tracking-wide disabled:pointer-events-none disabled:opacity-50 ${className}`}
         {...props}
       >
         {children}
@@ -50,11 +50,45 @@ const GoldButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTML
 );
 GoldButton.displayName = "GoldButton";
 
+const infrastructureItems = [
+  {
+    title: "Assigned Mentor",
+    summary: "One-on-one guidance from day one",
+    detail: "Every new agent is paired with an experienced mentor who has built their own healthcare book. Your mentor walks you through your first cases, reviews your quoting process, and is available for real-time support as you ramp up. This isn't a group chat — it's a direct relationship with someone who's done what you're doing."
+  },
+  {
+    title: "Proprietary Training Platform",
+    summary: "On-demand access to structured coursework",
+    detail: "Our private training software covers everything from carrier product knowledge and compliance requirements to advanced sales techniques. Modules are self-paced with assessments, so you can train on your schedule. New content is added regularly as carriers update plans and guidelines change."
+  },
+  {
+    title: "Scripts & Objection Handling",
+    summary: "Tested frameworks for real client conversations",
+    detail: "You'll receive proven call scripts, email templates, and objection-handling frameworks refined over thousands of client interactions. These aren't generic templates — they're specific to private healthcare enrollment and built for the objections you'll actually hear from prospects."
+  },
+  {
+    title: "Lead Flow & Lead Cost Programs",
+    summary: "Access to leads with potential cost coverage",
+    detail: "We provide access to vetted lead vendors at discounted rates. For agents hitting consistent production targets, there's potential for lead costs to be partially or fully covered at a reduced commission split. You also get training on organic lead generation so you're never fully dependent on purchased leads."
+  },
+  {
+    title: "Quoting & Enrollment Workflow",
+    summary: "Streamlined process from first call to active policy",
+    detail: "Our step-by-step quoting workflow takes you from needs analysis through carrier selection, plan comparison, client presentation, and enrollment submission. You'll know exactly what to do at each stage — no guesswork. Includes carrier-specific submission checklists so nothing falls through the cracks."
+  },
+  {
+    title: "Weekly Training & Team Calls",
+    summary: "Live sessions on products, compliance, and strategy",
+    detail: "Every week we run live training covering new carrier products, compliance updates, sales strategy, and real case studies. There's also a dedicated recruiting call for agents building teams. These aren't optional webinars — they're working sessions designed to keep you sharp and connected to what's happening in the market."
+  },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F9F9F7] text-[#0F172A]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <Navigation />
 
+      {/* Hero — leads with the opportunity, not the audience */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <motion.div
@@ -63,8 +97,8 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.div variants={fadeInUp} className="mb-4">
-              <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-[#A68A4A] uppercase border border-[#C5A059]/30 rounded-full bg-[#C5A059]/5">
-                Independent Agent Model
+              <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase border border-[#C5A059]/30 rounded-full bg-[#C5A059]/5">
+                Private Healthcare &middot; Recurring Commissions
               </span>
             </motion.div>
             
@@ -76,7 +110,8 @@ export default function Home() {
             </motion.h1>
             
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#0F172A]/55 max-w-2xl mx-auto leading-relaxed pt-4">
-              Already selling life? This platform gives you access to private healthcare carriers, contracts, and training — so your clients get health coverage through you. You stay independent. We handle the infrastructure.
+              Private healthcare is a recurring-commission line with compounding renewals.
+              We give you the carriers, contracts, training, and infrastructure to build a book that pays you month after month.
             </motion.p>
 
             <motion.p variants={fadeInUp} className="text-sm text-[#0F172A]/40 max-w-xl mx-auto pt-2 italic">
@@ -123,6 +158,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The Opportunity — healthcare-first, not life-agent-first */}
       <section id="opportunity" className="py-24 bg-white border-y border-[#C5A059]/10" data-testid="section-opportunity">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div 
@@ -134,34 +170,69 @@ export default function Home() {
           >
             <motion.div variants={fadeInUp} className="space-y-4">
               <div className="w-12 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#D4B76E] mb-6" />
-              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Private Healthcare Division</h3>
+              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Private Healthcare Market</h3>
               <p className="text-[#0F172A]/55 leading-relaxed">
-                We focus on private healthcare solutions for individuals, families, and self-employed clients. 
-                A massive, underserved market with growing demand.
+                Individuals, families, and self-employed clients need health coverage and don't know where to find it.
+                This is a massive, underserved market with growing demand every year.
               </p>
             </motion.div>
             
             <motion.div variants={fadeInUp} className="space-y-4">
               <div className="w-12 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#D4B76E] mb-6" />
-              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Independent Agent Model</h3>
+              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Recurring Revenue Model</h3>
               <p className="text-[#0F172A]/55 leading-relaxed">
-                You remain independent and can keep selling life or other lines with your current setup. 
-                We provide contracts, carrier access, and training infrastructure.
+                Healthcare policies pay monthly commissions that renew as long as the client stays on the plan.
+                Your book compounds over time — stop trading hours for dollars and start building an asset.
               </p>
             </motion.div>
             
             <motion.div variants={fadeInUp} className="space-y-4">
               <div className="w-12 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#D4B76E] mb-6" />
-              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Recurring Commissions</h3>
+              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Full Infrastructure</h3>
               <p className="text-[#0F172A]/55 leading-relaxed">
-                Your book can compound over time through renewals and consistent production. 
-                Stop trading time for money — build an asset.
+                Carrier contracts, quoting tools, training platform, scripts, mentor support, and a weekly cadence to keep you on track.
+                You focus on selling — we handle the backend.
               </p>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
+      {/* Already Selling Life? — its own section, not the lead */}
+      <section className="py-24 bg-[#0F172A] text-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <div className="text-xs font-medium tracking-[0.25em] text-[#D4B76E] uppercase">For Life Insurance Agents</div>
+            <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Already selling life?
+            </h2>
+            <p className="text-white/50 text-lg leading-relaxed max-w-2xl mx-auto">
+              We are not a life insurance platform and we don't onboard for life. Your current book, your current upline, your current carriers — all of that stays exactly where it is.
+            </p>
+            <p className="text-white/50 text-lg leading-relaxed max-w-2xl mx-auto">
+              What we do is give you access to private healthcare carriers and the infrastructure to help your clients (or new ones) secure health coverage — through you. It's an additional line of business that generates recurring commissions without disrupting anything you're already doing.
+            </p>
+            <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <GoldButton data-testid="button-apply-life-agents" className="text-base min-w-[220px]">
+                    Apply to Join
+                  </GoldButton>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>Start Your Application</DialogTitle>
+                    <DialogDescription>Complete the form below to schedule your introduction call.</DialogDescription>
+                  </DialogHeader>
+                  <LeadForm />
+                </DialogContent>
+              </Dialog>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who This Is For */}
       <section className="py-24 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -172,31 +243,31 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5" data-testid="card-licensed">
               <CardContent className="p-10 space-y-5">
-                <div className="text-xs font-semibold tracking-[0.2em] text-[#A68A4A] uppercase">Fast Track</div>
+                <div className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase">Fast Track</div>
                 <h3 className="text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Licensed Agents</h3>
                 <p className="text-[#0F172A]/55 leading-relaxed">
-                  You already sell life or other lines. Add private healthcare to serve your clients better — with carrier access, quoting tools, and support infrastructure.
+                  You already hold a Life &amp; Health license. You want access to healthcare carriers, higher splits, and real ownership of a compounding book.
                 </p>
                 <ul className="space-y-2 text-[#0F172A]/65 text-sm">
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Fast track onboarding</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Carrier contracting guidance</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Quoting + enrollment workflow</li>
-                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Weekly call cadence</li>
+                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Mentor assignment + weekly cadence</li>
                 </ul>
               </CardContent>
             </Card>
 
-            <Card className="bg-[#0F172A] text-white border-none shadow-xl" data-testid="card-not-licensed">
+            <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5" data-testid="card-not-licensed">
               <CardContent className="p-10 space-y-5">
-                <div className="text-xs font-semibold tracking-[0.2em] text-[#D4B76E] uppercase">Getting Started</div>
+                <div className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase">Getting Started</div>
                 <h3 className="text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Not Licensed Yet</h3>
-                <p className="text-white/60 leading-relaxed">
-                  Entrepreneurs, sales pros, career changers. Get licensed and build a healthcare book from scratch with full onboarding support.
+                <p className="text-[#0F172A]/55 leading-relaxed">
+                  Entrepreneurs, sales professionals, career changers. You're willing to get licensed and build a healthcare book from scratch with full onboarding support.
                 </p>
-                <ul className="space-y-2 text-white/55 text-sm">
-                  <li className="flex items-start gap-2"><span className="text-[#D4B76E] mt-0.5">&#8226;</span> Clear steps to get licensed</li>
-                  <li className="flex items-start gap-2"><span className="text-[#D4B76E] mt-0.5">&#8226;</span> Pre-training access and expectations</li>
-                  <li className="flex items-start gap-2"><span className="text-[#D4B76E] mt-0.5">&#8226;</span> Route into onboarding once licensed</li>
+                <ul className="space-y-2 text-[#0F172A]/65 text-sm">
+                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Clear steps to get licensed</li>
+                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Pre-training access and expectations</li>
+                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Full onboarding once licensed</li>
                 </ul>
               </CardContent>
             </Card>
@@ -221,6 +292,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Calculator */}
       <section id="calculator" className="py-24 bg-white" data-testid="section-calculator">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -240,61 +312,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#F9F9F7]">
+      {/* Agent Infrastructure — expandable accordion style */}
+      <section id="infrastructure" className="py-24 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-medium mb-12 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Agent Infrastructure</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { title: "Scripts & Objection Handling", desc: "Proven frameworks for client conversations" },
-                { title: "Quoting Workflow", desc: "Streamlined process from quote to enrollment" },
-                { title: "Weekly Training", desc: "Live sessions on products, compliance, and sales" },
-                { title: "Recruiting Cadence", desc: "Structured weekly calls for team alignment" },
-                { title: "Manager Support", desc: "Direct access to experienced leadership" },
-                { title: "Growth Path", desc: "Clear expectations by experience level" },
-              ].map((item, i) => (
-                <div key={i} className="gold-card p-8 space-y-3" data-testid={`card-infrastructure-${i}`}>
-                  <h3 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{item.title}</h3>
-                  <p className="text-[#0F172A]/55 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Get</div>
+              <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Agent Infrastructure</h2>
             </div>
+            
+            <Accordion type="multiple" className="w-full space-y-4">
+              {infrastructureItems.map((item, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`infra-${i}`}
+                  className="gold-card border-0 overflow-visible px-0"
+                  data-testid={`card-infrastructure-${i}`}
+                >
+                  <AccordionTrigger className="px-8 py-6 hover:no-underline [&[data-state=open]]:pb-2">
+                    <div className="flex flex-col items-start text-left gap-1">
+                      <h3 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{item.title}</h3>
+                      <p className="text-[#0F172A]/45 text-sm font-normal">{item.summary}</p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-8 pt-2">
+                    <div className="border-t border-[#C5A059]/10 pt-5">
+                      <p className="text-[#0F172A]/60 text-sm leading-[1.8]">{item.detail}</p>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-medium mb-12 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Requirements</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { title: "Licensed or Committed", desc: "Must hold or be pursuing a Life & Health license" },
-                { title: "Professional Standards", desc: "Strong communication and follow-up discipline" },
-                { title: "Process-Driven", desc: "Willingness to follow the proven system" },
-                { title: "Compliance First", desc: "Ethical, compliant behavior in all client interactions" },
-              ].map((item, i) => (
-                <div key={i} className="gold-card p-8 space-y-3" data-testid={`card-requirement-${i}`}>
-                  <h3 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{item.title}</h3>
-                  <p className="text-[#0F172A]/55 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" className="py-24 bg-[#F9F9F7]" data-testid="section-faq">
+      {/* FAQ */}
+      <section id="faq" className="py-24 bg-white" data-testid="section-faq">
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
           <h2 className="text-3xl md:text-5xl font-medium mb-12 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Frequently Asked Questions</h2>
           
           <Accordion type="single" collapsible className="w-full">
             {[
-              { q: "Can I keep selling life with my current upline?", a: "Absolutely. We are not a life insurance platform. We give you access to private healthcare carriers so you can help your existing clients (or new ones) secure health coverage. Your life business stays exactly where it is." },
+              { q: "Can I keep selling life with my current upline?", a: "Absolutely. We are not a life insurance platform and we don't onboard for life. We give you access to private healthcare carriers so you can help your existing clients (or new ones) secure health coverage. Your life business stays exactly where it is." },
               { q: "Do I need to be licensed?", a: "Preferred. If you're not licensed yet, we'll guide you through the licensing process — it typically takes 1-2 weeks." },
               { q: "What's the weekly call?", a: "A brief overview call covering expectations, next steps, and current opportunities. It's how we stay aligned." },
               { q: "How fast can I start?", a: "Depends on your licensing and contracting status. Licensed agents can start within days." },
-              { q: "Do you provide leads?", a: "We teach you how to generate your own high-intent leads and provide access to discounted lead vendors. We don't hand out free leads." },
+              { q: "Do you provide leads?", a: "We provide access to vetted lead vendors at discounted rates and train you on organic lead generation. For agents hitting production targets, there's potential for lead costs to be partially covered at a reduced commission split." },
               { q: "Is this part-time possible?", a: "Yes. Many agents start part-time while transitioning. We prefer a plan to go full-time within 3-6 months." },
               { q: "Which states do you operate in?", a: "Varies by carrier. We can discuss your specific state during the intro call." },
               { q: "What happens after I apply?", a: "You'll be directed to schedule a call via Calendly. If you register and don't attend, we'll call to reschedule." },
@@ -312,41 +376,10 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-[#0F172A] text-white py-24">
-        <div className="container mx-auto px-4 md:px-6 text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Apply to Join the Weekly Call
-          </h2>
-          <p className="text-white/40 max-w-xl mx-auto text-lg">
-            If you register and don't attend, we'll call to reschedule.
-          </p>
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Dialog>
-              <DialogTrigger asChild>
-                <GoldButton data-testid="button-apply-footer" className="text-base min-w-[220px]">
-                  Apply Now
-                </GoldButton>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>Start Your Application</DialogTitle>
-                  <DialogDescription>
-                    Complete the form below to schedule your introduction call.
-                  </DialogDescription>
-                </DialogHeader>
-                <LeadForm />
-              </DialogContent>
-            </Dialog>
-            <Button
-              data-testid="button-view-calculator-footer"
-              variant="outline"
-              className="text-base min-w-[220px] text-white/70 border-white/20 hover:border-white/40"
-              onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              View Calculator
-            </Button>
-          </div>
-          <div className="pt-20 text-sm text-white/25 border-t border-white/10 mt-12">
+      {/* Footer — clean, just copyright */}
+      <footer className="bg-[#0F172A] text-white py-12">
+        <div className="container mx-auto px-4 md:px-6 text-center">
+          <div className="text-sm text-white/25">
             &copy; {new Date().getFullYear()} Sakred Advisors. All rights reserved.
           </div>
         </div>
