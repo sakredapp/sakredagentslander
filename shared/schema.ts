@@ -9,6 +9,7 @@ export const leads = pgTable("leads", {
   phone: text("phone").notNull(),
   isLicensed: boolean("is_licensed").default(false),
   npn: text("npn"),
+  licensedStates: text("licensed_states").array(),
   licensingContext: text("licensing_context"),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -19,6 +20,7 @@ export const insertLeadSchema = createInsertSchema(leads).pick({
   phone: true,
   isLicensed: true,
   npn: true,
+  licensedStates: true,
   licensingContext: true,
 });
 

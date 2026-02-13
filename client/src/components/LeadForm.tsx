@@ -23,6 +23,15 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const US_STATES = [
+  "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL",
+  "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME",
+  "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH",
+  "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI",
+  "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI",
+  "WY",
+] as const;
+
 export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   const { mutate, isPending } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
@@ -35,6 +44,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
       phone: "",
       isLicensed: false,
       npn: "",
+      licensedStates: [],
       licensingContext: "",
     },
   });
@@ -155,6 +165,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
+              className="space-y-6"
             >
               <FormField
                 control={form.control}
@@ -168,6 +179,51 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                     <FormMessage />
                   </FormItem>
                 )}
+              />
+
+              <FormField
+                control={form.control}
+                name="licensedStates"
+                render={({ field }) => {
+                  const selected: string[] = field.value ?? [];
+                  const toggle = (st: string) => {
+                    const next = selected.includes(st)
+                      ? selected.filter((s) => s !== st)
+                      : [...selected, st];
+                    field.onChange(next);
+                  };
+                  return (
+                    <FormItem>
+                      <FormLabel>States Licensed In</FormLabel>
+                      <div
+                        data-testid="select-states"
+                        className="max-h-40 overflow-y-auto rounded-md border border-gray-200 bg-white/50 p-2"
+                      >
+                        <div className="flex flex-wrap gap-1.5">
+                          {US_STATES.map((st) => {
+                            const isSelected = selected.includes(st);
+                            return (
+                              <button
+                                key={st}
+                                type="button"
+                                data-testid={`chip-state-${st}`}
+                                onClick={() => toggle(st)}
+                                className={`px-2 py-0.5 text-xs font-medium rounded border transition-colors ${
+                                  isSelected
+                                    ? "bg-[#C5A059]/15 border-[#C5A059]/40 text-[#A68A4A]"
+                                    : "bg-transparent border-[#C5A059]/20 text-gray-500"
+                                }`}
+                              >
+                                {st}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
             </motion.div>
           )}
