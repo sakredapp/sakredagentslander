@@ -210,8 +210,8 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                                 onClick={() => toggle(st)}
                                 className={`py-1.5 text-[11px] font-medium rounded-full border text-center transition-colors ${
                                   isSelected
-                                    ? "bg-[#C5A059]/20 border-[#C5A059]/50 text-[#8B7340]"
-                                    : "bg-white border-gray-200 text-gray-400 hover:border-[#C5A059]/30 hover:text-gray-500"
+                                    ? "bg-[#D4B76E]/15 border-[#D4B76E]/40 text-[#B8A060]"
+                                    : "bg-white border-gray-200 text-gray-400 hover:border-[#D4B76E]/30 hover:text-gray-500"
                                 }`}
                               >
                                 {st}
