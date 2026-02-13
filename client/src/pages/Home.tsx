@@ -50,6 +50,44 @@ const GoldButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTML
 );
 GoldButton.displayName = "GoldButton";
 
+const clientTypes = [
+  {
+    title: "Self-Employed Individuals",
+    summary: "Freelancers, 1099 contractors, gig workers, small business owners",
+    avgPremium: "$6,000 – $9,600",
+    detail: "Self-employed people don't get employer-sponsored coverage and are often overpaying on the marketplace or going uninsured. They need help navigating private options that fit their budget and actually cover what matters. This is one of the fastest-growing segments — and most of them don't know a health insurance agent exists.",
+    tags: ["Ages 25–55", "Individual plans", "High demand"]
+  },
+  {
+    title: "Families",
+    summary: "Married couples, parents with dependents, multi-generational households",
+    avgPremium: "$14,000 – $28,000",
+    detail: "Families need comprehensive coverage that accounts for pediatric care, maternity, prescriptions, and varying health needs across age groups. A single family case can generate significant annual premium — and these clients tend to stay on plans long-term because switching is painful. High retention, high value.",
+    tags: ["Ages 28–50", "Family plans", "High retention"]
+  },
+  {
+    title: "Early Retirees",
+    summary: "Ages 50–64 — too young for Medicare, too old for employer coverage",
+    avgPremium: "$10,000 – $18,000",
+    detail: "This is the coverage gap. People who've left corporate jobs or retired early have limited options and often don't understand them. They're typically higher-income, health-conscious, and willing to pay for good coverage. They need an agent who can walk them through private plan options before Medicare kicks in at 65.",
+    tags: ["Ages 50–64", "Pre-Medicare", "Higher income"]
+  },
+  {
+    title: "Young Adults Aging Off Parents' Plans",
+    summary: "Ages 26–30 — just lost coverage and don't know what to do",
+    avgPremium: "$3,600 – $6,000",
+    detail: "At 26, you get dropped from your parents' plan. Most young adults have no idea what their options are and default to going uninsured or picking the cheapest marketplace plan without understanding what it covers. They need simple guidance and affordable private options. Lower premium, but easy to close and high volume.",
+    tags: ["Ages 26–30", "Individual plans", "High volume"]
+  },
+  {
+    title: "Small Business Owners with Employees",
+    summary: "2–50 employees — too small for group, too big to ignore",
+    avgPremium: "$4,800 – $8,400 per employee",
+    detail: "Small businesses that can't afford or qualify for traditional group plans still need to offer something to attract and retain employees. Private individual plans through an agent give them a way to provide coverage without the overhead of group administration. You become their go-to for every new hire.",
+    tags: ["2–50 employees", "Per-employee plans", "Recurring referrals"]
+  },
+];
+
 const infrastructureItems = [
   {
     title: "Assigned Mentor",
@@ -158,43 +196,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The Opportunity — healthcare-first, not life-agent-first */}
+      {/* Client Types — who's buying and what they pay */}
       <section id="opportunity" className="py-24 bg-white border-y border-[#C5A059]/10" data-testid="section-opportunity">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16"
-          >
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <div className="w-12 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#D4B76E] mb-6" />
-              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Private Healthcare Market</h3>
-              <p className="text-[#0F172A]/55 leading-relaxed">
-                Individuals, families, and self-employed clients need health coverage and don't know where to find it.
-                This is a massive, underserved market with growing demand every year.
-              </p>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <div className="w-12 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#D4B76E] mb-6" />
-              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Recurring Revenue Model</h3>
-              <p className="text-[#0F172A]/55 leading-relaxed">
-                Healthcare policies pay monthly commissions that renew as long as the client stays on the plan.
-                Your book compounds over time — stop trading hours for dollars and start building an asset.
-              </p>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className="space-y-4">
-              <div className="w-12 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#D4B76E] mb-6" />
-              <h3 className="text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Full Infrastructure</h3>
-              <p className="text-[#0F172A]/55 leading-relaxed">
-                Carrier contracts, quoting tools, training platform, scripts, mentor support, and a weekly cadence to keep you on track.
-                You focus on selling — we handle the backend.
-              </p>
-            </motion.div>
-          </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">The Market</div>
+              <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Types of Clients</h2>
+            </div>
+
+            <Accordion type="multiple" className="w-full space-y-4">
+              {clientTypes.map((client, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`client-${i}`}
+                  className="gold-card border-0 overflow-visible px-0"
+                  data-testid={`card-client-type-${i}`}
+                >
+                  <AccordionTrigger className="px-8 py-6 hover:no-underline [&[data-state=open]]:pb-2">
+                    <div className="flex items-center justify-between w-full pr-4">
+                      <div className="flex flex-col items-start text-left gap-1">
+                        <h3 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{client.title}</h3>
+                        <p className="text-[#0F172A]/45 text-sm font-normal">{client.summary}</p>
+                      </div>
+                      <div className="hidden sm:block text-right shrink-0 ml-6">
+                        <div className="text-xs font-medium tracking-[0.15em] text-[#A68A4A] uppercase">Avg. Annual Premium</div>
+                        <div className="text-lg font-medium text-[#0F172A]">{client.avgPremium}</div>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-8 pb-8 pt-2">
+                    <div className="border-t border-[#C5A059]/10 pt-5 space-y-4">
+                      <div className="sm:hidden flex items-center gap-2 text-sm">
+                        <span className="font-medium tracking-[0.1em] text-[#A68A4A] uppercase text-xs">Avg. Annual Premium:</span>
+                        <span className="font-medium">{client.avgPremium}</span>
+                      </div>
+                      <p className="text-[#0F172A]/60 text-sm leading-[1.8]">{client.detail}</p>
+                      <div className="flex flex-wrap gap-3 pt-2">
+                        {client.tags.map((tag, j) => (
+                          <span key={j} className="text-xs font-medium tracking-wide text-[#A68A4A] bg-[#C5A059]/8 px-3 py-1 rounded-full">{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </section>
 
@@ -229,14 +277,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Who This Is For */}
       <section className="py-24 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-medium mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Who This Is For</h2>
-            <p className="text-[#0F172A]/55">Two paths. Same destination.</p>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5" data-testid="card-licensed">
               <CardContent className="p-10 space-y-5">
