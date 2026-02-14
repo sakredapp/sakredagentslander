@@ -398,17 +398,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <p className="text-lg md:text-xl text-[#0F172A]/70 leading-relaxed italic border-t border-b border-[#C5A059]/15 py-8" data-testid="text-portal-bottom-line">
-                Your clients get a modern, mobile-first healthcare experience that makes understanding their coverage simple and getting help effortless — and you get the tools to manage it all efficiently. It's a real differentiator that sets you apart from agents who just hand over a paper card.
-              </p>
-            </motion.div>
           </div>
         </div>
       </section>
