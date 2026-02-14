@@ -19,7 +19,7 @@ import { LeadForm } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
 import { motion } from "framer-motion";
 import { forwardRef } from "react";
-import { Search, Shield, FileText, Phone, Users, Inbox, Settings } from "lucide-react";
+import { Search, Shield, FileText, Phone } from "lucide-react";
 import portalScreen1 from "@assets/IMG_6557_1771083947885.png";
 import portalScreen2 from "@assets/IMG_6558_1771083947885.jpeg";
 import portalScreen3 from "@assets/IMG_6559_1771083978264.jpeg";
@@ -352,41 +352,6 @@ export default function Home() {
                     variants={fadeInUp}
                     className="portal-card p-8 space-y-4"
                     data-testid={`card-client-feature-${i}`}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
-                      <card.icon className="w-5 h-5 text-[#C5A059]" />
-                    </div>
-                    <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{card.title}</h4>
-                    <p className="text-[#0F172A]/55 text-sm leading-relaxed">{card.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-            >
-              <motion.div variants={fadeInUp} className="text-center mb-6">
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-2">Agent Tools</div>
-                <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-agents-heading">
-                  For You as an Agent
-                </h3>
-              </motion.div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-                {[
-                  { icon: Users, title: "Client Dashboard", desc: "See all your assigned clients, their policies, and support needs in one view." },
-                  { icon: Inbox, title: "Support & Callback Queues", desc: "Manage incoming support requests and callback scheduling with status tracking and admin notes." },
-                  { icon: FileText, title: "Policy Document Processing", desc: "Policy documents are processed and indexed automatically, making them instantly searchable for your clients." },
-                  { icon: Settings, title: "Coverage Overrides", desc: "Customize coverage field labels and values per-client when policies need special handling." },
-                ].map((card, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    className="portal-card p-8 space-y-4"
-                    data-testid={`card-agent-feature-${i}`}
                   >
                     <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
                       <card.icon className="w-5 h-5 text-[#C5A059]" />
