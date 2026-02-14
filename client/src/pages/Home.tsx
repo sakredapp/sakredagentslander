@@ -278,7 +278,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={staggerContainer}
-              className="text-center mb-16"
+              className="text-center mb-8"
             >
               <motion.div variants={fadeInUp}>
                 <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4" data-testid="text-portal-subtitle">What You Can Offer</div>
@@ -297,7 +297,7 @@ export default function Home() {
               className="flex justify-center items-end mb-24"
               data-testid="portal-screenshots"
             >
-              <div className="relative flex items-end justify-center" style={{ height: "420px", width: "100%", maxWidth: "600px" }}>
+              <div className="relative flex items-end justify-center" style={{ height: "340px", width: "100%", maxWidth: "600px" }}>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="portal-glow rounded-full" style={{ width: "300px", height: "300px" }} />
                 </div>
