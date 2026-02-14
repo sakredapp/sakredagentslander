@@ -97,12 +97,6 @@ export function CommissionCalculator() {
             <p className="text-xs text-[#0F172A]/35 italic">85% is the recommended industry persistency rate</p>
           </div>
 
-          <div className="pt-2 px-4 py-3 rounded-md bg-[#C5A059]/5 border border-[#C5A059]/10">
-            <div className="flex justify-between gap-4 flex-wrap">
-              <span className="text-xs font-medium tracking-[0.1em] text-[#0F172A]/40 uppercase">Commission Rate</span>
-              <span className="text-sm font-medium text-[#A68A4A]">19%</span>
-            </div>
-          </div>
         </div>
       </div>
 
