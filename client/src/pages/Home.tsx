@@ -131,7 +131,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero — leads with the opportunity, not the audience */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 container mx-auto px-4 md:px-6">
+      <section className="relative pt-28 pb-16 md:pt-40 md:pb-24 container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <motion.div
             initial="hidden"
@@ -201,10 +201,10 @@ export default function Home() {
       </section>
 
       {/* Client Types — who's buying and what they pay */}
-      <section id="opportunity" className="py-24 bg-white border-y border-[#C5A059]/10" data-testid="section-opportunity">
+      <section id="opportunity" className="py-16 bg-white border-y border-[#C5A059]/10" data-testid="section-opportunity">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-10">
               <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">The Market</div>
               <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Types of Clients</h2>
             </div>
@@ -251,9 +251,9 @@ export default function Home() {
       </section>
 
       {/* Calculator */}
-      <section id="calculator" className="pt-24 pb-16 bg-white" data-testid="section-calculator">
+      <section id="calculator" className="pt-16 pb-12 bg-white" data-testid="section-calculator">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Project Your Earnings</div>
             <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Income Calculator</h2>
             <p className="text-[#0F172A]/55 leading-relaxed text-lg max-w-2xl mx-auto mt-4">
@@ -270,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* Client Portal */}
-      <section id="client-portal" className="pt-16 pb-24 bg-[#F9F9F7]" data-testid="section-client-portal">
+      <section id="client-portal" className="pt-12 pb-16 bg-[#F9F9F7]" data-testid="section-client-portal">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div
@@ -403,7 +403,7 @@ export default function Home() {
       </section>
 
       {/* Already Selling Life? — clean, on-brand */}
-      <section className="py-24 bg-white border-y border-[#C5A059]/10">
+      <section className="py-16 bg-white border-y border-[#C5A059]/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase">For Life Insurance Agents</div>
@@ -433,7 +433,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#F9F9F7]">
+      <section className="py-16 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5" data-testid="card-licensed">
@@ -488,10 +488,10 @@ export default function Home() {
       </section>
 
       {/* Agent Infrastructure — expandable accordion style */}
-      <section id="infrastructure" className="py-24 bg-[#F9F9F7]">
+      <section id="infrastructure" className="py-16 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
+            <div className="text-center mb-10">
               <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Get</div>
               <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Agent Infrastructure</h2>
             </div>
@@ -523,9 +523,9 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-24 bg-white" data-testid="section-faq">
+      <section id="faq" className="py-16 bg-white" data-testid="section-faq">
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-medium mb-12 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-5xl font-medium mb-8 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Frequently Asked Questions</h2>
           
           <Accordion type="single" collapsible className="w-full">
             {[
