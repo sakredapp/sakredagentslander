@@ -20,8 +20,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DialogFooter } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string; prefill?: { name?: string; email?: string } }) => void;
+    };
+  }
+}
 
 const US_STATES = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL",
@@ -32,9 +40,12 @@ const US_STATES = [
   "WY",
 ] as const;
 
+const CALENDLY_URL = "https://calendly.com/sakredhealth/opportunity";
+
 export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   const { mutate, isPending } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
+  const submittedData = useRef<{ name: string; email: string }>({ name: "", email: "" });
 
   const form = useForm<InsertLead>({
     resolver: zodResolver(insertLeadSchema),
@@ -51,11 +62,27 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
 
   const isLicensed = form.watch("isLicensed");
 
+  function openCalendly(name: string, email: string) {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: CALENDLY_URL,
+        prefill: { name, email },
+      });
+    } else {
+      window.open(
+        `${CALENDLY_URL}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`,
+        "_blank"
+      );
+    }
+  }
+
   function onSubmit(data: InsertLead) {
+    submittedData.current = { name: data.name, email: data.email };
     mutate(data, {
       onSuccess: () => {
         setSubmitted(true);
         if (onSuccess) onSuccess();
+        setTimeout(() => openCalendly(data.name, data.email), 500);
       },
     });
   }
@@ -68,9 +95,10 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col items-center justify-center py-10 text-center space-y-6"
         >
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Application Received</h3>
-            <p className="text-muted-foreground">Thank you for your interest. Please schedule your intro call below.</p>
+            <p className="text-muted-foreground">A booking calendar should appear momentarily. If it doesn't, click below to schedule.</p>
+            <p className="text-xs text-[#0F172A]/35 italic">Meetings are held Mondays and Thursdays at 12:00 PM EST.</p>
           </div>
           
           <Button 
@@ -78,7 +106,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
             size="lg" 
             className="w-full sm:w-auto"
             data-testid="button-schedule-call"
-            onClick={() => window.open("https://calendly.com", "_blank")}
+            onClick={() => openCalendly(submittedData.current.name, submittedData.current.email)}
           >
             Schedule Intro Call
           </Button>
