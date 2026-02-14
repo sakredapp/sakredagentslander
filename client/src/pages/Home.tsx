@@ -251,7 +251,7 @@ export default function Home() {
       </section>
 
       {/* Calculator */}
-      <section id="calculator" className="py-24 bg-white" data-testid="section-calculator">
+      <section id="calculator" className="pt-24 pb-16 bg-white" data-testid="section-calculator">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
             <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Project Your Earnings</div>
@@ -270,7 +270,7 @@ export default function Home() {
       </section>
 
       {/* Client Portal */}
-      <section id="client-portal" className="py-24 bg-[#F9F9F7]" data-testid="section-client-portal">
+      <section id="client-portal" className="pt-16 pb-24 bg-[#F9F9F7]" data-testid="section-client-portal">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div
