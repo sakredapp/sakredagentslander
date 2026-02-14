@@ -334,13 +334,13 @@ export default function Home() {
               viewport={{ once: true, amount: 0.2 }}
               variants={staggerContainer}
             >
-              <motion.div variants={fadeInUp} className="text-center mb-12">
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-3">Client Experience</div>
+              <motion.div variants={fadeInUp} className="text-center mb-6">
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-2">Client Experience</div>
                 <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-clients-heading">
                   For Your Clients
                 </h3>
               </motion.div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {[
                   { icon: FileText, title: "Policy Overview at a Glance", desc: "Clients can view their active policies, carrier info, and coverage details (deductibles, copays, out-of-pocket max) all in one place." },
                   { icon: Search, title: "Full-Text Policy Search", desc: "No more digging through PDFs. Clients can search their policy documents instantly for specific terms, coverage questions, or benefits details." },
@@ -369,8 +369,8 @@ export default function Home() {
               viewport={{ once: true, amount: 0.2 }}
               variants={staggerContainer}
             >
-              <motion.div variants={fadeInUp} className="text-center mb-12">
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-3">Agent Tools</div>
+              <motion.div variants={fadeInUp} className="text-center mb-6">
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-2">Agent Tools</div>
                 <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-agents-heading">
                   For You as an Agent
                 </h3>
