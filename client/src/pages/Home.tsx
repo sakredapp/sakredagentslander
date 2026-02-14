@@ -19,7 +19,7 @@ import { LeadForm } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
 import { motion } from "framer-motion";
 import { forwardRef } from "react";
-import { Search, Shield, FileText, Phone, Users, Inbox, Upload, Settings } from "lucide-react";
+import { Search, Shield, FileText, Phone, Users, Inbox, Settings } from "lucide-react";
 import portalScreen1 from "@assets/IMG_6557_1771083947885.png";
 import portalScreen2 from "@assets/IMG_6558_1771083947885.jpeg";
 import portalScreen3 from "@assets/IMG_6559_1771083978264.jpeg";
@@ -253,19 +253,162 @@ export default function Home() {
       {/* Calculator */}
       <section id="calculator" className="py-24 bg-white" data-testid="section-calculator">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-4 space-y-6">
-              <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Income Calculator</h2>
-              <p className="text-[#0F172A]/55 leading-relaxed text-lg">
-                Model your residual income growth based on consistent monthly production.
+          <div className="text-center mb-16">
+            <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Project Your Earnings</div>
+            <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Income Calculator</h2>
+            <p className="text-[#0F172A]/55 leading-relaxed text-lg max-w-2xl mx-auto mt-4">
+              Model your residual income growth based on consistent monthly production.
+            </p>
+            <p className="text-[#0F172A]/40 text-sm leading-relaxed italic mt-2">
+              Estimates only. Actual comp varies by carrier, persistency, and contracting.
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <CommissionCalculator />
+          </div>
+        </div>
+      </section>
+
+      {/* Client Portal */}
+      <section id="client-portal" className="py-24 bg-[#F9F9F7]" data-testid="section-client-portal">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+              className="text-center mb-16"
+            >
+              <motion.div variants={fadeInUp}>
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4" data-testid="text-portal-subtitle">What You Can Offer</div>
+                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-portal-heading">Sakred Health Client Portal</h2>
+              </motion.div>
+              <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6" data-testid="text-portal-intro">
+                As a Sakred Health insurance agent, you bring your clients more than just a policy — you give them a fully integrated healthcare portal built right into the Sakred Health wellness app.
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              className="flex justify-center items-end mb-24"
+              data-testid="portal-screenshots"
+            >
+              <div className="relative flex items-end justify-center" style={{ height: "420px", width: "100%", maxWidth: "600px" }}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="portal-glow rounded-full" style={{ width: "300px", height: "300px" }} />
+                </div>
+                <div className="relative z-10 -mr-6" style={{ transform: "rotate(-8deg) translateY(-10px)" }}>
+                  <img
+                    src={portalScreen1}
+                    alt="Sakred Health portal - policy overview"
+                    className="w-36 md:w-44 rounded-2xl shadow-2xl border border-[#C5A059]/20"
+                    data-testid="img-portal-screen-1"
+                  />
+                </div>
+                <div className="relative z-20" style={{ transform: "translateY(-20px)" }}>
+                  <img
+                    src={portalScreen2}
+                    alt="Sakred Health portal - search"
+                    className="w-40 md:w-52 rounded-2xl shadow-2xl border border-[#C5A059]/20"
+                    data-testid="img-portal-screen-2"
+                  />
+                </div>
+                <div className="relative z-10 -ml-6" style={{ transform: "rotate(8deg) translateY(-10px)" }}>
+                  <img
+                    src={portalScreen3}
+                    alt="Sakred Health portal - support"
+                    className="w-36 md:w-44 rounded-2xl shadow-2xl border border-[#C5A059]/20"
+                    data-testid="img-portal-screen-3"
+                  />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeInUp} className="text-center mb-12">
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-3">Client Experience</div>
+                <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-clients-heading">
+                  For Your Clients
+                </h3>
+              </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+                {[
+                  { icon: FileText, title: "Policy Overview at a Glance", desc: "Clients can view their active policies, carrier info, and coverage details (deductibles, copays, out-of-pocket max) all in one place." },
+                  { icon: Search, title: "Full-Text Policy Search", desc: "No more digging through PDFs. Clients can search their policy documents instantly for specific terms, coverage questions, or benefits details." },
+                  { icon: Shield, title: "Secure Document Access", desc: "All policy documents stored securely with private signed links, accessible anytime from their phone." },
+                  { icon: Phone, title: "Direct Support Access", desc: "Clients can submit support requests and schedule callback appointments with their assigned agent, all from within the app." },
+                ].map((card, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp}
+                    className="portal-card p-8 space-y-4"
+                    data-testid={`card-client-feature-${i}`}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
+                      <card.icon className="w-5 h-5 text-[#C5A059]" />
+                    </div>
+                    <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{card.title}</h4>
+                    <p className="text-[#0F172A]/55 text-sm leading-relaxed">{card.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeInUp} className="text-center mb-12">
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-3">Agent Tools</div>
+                <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-agents-heading">
+                  For You as an Agent
+                </h3>
+              </motion.div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                {[
+                  { icon: Users, title: "Client Dashboard", desc: "See all your assigned clients, their policies, and support needs in one view." },
+                  { icon: Inbox, title: "Support & Callback Queues", desc: "Manage incoming support requests and callback scheduling with status tracking and admin notes." },
+                  { icon: FileText, title: "Policy Document Processing", desc: "Policy documents are processed and indexed automatically, making them instantly searchable for your clients." },
+                  { icon: Settings, title: "Coverage Overrides", desc: "Customize coverage field labels and values per-client when policies need special handling." },
+                ].map((card, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp}
+                    className="portal-card p-8 space-y-4"
+                    data-testid={`card-agent-feature-${i}`}
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
+                      <card.icon className="w-5 h-5 text-[#C5A059]" />
+                    </div>
+                    <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{card.title}</h4>
+                    <p className="text-[#0F172A]/55 text-sm leading-relaxed">{card.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeInUp}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <p className="text-lg md:text-xl text-[#0F172A]/70 leading-relaxed italic border-t border-b border-[#C5A059]/15 py-8" data-testid="text-portal-bottom-line">
+                Your clients get a modern, mobile-first healthcare experience that makes understanding their coverage simple and getting help effortless — and you get the tools to manage it all efficiently. It's a real differentiator that sets you apart from agents who just hand over a paper card.
               </p>
-              <p className="text-[#0F172A]/40 text-sm leading-relaxed italic">
-                Estimates only. Actual comp varies by carrier, persistency, and contracting.
-              </p>
-            </div>
-            <div className="lg:col-span-8">
-              <CommissionCalculator />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -351,144 +494,6 @@ export default function Home() {
                 <LeadForm />
               </DialogContent>
             </Dialog>
-          </div>
-        </div>
-      </section>
-
-      {/* Client Portal */}
-      <section id="client-portal" className="py-24 bg-white" data-testid="section-client-portal">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-              className="text-center mb-16"
-            >
-              <motion.div variants={fadeInUp}>
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4" data-testid="text-portal-subtitle">What You Can Offer</div>
-                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-portal-heading">Sakred Health Client Portal</h2>
-              </motion.div>
-              <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6" data-testid="text-portal-intro">
-                As a Sakred Health insurance agent, you bring your clients more than just a policy — you give them a fully integrated healthcare portal built right into the Sakred Health wellness app.
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              className="flex justify-center items-end mb-20"
-              data-testid="portal-screenshots"
-            >
-              <div className="relative flex items-end justify-center" style={{ height: "420px", width: "100%", maxWidth: "600px" }}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="portal-glow rounded-full" style={{ width: "300px", height: "300px" }} />
-                </div>
-                <div className="relative z-10 -mr-6" style={{ transform: "rotate(-8deg) translateY(-10px)" }}>
-                  <img
-                    src={portalScreen1}
-                    alt="Sakred Health portal - policy overview"
-                    className="w-36 md:w-44 rounded-2xl shadow-2xl border border-[#C5A059]/20"
-                    data-testid="img-portal-screen-1"
-                  />
-                </div>
-                <div className="relative z-20" style={{ transform: "translateY(-20px)" }}>
-                  <img
-                    src={portalScreen2}
-                    alt="Sakred Health portal - search"
-                    className="w-40 md:w-52 rounded-2xl shadow-2xl border border-[#C5A059]/20"
-                    data-testid="img-portal-screen-2"
-                  />
-                </div>
-                <div className="relative z-10 -ml-6" style={{ transform: "rotate(8deg) translateY(-10px)" }}>
-                  <img
-                    src={portalScreen3}
-                    alt="Sakred Health portal - support"
-                    className="w-36 md:w-44 rounded-2xl shadow-2xl border border-[#C5A059]/20"
-                    data-testid="img-portal-screen-3"
-                  />
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-            >
-              <motion.h3 variants={fadeInUp} className="text-2xl md:text-3xl font-medium text-center mb-10" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-clients-heading">
-                For Your Clients
-              </motion.h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-                {[
-                  { icon: FileText, title: "Policy Overview at a Glance", desc: "Clients can view their active policies, carrier info, and coverage details (deductibles, copays, out-of-pocket max) all in one place." },
-                  { icon: Search, title: "Full-Text Policy Search", desc: "No more digging through PDFs. Clients can search their policy documents instantly for specific terms, coverage questions, or benefits details." },
-                  { icon: Shield, title: "Secure Document Access", desc: "All policy documents stored securely with private signed links, accessible anytime from their phone." },
-                  { icon: Phone, title: "Direct Support Access", desc: "Clients can submit support requests and schedule callback appointments with their assigned agent, all from within the app." },
-                ].map((card, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    className="portal-card p-8 space-y-4"
-                    data-testid={`card-client-feature-${i}`}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
-                      <card.icon className="w-5 h-5 text-[#C5A059]" />
-                    </div>
-                    <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{card.title}</h4>
-                    <p className="text-[#0F172A]/55 text-sm leading-relaxed">{card.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-            >
-              <motion.h3 variants={fadeInUp} className="text-2xl md:text-3xl font-medium text-center mb-10" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-for-agents-heading">
-                For You as an Agent
-              </motion.h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-                {[
-                  { icon: Users, title: "Client Dashboard", desc: "See all your assigned clients, their policies, and support needs in one view." },
-                  { icon: Inbox, title: "Support & Callback Queues", desc: "Manage incoming support requests and callback scheduling with status tracking and admin notes." },
-                  { icon: Upload, title: "Document Management", desc: "Upload and process policy documents that become instantly searchable for your clients." },
-                  { icon: Settings, title: "Coverage Overrides", desc: "Customize coverage field labels and values per-client when policies need special handling." },
-                ].map((card, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    className="portal-card p-8 space-y-4"
-                    data-testid={`card-agent-feature-${i}`}
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
-                      <card.icon className="w-5 h-5 text-[#C5A059]" />
-                    </div>
-                    <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{card.title}</h4>
-                    <p className="text-[#0F172A]/55 text-sm leading-relaxed">{card.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <p className="text-lg md:text-xl text-[#0F172A]/70 leading-relaxed italic border-t border-b border-[#C5A059]/15 py-8" data-testid="text-portal-bottom-line">
-                Your clients get a modern, mobile-first healthcare experience that makes understanding their coverage simple and getting help effortless — and you get the tools to manage it all efficiently. It's a real differentiator that sets you apart from agents who just hand over a paper card.
-              </p>
-            </motion.div>
           </div>
         </div>
       </section>
