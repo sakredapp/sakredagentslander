@@ -85,6 +85,21 @@
   background-position: right center;
 }
 
+.portal-glow {
+  box-shadow: 0 0 60px 20px rgba(197, 160, 89, 0.15), 0 0 120px 40px rgba(197, 160, 89, 0.08);
+}
+
+.portal-card {
+  background: #ffffff;
+  border: 1px solid rgba(197, 160, 89, 0.15);
+  border-radius: 0.75rem;
+  transition: transform 300ms, box-shadow 300ms;
+}
+.portal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(197, 160, 89, 0.12), 0 0 40px rgba(197, 160, 89, 0.06);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
