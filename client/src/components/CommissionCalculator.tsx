@@ -5,33 +5,36 @@ import { Card } from "@/components/ui/card";
 export function CommissionCalculator() {
   const [premium, setPremium] = useState(800);
   const [policies, setPolicies] = useState(5);
-  const [commission, setCommission] = useState(15);
-  const [retention, setRetention] = useState(12);
+  const [persistency, setPersistency] = useState(85);
+
+  const COMMISSION_RATE = 0.19;
 
   const calculate = useMemo(() => {
-    const monthlyCommPerPolicy = premium * (commission / 100);
-    const month1 = monthlyCommPerPolicy * policies;
+    const monthlyCommPerPolicy = premium * COMMISSION_RATE;
+    const persistencyRate = persistency / 100;
 
-    let month6 = 0;
-    for (let m = 1; m <= 6; m++) {
-      const activePolicies = Math.min(m, Math.floor(retention)) * policies;
-      month6 = activePolicies * monthlyCommPerPolicy;
+    const years: { year: number; monthlyIncome: number; annualIncome: number; activePolicies: number }[] = [];
+
+    let totalActive = 0;
+
+    for (let y = 1; y <= 5; y++) {
+      const newPoliciesThisYear = policies * 12;
+      const previousActive = totalActive * persistencyRate;
+      totalActive = previousActive + newPoliciesThisYear;
+
+      const monthlyIncome = totalActive * monthlyCommPerPolicy;
+      const annualIncome = monthlyIncome * 12;
+
+      years.push({
+        year: y,
+        monthlyIncome,
+        annualIncome,
+        activePolicies: Math.round(totalActive),
+      });
     }
 
-    let month12 = 0;
-    const activePoliciesAt12 = Math.min(12, Math.floor(retention)) * policies;
-    month12 = activePoliciesAt12 * monthlyCommPerPolicy;
-
-    const total12 = Array.from({ length: 12 }, (_, i) => {
-      const m = i + 1;
-      const active = Math.min(m, Math.floor(retention)) * policies;
-      return active * monthlyCommPerPolicy;
-    }).reduce((sum, v) => sum + v, 0);
-
-    const renewalRunRate = activePoliciesAt12 * monthlyCommPerPolicy;
-
-    return { month1, month6, month12, total12, renewalRunRate };
-  }, [premium, policies, commission, retention]);
+    return years;
+  }, [premium, policies, persistency]);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -43,7 +46,6 @@ export function CommissionCalculator() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-      {/* Inputs */}
       <div className="space-y-8">
         <div className="space-y-6">
           <div className="space-y-3">
@@ -80,80 +82,57 @@ export function CommissionCalculator() {
 
           <div className="space-y-3">
             <div className="flex justify-between gap-4 flex-wrap">
-              <span className="text-sm font-medium text-[#0F172A]/70">Avg Retention (months)</span>
-              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{retention}</span>
+              <span className="text-sm font-medium text-[#0F172A]/70">Persistency %</span>
+              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{persistency}%</span>
             </div>
             <Slider
-              value={[retention]}
-              onValueChange={(vals) => setRetention(vals[0])}
-              min={3}
-              max={36}
+              value={[persistency]}
+              onValueChange={(vals) => setPersistency(vals[0])}
+              min={50}
+              max={100}
               step={1}
               className="py-2"
-              data-testid="slider-retention"
+              data-testid="slider-persistency"
             />
+            <p className="text-xs text-[#0F172A]/35 italic">85% is the recommended industry persistency rate</p>
           </div>
 
-          <div className="space-y-3">
+          <div className="pt-2 px-4 py-3 rounded-md bg-[#C5A059]/5 border border-[#C5A059]/10">
             <div className="flex justify-between gap-4 flex-wrap">
-              <span className="text-sm font-medium text-[#0F172A]/70">Commission Rate</span>
-              <span className="text-sm font-medium text-[#C5A059] tabular-nums">{commission}%</span>
+              <span className="text-xs font-medium tracking-[0.1em] text-[#0F172A]/40 uppercase">Commission Rate</span>
+              <span className="text-sm font-medium text-[#A68A4A]">19%</span>
             </div>
-            <Slider
-              value={[commission]}
-              onValueChange={(vals) => setCommission(vals[0])}
-              min={5}
-              max={30}
-              step={1}
-              className="py-2"
-              data-testid="slider-commission"
-            />
           </div>
         </div>
       </div>
 
-      {/* Outputs */}
       <Card className="border-[#C5A059]/20 bg-white shadow-lg shadow-[#C5A059]/5 overflow-visible">
-        <div className="p-8 space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">Month 1</div>
-              <div className="text-2xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {formatCurrency(calculate.month1)}
-              </div>
-            </div>
-            <div>
-              <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">Month 6 Run-Rate</div>
-              <div className="text-2xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {formatCurrency(calculate.month6)}
-              </div>
-            </div>
-          </div>
+        <div className="p-8 space-y-0">
+          <div className="text-xs font-medium tracking-[0.15em] text-[#0F172A]/35 uppercase mb-5">Projected Income by Year</div>
 
-          <div className="border-t border-[#C5A059]/10 pt-6">
-            <div className="text-xs font-semibold tracking-[0.15em] text-[#C5A059] uppercase mb-2">Month 12 Run-Rate</div>
-            <div className="text-4xl md:text-5xl font-medium bg-gradient-to-r from-[#C5A059] via-[#D4B76E] to-[#A68A4A] bg-clip-text text-transparent tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
-              {formatCurrency(calculate.month12)}
-              <span className="text-lg text-[#0F172A]/30 ml-2" style={{ fontFamily: "'DM Sans', sans-serif", WebkitTextFillColor: 'initial' }}>/mo</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-6 border-t border-[#C5A059]/10 pt-6">
-            <div>
-              <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">12-Month Total</div>
-              <div className="text-xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {formatCurrency(calculate.total12)}
+          {calculate.map((yr, i) => (
+            <div
+              key={yr.year}
+              className={`flex items-center justify-between py-4 ${i < calculate.length - 1 ? "border-b border-[#C5A059]/8" : ""}`}
+              data-testid={`row-year-${yr.year}`}
+            >
+              <div className="space-y-0.5">
+                <div className="text-sm font-medium text-[#0F172A]/70">Year {yr.year}</div>
+                <div className="text-xs text-[#0F172A]/35">{yr.activePolicies} active policies</div>
+              </div>
+              <div className="text-right space-y-0.5">
+                <div
+                  className={`font-medium tabular-nums ${i === calculate.length - 1 ? "text-xl bg-gradient-to-r from-[#C5A059] via-[#D4B76E] to-[#A68A4A] bg-clip-text text-transparent" : "text-lg text-[#0F172A]"}`}
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  {formatCurrency(yr.annualIncome)}
+                </div>
+                <div className="text-xs text-[#0F172A]/35 tabular-nums">{formatCurrency(yr.monthlyIncome)}/mo</div>
               </div>
             </div>
-            <div>
-              <div className="text-xs font-semibold tracking-[0.15em] text-[#0F172A]/35 uppercase mb-1">Renewal Run-Rate</div>
-              <div className="text-xl font-medium tabular-nums" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {formatCurrency(calculate.renewalRunRate)}
-              </div>
-            </div>
-          </div>
+          ))}
 
-          <div className="text-xs text-[#0F172A]/30 pt-2 italic">
+          <div className="text-xs text-[#0F172A]/30 pt-6 italic">
             Estimates only. Actual comp varies by carrier, persistency, and contracting.
           </div>
         </div>
