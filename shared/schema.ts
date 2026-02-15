@@ -4,7 +4,8 @@ import { z } from "zod";
 
 export const leads = pgTable("recruits", {
   id: serial("id").primaryKey(),
-  name: text("name").notNull(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
   email: text("email").notNull(),
   phone: text("phone").notNull(),
   isLicensed: boolean("is_licensed").default(false),
@@ -15,7 +16,8 @@ export const leads = pgTable("recruits", {
 });
 
 export const insertLeadSchema = createInsertSchema(leads).pick({
-  name: true,
+  firstName: true,
+  lastName: true,
   email: true,
   phone: true,
   isLicensed: true,

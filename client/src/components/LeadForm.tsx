@@ -50,7 +50,8 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   const form = useForm<InsertLead>({
     resolver: zodResolver(insertLeadSchema),
     defaultValues: {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       isLicensed: false,
@@ -77,12 +78,13 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   }
 
   function onSubmit(data: InsertLead) {
-    submittedData.current = { name: data.name, email: data.email };
+    const fullName = `${data.firstName} ${data.lastName}`;
+    submittedData.current = { name: fullName, email: data.email };
     mutate(data, {
       onSuccess: () => {
         setSubmitted(true);
         if (onSuccess) onSuccess();
-        setTimeout(() => openCalendly(data.name, data.email), 500);
+        setTimeout(() => openCalendly(fullName, data.email), 500);
       },
     });
   }
@@ -118,19 +120,34 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pt-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name</FormLabel>
-              <FormControl>
-                <Input placeholder="John Doe" {...field} data-testid="input-name" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="firstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="John" {...field} data-testid="input-first-name" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Doe" {...field} data-testid="input-last-name" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
