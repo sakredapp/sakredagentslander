@@ -44,7 +44,7 @@ const GoldButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTML
     return (
       <button
         ref={ref}
-        className={`gold-glow-btn inline-flex items-center justify-center whitespace-nowrap text-sm font-light tracking-widest font-serif disabled:pointer-events-none disabled:opacity-50 ${className}`}
+        className={`gold-glow-btn inline-flex items-center justify-center whitespace-nowrap text-sm font-normal tracking-wide disabled:pointer-events-none disabled:opacity-50 ${className}`}
         {...props}
       >
         {children}
