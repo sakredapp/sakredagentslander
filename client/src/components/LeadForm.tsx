@@ -22,14 +22,7 @@ import {
 import { DialogFooter } from "@/components/ui/dialog";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string; prefill?: { name?: string; email?: string } }) => void;
-    };
-  }
-}
+import { BookingCalendar } from "@/components/BookingCalendar";
 
 const US_STATES = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL",
@@ -39,8 +32,6 @@ const US_STATES = [
   "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI",
   "WY",
 ] as const;
-
-const CALENDLY_URL = "https://calendly.com/sakredhealth/opportunity";
 
 export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   const { mutate, isPending } = useCreateLead();
@@ -63,20 +54,6 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
 
   const isLicensed = form.watch("isLicensed");
 
-  function openCalendly(name: string, email: string) {
-    if (window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: CALENDLY_URL,
-        prefill: { name, email },
-      });
-    } else {
-      window.open(
-        `${CALENDLY_URL}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`,
-        "_blank"
-      );
-    }
-  }
-
   function onSubmit(data: InsertLead) {
     const fullName = `${data.firstName} ${data.lastName}`;
     submittedData.current = { name: fullName, email: data.email };
@@ -84,7 +61,6 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
       onSuccess: () => {
         setSubmitted(true);
         if (onSuccess) onSuccess();
-        setTimeout(() => openCalendly(fullName, data.email), 500);
       },
     });
   }
@@ -95,23 +71,17 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col items-center justify-center py-10 text-center space-y-6"
+          className="flex flex-col items-center justify-center py-6 text-center space-y-5"
         >
           <div className="space-y-3">
             <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Application Received</h3>
-            <p className="text-muted-foreground">A booking calendar should appear momentarily. If it doesn't, click below to schedule.</p>
+            <p className="text-muted-foreground">Pick a time for your intro call</p>
             <p className="text-xs text-[#0F172A]/35 italic">Meetings are held Mondays and Thursdays at 12:00 PM EST.</p>
           </div>
-          
-          <Button 
-            variant="gold" 
-            size="lg" 
-            className="w-full sm:w-auto"
-            data-testid="button-schedule-call"
-            onClick={() => openCalendly(submittedData.current.name, submittedData.current.email)}
-          >
-            Schedule Intro Call
-          </Button>
+
+          <div className="w-full">
+            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} />
+          </div>
         </motion.div>
       </AnimatePresence>
     );
