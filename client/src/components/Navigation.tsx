@@ -69,7 +69,7 @@ export function Navigation() {
             <DialogTrigger asChild>
               <button
                 data-testid="button-apply-nav"
-                className="gold-glow-btn text-[#0F172A] font-normal tracking-wide"
+                className="gold-glow-btn text-[#0F172A] font-light tracking-widest font-serif text-sm"
               >
                 Apply to Join
               </button>
