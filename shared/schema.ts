@@ -15,7 +15,12 @@ export const leads = pgTable("recruits", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const insertLeadSchema = createInsertSchema(leads).pick({
+export const insertLeadSchema = createInsertSchema(leads, {
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().min(1, "Email is required").email("Please enter a valid email"),
+  phone: z.string().min(7, "Please enter a valid phone number"),
+}).pick({
   firstName: true,
   lastName: true,
   email: true,
