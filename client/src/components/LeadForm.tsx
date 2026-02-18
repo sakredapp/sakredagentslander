@@ -189,8 +189,9 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
                   <FormItem>
                     <FormLabel>NPN (National Producer Number)</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g. 12345678" {...field} value={field.value ?? ""} data-testid="input-npn" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                      <Input placeholder="e.g. 0012345678" {...field} value={field.value ?? ""} data-testid="input-npn" maxLength={10} inputMode="numeric" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
                     </FormControl>
+                    <p className="text-[11px] text-muted-foreground">10 digits — add leading zeros if yours is shorter (e.g. 0012345678)</p>
                     <FormMessage />
                   </FormItem>
                 )}

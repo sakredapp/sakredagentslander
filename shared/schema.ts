@@ -20,6 +20,10 @@ export const insertLeadSchema = createInsertSchema(leads, {
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().min(1, "Email is required").email("Please enter a valid email"),
   phone: z.string().min(7, "Please enter a valid phone number"),
+  npn: z.string().optional().refine(
+    (val) => !val || /^\d{1,10}$/.test(val),
+    { message: "NPN must be up to 10 digits (numbers only)" }
+  ),
 }).pick({
   firstName: true,
   lastName: true,
