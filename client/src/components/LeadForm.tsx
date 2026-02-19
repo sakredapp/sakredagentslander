@@ -83,8 +83,8 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
           className="flex flex-col items-center justify-center py-6 text-center space-y-5"
         >
           <div className="space-y-2">
-            <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Application Received</h3>
-            <p className="text-muted-foreground">Schedule your intro call below</p>
+            <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">You're In. Let's Go.</h3>
+            <p className="text-muted-foreground">Lock in your intro call and let's get to work.</p>
           </div>
 
           <div className="w-full">

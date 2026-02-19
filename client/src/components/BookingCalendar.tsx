@@ -155,11 +155,11 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
           <Check className="w-7 h-7 text-[#C5A059]" />
         </div>
         <div className="space-y-1">
-          <h4 className="text-xl font-serif text-[#0F172A]">You're Booked</h4>
+          <h4 className="text-xl font-serif text-[#0F172A]">Locked In. See You There.</h4>
           <p className="text-sm text-muted-foreground">{formattedDate} at {confirmed.time} EST</p>
         </div>
-        <p className="text-xs text-muted-foreground max-w-xs">
-          We'll give you a call at the scheduled time. Make sure your phone is nearby.
+        <p className="text-sm text-muted-foreground max-w-xs">
+          We'll call you at the scheduled time. Have your phone ready — this is where it starts.
         </p>
       </motion.div>
     );
