@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { LeadForm } from "@/components/LeadForm";
+import { LeadForm, type FormStage } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
@@ -55,22 +55,28 @@ const GoldButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTML
 GoldButton.displayName = "GoldButton";
 
 function LeadFormDialogContent({ onSuccess }: { onSuccess?: () => void }) {
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [stage, setStage] = useState<FormStage>("form");
   return (
     <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-      {!formSubmitted && (
+      {stage === "form" && (
         <DialogHeader className="text-center">
           <DialogTitle className="text-2xl text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
           <DialogDescription className="text-center">Complete the form below to schedule your introduction call.</DialogDescription>
         </DialogHeader>
       )}
-      {formSubmitted && (
-        <DialogHeader className="sr-only">
-          <DialogTitle>Schedule Your Opportunity Call</DialogTitle>
-          <DialogDescription>Pick a time for your call.</DialogDescription>
+      {stage === "calendar" && (
+        <DialogHeader className="text-center">
+          <DialogTitle className="text-2xl text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Schedule Your Opportunity Call</DialogTitle>
+          <DialogDescription className="text-center">We'll hop on a Zoom to walk you through what it's like as a Sakred agent.</DialogDescription>
         </DialogHeader>
       )}
-      <LeadForm onSuccess={onSuccess} onSubmittedChange={setFormSubmitted} />
+      {stage === "booked" && (
+        <DialogHeader className="sr-only">
+          <DialogTitle>Booked</DialogTitle>
+          <DialogDescription>Your call is confirmed.</DialogDescription>
+        </DialogHeader>
+      )}
+      <LeadForm onSuccess={onSuccess} onStageChange={setStage} />
     </DialogContent>
   );
 }

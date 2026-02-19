@@ -41,7 +41,9 @@ const US_STATES = [
   "WY",
 ] as const;
 
-export function LeadForm({ onSuccess, onSubmittedChange }: { onSuccess?: () => void; onSubmittedChange?: (submitted: boolean) => void }) {
+export type FormStage = "form" | "calendar" | "booked";
+
+export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void; onStageChange?: (stage: FormStage) => void }) {
   const { mutate, isPending } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
   const submittedData = useRef<{ name: string; email: string; leadId?: number }>({ name: "", email: "" });
@@ -69,7 +71,7 @@ export function LeadForm({ onSuccess, onSubmittedChange }: { onSuccess?: () => v
       onSuccess: (lead: any) => {
         submittedData.current.leadId = lead?.id;
         setSubmitted(true);
-        onSubmittedChange?.(true);
+        onStageChange?.("calendar");
         if (onSuccess) onSuccess();
       },
     });
@@ -83,13 +85,8 @@ export function LeadForm({ onSuccess, onSubmittedChange }: { onSuccess?: () => v
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col items-center justify-center py-6 text-center space-y-5"
         >
-          <div className="space-y-2">
-            <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Schedule Your Opportunity Call</h3>
-            <p className="text-muted-foreground">We'll hop on a Zoom to walk you through what it's like as a Sakred agent.</p>
-          </div>
-
           <div className="w-full">
-            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} leadId={submittedData.current.leadId} />
+            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} leadId={submittedData.current.leadId} onBooked={() => onStageChange?.("booked")} />
           </div>
         </motion.div>
       </AnimatePresence>

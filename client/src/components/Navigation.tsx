@@ -9,15 +9,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { LeadForm } from "./LeadForm";
+import { LeadForm, type FormStage } from "./LeadForm";
 import { motion, AnimatePresence } from "framer-motion";
 import logoSrc from "@assets/Sakred_(512_x_512_px_LOGO__1771013523114.png";
 
 function NavLeadFormDialog({ onSuccess }: { onSuccess?: () => void }) {
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [stage, setStage] = useState<FormStage>("form");
   return (
     <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-      {!formSubmitted && (
+      {stage === "form" && (
         <DialogHeader className="text-center">
           <DialogTitle className="font-serif text-2xl text-center">Become A Sakred Agent</DialogTitle>
           <DialogDescription className="text-center">
@@ -25,13 +25,21 @@ function NavLeadFormDialog({ onSuccess }: { onSuccess?: () => void }) {
           </DialogDescription>
         </DialogHeader>
       )}
-      {formSubmitted && (
-        <DialogHeader className="sr-only">
-          <DialogTitle>Schedule Your Opportunity Call</DialogTitle>
-          <DialogDescription>Pick a time for your call.</DialogDescription>
+      {stage === "calendar" && (
+        <DialogHeader className="text-center">
+          <DialogTitle className="font-serif text-2xl text-center">Schedule Your Opportunity Call</DialogTitle>
+          <DialogDescription className="text-center">
+            We'll hop on a Zoom to walk you through what it's like as a Sakred agent.
+          </DialogDescription>
         </DialogHeader>
       )}
-      <LeadForm onSuccess={onSuccess} onSubmittedChange={setFormSubmitted} />
+      {stage === "booked" && (
+        <DialogHeader className="sr-only">
+          <DialogTitle>Booked</DialogTitle>
+          <DialogDescription>Your call is confirmed.</DialogDescription>
+        </DialogHeader>
+      )}
+      <LeadForm onSuccess={onSuccess} onStageChange={setStage} />
     </DialogContent>
   );
 }

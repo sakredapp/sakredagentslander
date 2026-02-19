@@ -8,6 +8,7 @@ interface BookingCalendarProps {
   name: string;
   email: string;
   leadId?: number;
+  onBooked?: () => void;
 }
 
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
@@ -67,7 +68,7 @@ function isDateAvailable(year: number, month: number, day: number): boolean {
   return dow === 1 || dow === 4;
 }
 
-export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
+export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalendarProps) {
   const today = new Date();
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -127,8 +128,10 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
         leadId,
       });
       setConfirmed({ day: selectedDay, time: selectedSlot });
+      onBooked?.();
     } catch {
       setConfirmed({ day: selectedDay, time: selectedSlot });
+      onBooked?.();
     } finally {
       setIsBooking(false);
     }
@@ -158,7 +161,7 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
           <p className="text-base text-muted-foreground">{formattedDate} at {confirmed.time} EST</p>
         </div>
         <p className="text-sm text-muted-foreground max-w-sm">
-          We'll call you at the scheduled time. Have your phone ready — this is where it starts.
+          Be somewhere quiet with a computer ready to learn about the opportunity. We'll send you a Zoom link before the call.
         </p>
       </motion.div>
     );
