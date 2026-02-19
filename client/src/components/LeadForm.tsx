@@ -41,7 +41,7 @@ const US_STATES = [
   "WY",
 ] as const;
 
-export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
+export function LeadForm({ onSuccess, onSubmittedChange }: { onSuccess?: () => void; onSubmittedChange?: (submitted: boolean) => void }) {
   const { mutate, isPending } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
   const submittedData = useRef<{ name: string; email: string; leadId?: number }>({ name: "", email: "" });
@@ -69,6 +69,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
       onSuccess: (lead: any) => {
         submittedData.current.leadId = lead?.id;
         setSubmitted(true);
+        onSubmittedChange?.(true);
         if (onSuccess) onSuccess();
       },
     });

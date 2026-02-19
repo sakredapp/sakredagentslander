@@ -18,7 +18,7 @@ import {
 import { LeadForm } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
 import { motion } from "framer-motion";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { Search, Shield, FileText, Phone } from "lucide-react";
 import portalScreen1 from "@assets/IMG_6557_1771083947885.png";
 import portalScreen2 from "@assets/IMG_6558_1771083947885.jpeg";
@@ -53,6 +53,27 @@ const GoldButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTML
   }
 );
 GoldButton.displayName = "GoldButton";
+
+function LeadFormDialogContent({ onSuccess }: { onSuccess?: () => void }) {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  return (
+    <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
+      {!formSubmitted && (
+        <DialogHeader className="text-center">
+          <DialogTitle className="text-2xl text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
+          <DialogDescription className="text-center">Complete the form below to schedule your introduction call.</DialogDescription>
+        </DialogHeader>
+      )}
+      {formSubmitted && (
+        <DialogHeader className="sr-only">
+          <DialogTitle>Schedule Your Opportunity Call</DialogTitle>
+          <DialogDescription>Pick a time for your call.</DialogDescription>
+        </DialogHeader>
+      )}
+      <LeadForm onSuccess={onSuccess} onSubmittedChange={setFormSubmitted} />
+    </DialogContent>
+  );
+}
 
 const clientTypes = [
   {
@@ -167,15 +188,7 @@ export default function Home() {
                     Apply to Join
                   </GoldButton>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-                  <DialogHeader className="text-center">
-                    <DialogTitle className="text-2xl text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
-                    <DialogDescription className="text-center">
-                      Complete the form below to schedule your introduction call.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <LeadForm />
-                </DialogContent>
+                <LeadFormDialogContent />
               </Dialog>
               <Button 
                 data-testid="button-view-calculator"
@@ -385,13 +398,7 @@ export default function Home() {
                     Apply to Join
                   </GoldButton>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-                  <DialogHeader className="text-center">
-                    <DialogTitle className="text-2xl text-[#0F172A] text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
-                    <DialogDescription className="text-center">Complete the form below to schedule your introduction call.</DialogDescription>
-                  </DialogHeader>
-                  <LeadForm />
-                </DialogContent>
+                <LeadFormDialogContent />
               </Dialog>
             </div>
           </div>
@@ -440,13 +447,7 @@ export default function Home() {
                   Apply to Join
                 </GoldButton>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-                <DialogHeader className="text-center">
-                  <DialogTitle className="text-2xl text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
-                  <DialogDescription className="text-center">Complete the form below to schedule your introduction call.</DialogDescription>
-                </DialogHeader>
-                <LeadForm />
-              </DialogContent>
+              <LeadFormDialogContent />
             </Dialog>
           </div>
         </div>

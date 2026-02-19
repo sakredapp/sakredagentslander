@@ -13,6 +13,29 @@ import { LeadForm } from "./LeadForm";
 import { motion, AnimatePresence } from "framer-motion";
 import logoSrc from "@assets/Sakred_(512_x_512_px_LOGO__1771013523114.png";
 
+function NavLeadFormDialog({ onSuccess }: { onSuccess?: () => void }) {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  return (
+    <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
+      {!formSubmitted && (
+        <DialogHeader className="text-center">
+          <DialogTitle className="font-serif text-2xl text-center">Become A Sakred Agent</DialogTitle>
+          <DialogDescription className="text-center">
+            Complete the form below to schedule your introduction call.
+          </DialogDescription>
+        </DialogHeader>
+      )}
+      {formSubmitted && (
+        <DialogHeader className="sr-only">
+          <DialogTitle>Schedule Your Opportunity Call</DialogTitle>
+          <DialogDescription>Pick a time for your call.</DialogDescription>
+        </DialogHeader>
+      )}
+      <LeadForm onSuccess={onSuccess} onSubmittedChange={setFormSubmitted} />
+    </DialogContent>
+  );
+}
+
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -74,15 +97,7 @@ export function Navigation() {
                 Apply to Join
               </button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-              <DialogHeader className="text-center">
-                <DialogTitle className="font-serif text-2xl text-center">Become A Sakred Agent</DialogTitle>
-                <DialogDescription className="text-center">
-                  Complete the form below to schedule your introduction call.
-                </DialogDescription>
-              </DialogHeader>
-              <LeadForm />
-            </DialogContent>
+            <NavLeadFormDialog />
           </Dialog>
         </div>
 
@@ -124,15 +139,7 @@ export function Navigation() {
                     Apply to Join
                   </button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
-                  <DialogHeader className="text-center">
-                    <DialogTitle className="font-serif text-2xl text-center">Become A Sakred Agent</DialogTitle>
-                    <DialogDescription className="text-center">
-                      Complete the form below to schedule your introduction call.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <LeadForm onSuccess={() => setMobileMenuOpen(false)} />
-                </DialogContent>
+                <NavLeadFormDialog onSuccess={() => setMobileMenuOpen(false)} />
               </Dialog>
             </motion.div>
           )}
