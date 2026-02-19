@@ -84,7 +84,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
         >
           <div className="space-y-2">
             <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Schedule Your Opportunity Call</h3>
-            <p className="text-muted-foreground">We'll walk you through what it's like as a Sakred agent.</p>
+            <p className="text-muted-foreground">We'll hop on a Zoom to walk you through what it's like as a Sakred agent.</p>
           </div>
 
           <div className="w-full">
