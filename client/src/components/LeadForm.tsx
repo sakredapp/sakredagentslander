@@ -20,9 +20,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DialogFooter } from "@/components/ui/dialog";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookingCalendar } from "@/components/BookingCalendar";
+
+function formatPhoneNumber(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+  if (digits.length === 0) return "";
+  if (digits.length <= 3) return `(${digits}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
 
 const US_STATES = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL",
@@ -36,7 +44,7 @@ const US_STATES = [
 export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
   const { mutate, isPending } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
-  const submittedData = useRef<{ name: string; email: string }>({ name: "", email: "" });
+  const submittedData = useRef<{ name: string; email: string; leadId?: number }>({ name: "", email: "" });
 
   const form = useForm<InsertLead>({
     resolver: zodResolver(insertLeadSchema),
@@ -58,7 +66,8 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
     const fullName = `${data.firstName} ${data.lastName}`;
     submittedData.current = { name: fullName, email: data.email };
     mutate(data, {
-      onSuccess: () => {
+      onSuccess: (lead: any) => {
+        submittedData.current.leadId = lead?.id;
         setSubmitted(true);
         if (onSuccess) onSuccess();
       },
@@ -73,14 +82,13 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col items-center justify-center py-6 text-center space-y-5"
         >
-          <div className="space-y-3">
+          <div className="space-y-2">
             <h3 className="text-2xl font-serif text-[#0F172A]" data-testid="text-application-received">Application Received</h3>
-            <p className="text-muted-foreground">Pick a time for your intro call</p>
-            <p className="text-xs text-[#0F172A]/35 italic">Meetings are held Mondays and Thursdays at 12:00 PM EST.</p>
+            <p className="text-muted-foreground">Schedule your intro call below</p>
           </div>
 
           <div className="w-full">
-            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} />
+            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} leadId={submittedData.current.leadId} />
           </div>
         </motion.div>
       </AnimatePresence>
@@ -140,7 +148,17 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
               <FormItem>
                 <FormLabel>Phone</FormLabel>
                 <FormControl>
-                  <Input placeholder="(555) 000-0000" {...field} data-testid="input-phone" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
+                  <Input
+                    placeholder="(555) 000-0000"
+                    data-testid="input-phone"
+                    inputMode="tel"
+                    className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20"
+                    value={field.value}
+                    onChange={(e) => field.onChange(formatPhoneNumber(e.target.value))}
+                    onBlur={field.onBlur}
+                    name={field.name}
+                    ref={field.ref}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
