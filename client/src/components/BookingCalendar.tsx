@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Clock, Phone, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { apiRequest } from "@/lib/queryClient";
-import logoSrc from "@assets/full_png_image_sakred__1771270056819.png";
 
 interface BookingCalendarProps {
   name: string;
@@ -11,7 +10,7 @@ interface BookingCalendarProps {
   leadId?: number;
 }
 
-const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
@@ -148,17 +147,17 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center text-center space-y-4 py-6"
+        className="flex flex-col items-center text-center space-y-5 py-8"
         data-testid="booking-confirmed"
       >
-        <div className="w-14 h-14 rounded-full bg-[#C5A059]/15 flex items-center justify-center">
-          <Check className="w-7 h-7 text-[#C5A059]" />
+        <div className="w-16 h-16 rounded-full bg-[#C5A059]/15 flex items-center justify-center">
+          <Check className="w-8 h-8 text-[#C5A059]" />
         </div>
-        <div className="space-y-1">
-          <h4 className="text-xl font-serif text-[#0F172A]">Locked In. See You There.</h4>
-          <p className="text-sm text-muted-foreground">{formattedDate} at {confirmed.time} EST</p>
+        <div className="space-y-2">
+          <h4 className="text-2xl font-serif text-[#0F172A]">You're In. Let's Execute.</h4>
+          <p className="text-base text-muted-foreground">{formattedDate} at {confirmed.time} EST</p>
         </div>
-        <p className="text-sm text-muted-foreground max-w-xs">
+        <p className="text-sm text-muted-foreground max-w-sm">
           We'll call you at the scheduled time. Have your phone ready — this is where it starts.
         </p>
       </motion.div>
@@ -173,119 +172,96 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
       data-testid="booking-calendar"
       className="w-full"
     >
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="md:w-[180px] flex-shrink-0 flex flex-col items-center md:items-start gap-4 md:border-r md:border-gray-200 md:pr-8">
-          <img src={logoSrc} alt="Sakred Advisors" className="w-14 h-14 object-contain" />
-          <div className="text-center md:text-left">
-            <p className="text-xs text-muted-foreground uppercase tracking-wide">Sakred Advisors</p>
-            <h4 className="text-base font-serif font-medium text-[#0F172A] mt-1">Intro Call</h4>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Clock className="w-4 h-4" />
-            <span>30 min</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Phone className="w-4 h-4" />
-            <span>Phone call</span>
-          </div>
-        </div>
-
-        <div className="flex-1 min-w-0">
-          <p className="text-base font-medium text-[#0F172A] mb-4" data-testid="text-select-date">Select a Date & Time</p>
-
-          <div className="flex items-center justify-between gap-2 mb-4">
-            <Button
-              size="icon"
-              variant="ghost"
-              disabled={!canGoPrev}
-              onClick={prevMonth}
-              data-testid="button-prev-month"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
-            <span className="text-base font-medium text-[#0F172A]" data-testid="text-current-month">
-              {MONTH_NAMES[viewMonth]} {viewYear}
-            </span>
-            <Button
-              size="icon"
-              variant="ghost"
-              disabled={!canGoNext}
-              onClick={nextMonth}
-              data-testid="button-next-month"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-7 gap-1 mb-2">
-            {DAYS.map((d) => (
-              <div key={d} className="text-center text-xs font-medium text-muted-foreground uppercase tracking-wider py-1.5">
-                {d}
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-7 gap-1">
-            {calendarDays.map((day, idx) => {
-              if (day === null) {
-                return <div key={`empty-${idx}`} className="w-10 h-10 mx-auto" />;
-              }
-              const available = isDateAvailable(viewYear, viewMonth, day);
-              const isSelected = selectedDay === day;
-              const isToday = day === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
-
-              return (
-                <button
-                  key={day}
-                  disabled={!available}
-                  data-testid={`day-${day}`}
-                  onClick={() => setSelectedDay(day)}
-                  className={`w-10 h-10 mx-auto flex items-center justify-center text-sm rounded-full transition-all duration-200 relative ${
-                    isSelected
-                      ? "bg-[#C5A059] text-white font-medium shadow-sm"
-                      : available
-                        ? "text-[#0F172A] font-medium ring-2 ring-[#C5A059] hover:bg-[#C5A059]/15 cursor-pointer"
-                        : "text-gray-300 cursor-default"
-                  }`}
-                >
-                  {day}
-                  {isToday && !isSelected && (
-                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0F172A]/30" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          <AnimatePresence mode="wait">
-            {selectedDay && selectedSlot && (
-              <motion.div
-                key={selectedDay}
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -4 }}
-                transition={{ duration: 0.2 }}
-                className="mt-5 pt-5 border-t border-gray-100"
-              >
-                <p className="text-sm text-muted-foreground mb-3">Available time (Eastern)</p>
-                <div className="flex items-center gap-3" data-testid="time-slot-section">
-                  <button
-                    data-testid={`time-slot-${selectedSlot}`}
-                    onClick={handleConfirm}
-                    className="flex-1 py-3 rounded-md border-2 border-[#C5A059] bg-[#C5A059]/5 text-[#0F172A] text-sm font-medium transition-colors hover:bg-[#C5A059] hover:text-white text-center"
-                  >
-                    {selectedSlot}
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <p className="text-xs text-muted-foreground mt-4 text-center">
-            Eastern Standard Time
-          </p>
-        </div>
+      <div className="flex items-center justify-between gap-2 mb-4">
+        <Button
+          size="icon"
+          variant="ghost"
+          disabled={!canGoPrev}
+          onClick={prevMonth}
+          data-testid="button-prev-month"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </Button>
+        <span className="text-base font-medium text-[#0F172A]" data-testid="text-current-month">
+          {MONTH_NAMES[viewMonth]} {viewYear}
+        </span>
+        <Button
+          size="icon"
+          variant="ghost"
+          disabled={!canGoNext}
+          onClick={nextMonth}
+          data-testid="button-next-month"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </Button>
       </div>
+
+      <div className="grid grid-cols-7 mb-2">
+        {DAYS.map((d) => (
+          <div key={d} className="text-center text-xs font-medium text-muted-foreground py-2">
+            {d}
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-7 gap-y-2">
+        {calendarDays.map((day, idx) => {
+          if (day === null) {
+            return <div key={`empty-${idx}`} className="h-11" />;
+          }
+          const available = isDateAvailable(viewYear, viewMonth, day);
+          const isSelected = selectedDay === day;
+          const isToday = day === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
+
+          return (
+            <div key={day} className="flex items-center justify-center">
+              <button
+                disabled={!available}
+                data-testid={`day-${day}`}
+                onClick={() => setSelectedDay(day)}
+                className={`w-11 h-11 flex items-center justify-center text-sm rounded-full transition-all duration-200 relative ${
+                  isSelected
+                    ? "bg-[#C5A059] text-white font-medium"
+                    : available
+                      ? "text-[#0F172A] font-medium ring-2 ring-[#C5A059] hover:bg-[#C5A059]/10 cursor-pointer"
+                      : "text-gray-300 cursor-default"
+                }`}
+              >
+                {day}
+                {isToday && !isSelected && (
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0F172A]/30" />
+                )}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      <AnimatePresence mode="wait">
+        {selectedDay && selectedSlot && (
+          <motion.div
+            key={selectedDay}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2 }}
+            className="mt-5 pt-5 border-t border-gray-100"
+          >
+            <p className="text-sm text-muted-foreground mb-3">Available time (Eastern)</p>
+            <button
+              data-testid={`time-slot-${selectedSlot}`}
+              onClick={handleConfirm}
+              className="w-full py-3 rounded-md border-2 border-[#C5A059] bg-[#C5A059]/5 text-[#0F172A] text-sm font-medium transition-colors hover:bg-[#C5A059] hover:text-white text-center"
+            >
+              {selectedSlot}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <p className="text-xs text-muted-foreground mt-4 text-center">
+        Eastern Standard Time
+      </p>
     </motion.div>
   );
 }
