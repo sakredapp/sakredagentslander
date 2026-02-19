@@ -57,6 +57,13 @@ function isDateAvailable(year: number, month: number, day: number): boolean {
   const dateVal = et.year * 10000 + et.month * 100 + et.day;
   const nowVal = nowET.year * 10000 + nowET.month * 100 + nowET.day;
   if (dateVal <= nowVal) return false;
+
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 21);
+  const maxET = toET(maxDate);
+  const maxVal = maxET.year * 10000 + maxET.month * 100 + maxET.day;
+  if (dateVal > maxVal) return false;
+
   const dow = new Date(year, month, day).getDay();
   return dow === 1 || dow === 4;
 }
@@ -75,6 +82,9 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
     ? getSlotForDay(new Date(viewYear, viewMonth, selectedDay).getDay())
     : null;
 
+  const maxBookingDate = new Date();
+  maxBookingDate.setDate(maxBookingDate.getDate() + 21);
+
   function prevMonth() {
     if (viewMonth === 0) {
       setViewMonth(11);
@@ -86,16 +96,24 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
   }
 
   function nextMonth() {
-    if (viewMonth === 11) {
-      setViewMonth(0);
-      setViewYear(viewYear + 1);
-    } else {
-      setViewMonth(viewMonth + 1);
-    }
+    const maxMonth = maxBookingDate.getMonth();
+    const maxYear = maxBookingDate.getFullYear();
+    const nextM = viewMonth === 11 ? 0 : viewMonth + 1;
+    const nextY = viewMonth === 11 ? viewYear + 1 : viewYear;
+    if (nextY > maxYear || (nextY === maxYear && nextM > maxMonth)) return;
+    setViewMonth(nextM);
+    setViewYear(nextY);
     setSelectedDay(null);
   }
 
-  const canGoPrev = viewYear > today.getFullYear() || viewMonth > today.getMonth();
+  const canGoPrev = viewYear > today.getFullYear() || (viewYear === today.getFullYear() && viewMonth > today.getMonth());
+  const canGoNext = (() => {
+    const nextM = viewMonth === 11 ? 0 : viewMonth + 1;
+    const nextY = viewMonth === 11 ? viewYear + 1 : viewYear;
+    const maxMonth = maxBookingDate.getMonth();
+    const maxYear = maxBookingDate.getFullYear();
+    return nextY < maxYear || (nextY === maxYear && nextM <= maxMonth);
+  })();
 
   async function handleConfirm() {
     if (!selectedDay || !selectedSlot) return;
@@ -130,14 +148,14 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center text-center space-y-4 py-4"
+        className="flex flex-col items-center text-center space-y-4 py-6"
         data-testid="booking-confirmed"
       >
-        <div className="w-12 h-12 rounded-full bg-[#C5A059]/15 flex items-center justify-center">
-          <Check className="w-6 h-6 text-[#C5A059]" />
+        <div className="w-14 h-14 rounded-full bg-[#C5A059]/15 flex items-center justify-center">
+          <Check className="w-7 h-7 text-[#C5A059]" />
         </div>
         <div className="space-y-1">
-          <h4 className="text-lg font-serif text-[#0F172A]">You're Booked</h4>
+          <h4 className="text-xl font-serif text-[#0F172A]">You're Booked</h4>
           <p className="text-sm text-muted-foreground">{formattedDate} at {confirmed.time} EST</p>
         </div>
         <p className="text-xs text-muted-foreground max-w-xs">
@@ -155,27 +173,27 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
       data-testid="booking-calendar"
       className="w-full"
     >
-      <div className="flex flex-col md:flex-row gap-6">
-        <div className="md:w-[180px] flex-shrink-0 flex flex-col items-center md:items-start gap-3 md:border-r md:border-gray-100 md:pr-6">
-          <img src={logoSrc} alt="Sakred Advisors" className="w-12 h-12 object-contain" />
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="md:w-[180px] flex-shrink-0 flex flex-col items-center md:items-start gap-4 md:border-r md:border-gray-200 md:pr-8">
+          <img src={logoSrc} alt="Sakred Advisors" className="w-14 h-14 object-contain" />
           <div className="text-center md:text-left">
-            <p className="text-[11px] text-muted-foreground uppercase tracking-wide">Sakred Advisors</p>
-            <h4 className="text-sm font-serif font-medium text-[#0F172A] mt-0.5">Intro Call</h4>
+            <p className="text-xs text-muted-foreground uppercase tracking-wide">Sakred Advisors</p>
+            <h4 className="text-base font-serif font-medium text-[#0F172A] mt-1">Intro Call</h4>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Clock className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Clock className="w-4 h-4" />
             <span>30 min</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Phone className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Phone className="w-4 h-4" />
             <span>Phone call</span>
           </div>
         </div>
 
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-[#0F172A] mb-3" data-testid="text-select-date">Select a Date & Time</p>
+          <p className="text-base font-medium text-[#0F172A] mb-4" data-testid="text-select-date">Select a Date & Time</p>
 
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between gap-2 mb-4">
             <Button
               size="icon"
               variant="ghost"
@@ -185,12 +203,13 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
             >
               <ChevronLeft className="w-4 h-4" />
             </Button>
-            <span className="text-sm font-medium text-[#0F172A]" data-testid="text-current-month">
+            <span className="text-base font-medium text-[#0F172A]" data-testid="text-current-month">
               {MONTH_NAMES[viewMonth]} {viewYear}
             </span>
             <Button
               size="icon"
               variant="ghost"
+              disabled={!canGoNext}
               onClick={nextMonth}
               data-testid="button-next-month"
             >
@@ -198,18 +217,18 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
             </Button>
           </div>
 
-          <div className="grid grid-cols-7 gap-0 mb-1">
+          <div className="grid grid-cols-7 gap-1 mb-2">
             {DAYS.map((d) => (
-              <div key={d} className="text-center text-[10px] font-medium text-muted-foreground uppercase tracking-wider py-1">
+              <div key={d} className="text-center text-xs font-medium text-muted-foreground uppercase tracking-wider py-1.5">
                 {d}
               </div>
             ))}
           </div>
 
-          <div className="grid grid-cols-7 gap-0">
+          <div className="grid grid-cols-7 gap-1">
             {calendarDays.map((day, idx) => {
               if (day === null) {
-                return <div key={`empty-${idx}`} className="aspect-square" />;
+                return <div key={`empty-${idx}`} className="w-10 h-10 mx-auto" />;
               }
               const available = isDateAvailable(viewYear, viewMonth, day);
               const isSelected = selectedDay === day;
@@ -221,11 +240,11 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
                   disabled={!available}
                   data-testid={`day-${day}`}
                   onClick={() => setSelectedDay(day)}
-                  className={`aspect-square flex items-center justify-center text-sm rounded-full transition-colors relative ${
+                  className={`w-10 h-10 mx-auto flex items-center justify-center text-sm rounded-full transition-all duration-200 relative ${
                     isSelected
-                      ? "bg-[#C5A059] text-white font-medium"
+                      ? "bg-[#C5A059] text-white font-medium shadow-sm"
                       : available
-                        ? "text-[#C5A059] font-medium hover:bg-[#C5A059]/10 cursor-pointer"
+                        ? "text-[#0F172A] font-medium ring-2 ring-[#C5A059] hover:bg-[#C5A059]/15 cursor-pointer"
                         : "text-gray-300 cursor-default"
                   }`}
                 >
@@ -246,14 +265,14 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
                 transition={{ duration: 0.2 }}
-                className="mt-4 pt-4 border-t border-gray-100"
+                className="mt-5 pt-5 border-t border-gray-100"
               >
-                <p className="text-xs text-muted-foreground mb-2">Available time (Eastern)</p>
+                <p className="text-sm text-muted-foreground mb-3">Available time (Eastern)</p>
                 <div className="flex items-center gap-3" data-testid="time-slot-section">
                   <button
                     data-testid={`time-slot-${selectedSlot}`}
                     onClick={handleConfirm}
-                    className="flex-1 py-2.5 rounded-md border border-[#C5A059] bg-[#C5A059]/5 text-[#0F172A] text-sm font-medium transition-colors hover:bg-[#C5A059] hover:text-white text-center"
+                    className="flex-1 py-3 rounded-md border-2 border-[#C5A059] bg-[#C5A059]/5 text-[#0F172A] text-sm font-medium transition-colors hover:bg-[#C5A059] hover:text-white text-center"
                   >
                     {selectedSlot}
                   </button>
@@ -262,7 +281,7 @@ export function BookingCalendar({ name, email, leadId }: BookingCalendarProps) {
             )}
           </AnimatePresence>
 
-          <p className="text-[10px] text-muted-foreground mt-3 text-center">
+          <p className="text-xs text-muted-foreground mt-4 text-center">
             Eastern Standard Time
           </p>
         </div>
