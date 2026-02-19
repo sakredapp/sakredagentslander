@@ -169,7 +169,7 @@ export default function Home() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
                   <DialogHeader>
-                    <DialogTitle className="text-2xl" style={{ fontFamily: "'Playfair Display', serif" }}>Start Your Application</DialogTitle>
+                    <DialogTitle className="text-2xl" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
                     <DialogDescription>
                       Complete the form below to schedule your introduction call.
                     </DialogDescription>
@@ -387,7 +387,7 @@ export default function Home() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
                   <DialogHeader>
-                    <DialogTitle className="text-2xl text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>Start Your Application</DialogTitle>
+                    <DialogTitle className="text-2xl text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
                     <DialogDescription>Complete the form below to schedule your introduction call.</DialogDescription>
                   </DialogHeader>
                   <LeadForm />
@@ -442,7 +442,7 @@ export default function Home() {
               </DialogTrigger>
               <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
                 <DialogHeader>
-                  <DialogTitle className="text-2xl" style={{ fontFamily: "'Playfair Display', serif" }}>Start Your Application</DialogTitle>
+                  <DialogTitle className="text-2xl" style={{ fontFamily: "'Playfair Display', serif" }}>Become A Sakred Agent</DialogTitle>
                   <DialogDescription>Complete the form below to schedule your introduction call.</DialogDescription>
                 </DialogHeader>
                 <LeadForm />

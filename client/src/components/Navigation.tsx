@@ -76,7 +76,7 @@ export function Navigation() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[500px] border-[#C5A059]/20">
               <DialogHeader>
-                <DialogTitle className="font-serif text-2xl">Start Your Application</DialogTitle>
+                <DialogTitle className="font-serif text-2xl">Become A Sakred Agent</DialogTitle>
                 <DialogDescription>
                   Complete the form below to schedule your introduction call.
                 </DialogDescription>
@@ -126,7 +126,7 @@ export function Navigation() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[500px]">
                   <DialogHeader>
-                    <DialogTitle className="font-serif text-2xl">Start Your Application</DialogTitle>
+                    <DialogTitle className="font-serif text-2xl">Become A Sakred Agent</DialogTitle>
                     <DialogDescription>
                       Complete the form below to schedule your introduction call.
                     </DialogDescription>

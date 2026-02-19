@@ -278,7 +278,7 @@ export function LeadForm({ onSuccess }: { onSuccess?: () => void }) {
         />
 
         <DialogFooter className="pt-4">
-          <Button type="submit" variant="navy" size="lg" className="w-full" data-testid="button-submit-application" disabled={isPending}>
+          <Button type="submit" size="lg" className="w-full bg-gradient-to-b from-[#2a2a2a] to-[#0a0a0a] text-white border border-[#3a3a3a] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] font-serif tracking-wide" data-testid="button-submit-application" disabled={isPending}>
             {isPending ? "Submitting..." : "Submit Application"}
           </Button>
         </DialogFooter>
