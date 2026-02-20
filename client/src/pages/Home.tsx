@@ -207,7 +207,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-6 px-8 py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
                 <span className="text-sm font-medium text-[#0F172A]/70">Apply</span>
                 <span className="text-[#C5A059]">&#8594;</span>
-                <span className="text-sm font-medium text-[#0F172A]/70">Weekly Call</span>
+                <span className="text-sm font-medium text-[#0F172A]/70">Opportunity Call</span>
                 <span className="text-[#C5A059]">&#8594;</span>
                 <span className="text-sm font-medium text-[#0F172A]/70">Onboarding</span>
               </div>
