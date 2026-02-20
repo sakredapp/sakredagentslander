@@ -12,6 +12,7 @@ export const leads = pgTable("recruits", {
   npn: text("npn"),
   licensedStates: text("licensed_states").array(),
   licensingContext: text("licensing_context"),
+  smsConsent: boolean("sms_consent").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -24,6 +25,9 @@ export const insertLeadSchema = createInsertSchema(leads, {
     (val) => !val || /^\d{1,10}$/.test(val),
     { message: "NPN must be up to 10 digits (numbers only)" }
   ),
+  smsConsent: z.boolean().refine((val) => val === true, {
+    message: "You must agree to receive SMS notifications",
+  }),
 }).pick({
   firstName: true,
   lastName: true,
@@ -33,6 +37,7 @@ export const insertLeadSchema = createInsertSchema(leads, {
   npn: true,
   licensedStates: true,
   licensingContext: true,
+  smsConsent: true,
 });
 
 export type InsertLead = z.infer<typeof insertLeadSchema>;

@@ -183,9 +183,6 @@ export default function Home() {
               We give you the carriers, contracts, training, and infrastructure to build a book that pays you month after month.
             </motion.p>
 
-            <motion.p variants={fadeInUp} className="text-sm text-[#0F172A]/40 max-w-xl mx-auto pt-2 italic">
-              Phone number required — if you register and miss the call, we'll give you a ring to reschedule.
-            </motion.p>
             
             <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Dialog>

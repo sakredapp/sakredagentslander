@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { DialogFooter } from "@/components/ui/dialog";
 import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -59,6 +60,7 @@ export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void;
       npn: "",
       licensedStates: [],
       licensingContext: "",
+      smsConsent: false,
     },
   });
 
@@ -271,6 +273,29 @@ export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void;
                 <Input placeholder="e.g. Real Estate Agent, Teacher, Sales..." {...field} value={field.value ?? ""} data-testid="input-context" className="h-12 bg-white/50 border-gray-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20" />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="smsConsent"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  data-testid="checkbox-sms-consent"
+                  className="mt-0.5 border-gray-300 data-[state=checked]:bg-[#C5A059] data-[state=checked]:border-[#C5A059]"
+                />
+              </FormControl>
+              <div className="space-y-1 leading-none">
+                <FormLabel className="text-xs text-gray-500 font-normal cursor-pointer">
+                  I agree to receive SMS notifications related to my application, onboarding, and scheduling updates from Sakred Agents.
+                </FormLabel>
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />
