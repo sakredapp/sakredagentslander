@@ -42,29 +42,3 @@ export const insertLeadSchema = createInsertSchema(leads, {
 
 export type InsertLead = z.infer<typeof insertLeadSchema>;
 export type Lead = typeof leads.$inferSelect;
-
-export const bookings = pgTable("bookings", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull(),
-  date: text("date").notNull(),
-  time: text("time").notNull(),
-  leadId: integer("lead_id"),
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
-export const insertBookingSchema = createInsertSchema(bookings, {
-  name: z.string().min(1),
-  email: z.string().email(),
-  date: z.string().min(1),
-  time: z.string().min(1),
-}).pick({
-  name: true,
-  email: true,
-  date: true,
-  time: true,
-  leadId: true,
-});
-
-export type InsertBooking = z.infer<typeof insertBookingSchema>;
-export type Booking = typeof bookings.$inferSelect;

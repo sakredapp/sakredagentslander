@@ -25,8 +25,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Backend
 - **Framework**: Express 5 on Node.js, TypeScript compiled with tsx (dev) and esbuild (production)
-- **API Structure**: Single REST endpoint defined in `shared/routes.ts` as a typed contract:
-  - `POST /api/leads` — creates a lead record (name, email, phone, isLicensed, licensingContext)
+- **API Structure**: REST endpoints:
+  - `POST /api/leads` — creates a lead record (name, email, phone, isLicensed, smsConsent, licensingContext)
+  - `GET /api/scheduling/available` — proxies to CRM (`CRM_BASE_URL`) to fetch available booking slots
+  - `POST /api/scheduling/book` — proxies to CRM to book a slot (slot_id, email, name, phone)
+- **CRM Integration**: Booking flow proxies through server to Sakred CRM (`CRM_BASE_URL` env var, defaults to `https://sakredcrm.com`). CRM handles confirmation emails, Zoom links, calendar invites, and agent notifications.
 - **Validation**: Zod schemas shared between client and server via `shared/` directory. The `insertLeadSchema` is generated from the Drizzle table definition using `drizzle-zod`
 - **Storage Layer**: `server/storage.ts` implements `IStorage` interface with `DatabaseStorage` class — abstracts database operations
 
@@ -39,7 +42,7 @@ Preferred communication style: Simple, everyday language.
 - **Connection**: Uses `SUPABASE_POOLER_URL` or `SUPABASE_DATABASE_URL` environment variable via `pg.Pool` with SSL enabled. Falls back to `DATABASE_URL` for Drizzle Kit migrations.
 - **Schema Push**: `npm run db:push` runs `drizzle-kit push` to sync schema to database
 - **Tables**:
-  - `leads` — id (serial PK), name (text), email (text), phone (text), is_licensed (boolean), licensing_context (text), created_at (timestamp)
+  - `recruits` — id (serial PK), first_name, last_name, email, phone, is_licensed (boolean), npn, licensed_states (text[]), licensing_context, sms_consent (boolean), created_at (timestamp)
 
 ### Build & Dev
 - **Dev**: `npm run dev` — runs tsx with Vite dev server middleware (HMR via `/vite-hmr`)

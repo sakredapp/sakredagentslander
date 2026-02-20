@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { apiRequest } from "@/lib/queryClient";
+
+interface CRMSlot {
+  id: string;
+  starts_at: string;
+  ends_at: string;
+  spots_remaining: number;
+  title: string;
+}
 
 interface BookingCalendarProps {
   name: string;
   email: string;
+  phone: string;
   leadId?: number;
   onBooked?: () => void;
 }
@@ -17,30 +25,6 @@ const MONTH_NAMES = [
   "July", "August", "September", "October", "November", "December",
 ];
 
-function getSlotForDay(dayOfWeek: number): string | null {
-  if (dayOfWeek === 1) return "12:00 PM";
-  if (dayOfWeek === 4) return "4:00 PM";
-  return null;
-}
-
-function toET(date: Date): { year: number; month: number; day: number; dow: number } {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    weekday: "short",
-  }).formatToParts(date);
-  const get = (t: string) => parts.find((p) => p.type === t)?.value || "";
-  const dowMap: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
-  return {
-    year: parseInt(get("year")),
-    month: parseInt(get("month")) - 1,
-    day: parseInt(get("day")),
-    dow: dowMap[get("weekday")] ?? 0,
-  };
-}
-
 function getCalendarDays(year: number, month: number) {
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -50,40 +34,76 @@ function getCalendarDays(year: number, month: number) {
   return days;
 }
 
-function isDateAvailable(year: number, month: number, day: number): boolean {
-  const date = new Date(year, month, day, 12, 0, 0);
-  const et = toET(date);
-  const nowET = toET(new Date());
-  const dateVal = et.year * 10000 + et.month * 100 + et.day;
-  const nowVal = nowET.year * 10000 + nowET.month * 100 + nowET.day;
-  if (dateVal <= nowVal) return false;
-
-  const maxDate = new Date();
-  maxDate.setDate(maxDate.getDate() + 21);
-  const maxET = toET(maxDate);
-  const maxVal = maxET.year * 10000 + maxET.month * 100 + maxET.day;
-  if (dateVal > maxVal) return false;
-
-  const dow = new Date(year, month, day).getDay();
-  return dow === 1 || dow === 4;
+function formatTime(isoString: string): string {
+  const date = new Date(isoString);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/New_York",
+  });
 }
 
-export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalendarProps) {
+function getDateKey(isoString: string): string {
+  const date = new Date(isoString);
+  const year = date.toLocaleString("en-US", { year: "numeric", timeZone: "America/New_York" });
+  const month = date.toLocaleString("en-US", { month: "2-digit", timeZone: "America/New_York" });
+  const day = date.toLocaleString("en-US", { day: "2-digit", timeZone: "America/New_York" });
+  return `${year}-${month}-${day}`;
+}
+
+export function BookingCalendar({ name, email, phone, leadId, onBooked }: BookingCalendarProps) {
   const today = new Date();
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
-  const [confirmed, setConfirmed] = useState<{ day: number; time: string } | null>(null);
+  const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
+  const [confirmed, setConfirmed] = useState<{ date: string; time: string } | null>(null);
   const [isBooking, setIsBooking] = useState(false);
+  const [bookingError, setBookingError] = useState<string | null>(null);
+
+  const [slots, setSlots] = useState<CRMSlot[]>([]);
+  const [slotsLoading, setSlotsLoading] = useState(true);
+  const [slotsError, setSlotsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSlotsLoading(true);
+    setSlotsError(null);
+    fetch("/api/scheduling/available")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load available times");
+        return res.json();
+      })
+      .then((data) => {
+        const slotList = Array.isArray(data) ? data : data.slots || data.data || [];
+        setSlots(slotList);
+      })
+      .catch((err) => setSlotsError(err.message))
+      .finally(() => setSlotsLoading(false));
+  }, []);
+
+  const slotsByDate = new Map<string, CRMSlot[]>();
+  for (const slot of slots) {
+    if (slot.spots_remaining <= 0) continue;
+    const key = getDateKey(slot.starts_at);
+    if (!slotsByDate.has(key)) slotsByDate.set(key, []);
+    slotsByDate.get(key)!.push(slot);
+  }
 
   const calendarDays = getCalendarDays(viewYear, viewMonth);
 
-  const selectedSlot = selectedDay
-    ? getSlotForDay(new Date(viewYear, viewMonth, selectedDay).getDay())
-    : null;
+  function isDayAvailable(day: number): boolean {
+    const key = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    return slotsByDate.has(key);
+  }
+
+  function getSlotsForDay(day: number): CRMSlot[] {
+    const key = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    return slotsByDate.get(key) || [];
+  }
 
   const maxBookingDate = new Date();
-  maxBookingDate.setDate(maxBookingDate.getDate() + 21);
+  maxBookingDate.setDate(maxBookingDate.getDate() + 28);
 
   function prevMonth() {
     if (viewMonth === 0) {
@@ -93,6 +113,7 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
       setViewMonth(viewMonth - 1);
     }
     setSelectedDay(null);
+    setSelectedSlotId(null);
   }
 
   function nextMonth() {
@@ -104,6 +125,7 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
     setViewMonth(nextM);
     setViewYear(nextY);
     setSelectedDay(null);
+    setSelectedSlotId(null);
   }
 
   const canGoPrev = viewYear > today.getFullYear() || (viewYear === today.getFullYear() && viewMonth > today.getMonth());
@@ -116,36 +138,48 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
   })();
 
   async function handleConfirm() {
-    if (!selectedDay || !selectedSlot) return;
+    if (!selectedSlotId) return;
     setIsBooking(true);
+    setBookingError(null);
     try {
-      const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}-${String(selectedDay).padStart(2, "0")}`;
-      await apiRequest("POST", "/api/bookings", {
-        name,
-        email,
-        date: dateStr,
-        time: selectedSlot,
-        leadId,
+      const res = await fetch("/api/scheduling/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          slot_id: selectedSlotId,
+          email,
+          name,
+          phone,
+        }),
       });
-      setConfirmed({ day: selectedDay, time: selectedSlot });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => null);
+        throw new Error(errData?.message || "Booking failed. Please try again.");
+      }
+      const selectedSlot = slots.find((s) => s.id === selectedSlotId);
+      if (selectedSlot) {
+        const date = new Date(selectedSlot.starts_at);
+        const formattedDate = date.toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+          timeZone: "America/New_York",
+        });
+        const formattedTime = formatTime(selectedSlot.starts_at);
+        setConfirmed({ date: formattedDate, time: formattedTime });
+      } else {
+        setConfirmed({ date: "Your selected date", time: "" });
+      }
       onBooked?.();
-    } catch {
-      setConfirmed({ day: selectedDay, time: selectedSlot });
-      onBooked?.();
+    } catch (err: any) {
+      setBookingError(err.message || "Something went wrong. Please try again.");
     } finally {
       setIsBooking(false);
     }
   }
 
   if (confirmed) {
-    const dateObj = new Date(viewYear, viewMonth, confirmed.day);
-    const formattedDate = dateObj.toLocaleDateString("en-US", {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -158,14 +192,49 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
         </div>
         <div className="space-y-2">
           <h4 className="text-2xl font-serif text-[#0F172A]">You're In. Let's Execute.</h4>
-          <p className="text-base text-muted-foreground">{formattedDate} at {confirmed.time} EST</p>
+          <p className="text-base text-muted-foreground">{confirmed.date}{confirmed.time ? ` at ${confirmed.time} EST` : ""}</p>
         </div>
         <p className="text-sm text-muted-foreground max-w-sm">
-          Be somewhere quiet with a computer ready to learn about the opportunity. We'll send you a Zoom link before the call.
+          Check your email for a confirmation with the Zoom link and calendar invite. Be somewhere quiet with a computer ready to learn about the opportunity.
         </p>
       </motion.div>
     );
   }
+
+  if (slotsLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 space-y-3" data-testid="booking-loading">
+        <Loader2 className="w-6 h-6 text-[#C5A059] animate-spin" />
+        <p className="text-sm text-muted-foreground">Loading available times...</p>
+      </div>
+    );
+  }
+
+  if (slotsError) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 space-y-3 text-center" data-testid="booking-error">
+        <p className="text-sm text-red-500">Unable to load available times. Please try again later.</p>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => window.location.reload()}
+          data-testid="button-retry-slots"
+        >
+          Retry
+        </Button>
+      </div>
+    );
+  }
+
+  if (slots.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 space-y-3 text-center" data-testid="booking-no-slots">
+        <p className="text-sm text-muted-foreground">No available time slots right now. Please check back soon.</p>
+      </div>
+    );
+  }
+
+  const daySlots = selectedDay ? getSlotsForDay(selectedDay) : [];
 
   return (
     <motion.div
@@ -212,7 +281,7 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
           if (day === null) {
             return <div key={`empty-${idx}`} className="h-11" />;
           }
-          const available = isDateAvailable(viewYear, viewMonth, day);
+          const available = isDayAvailable(day);
           const isSelected = selectedDay === day;
           const isToday = day === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
 
@@ -221,7 +290,7 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
               <button
                 disabled={!available}
                 data-testid={`day-${day}`}
-                onClick={() => setSelectedDay(day)}
+                onClick={() => { setSelectedDay(day); setSelectedSlotId(null); }}
                 className={`w-11 h-11 flex items-center justify-center text-sm rounded-full transition-all duration-200 relative ${
                   isSelected
                     ? "bg-[#C5A059] text-white font-medium"
@@ -241,7 +310,7 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
       </div>
 
       <AnimatePresence mode="wait">
-        {selectedDay && selectedSlot && (
+        {selectedDay && daySlots.length > 0 && (
           <motion.div
             key={selectedDay}
             initial={{ opacity: 0, y: 4 }}
@@ -250,20 +319,65 @@ export function BookingCalendar({ name, email, leadId, onBooked }: BookingCalend
             transition={{ duration: 0.2 }}
             className="mt-5 pt-5 border-t border-gray-100"
           >
-            <p className="text-sm text-muted-foreground mb-3">Available time (Eastern)</p>
-            <button
-              data-testid={`time-slot-${selectedSlot}`}
-              onClick={handleConfirm}
-              className="w-full py-3 rounded-md border-2 border-[#C5A059] bg-[#C5A059]/5 text-[#0F172A] text-sm font-medium transition-colors hover:bg-[#C5A059] hover:text-white text-center"
-            >
-              {selectedSlot}
-            </button>
+            <p className="text-sm text-muted-foreground mb-3">Available times (Eastern)</p>
+            <div className="space-y-2">
+              {daySlots.map((slot) => {
+                const isSlotSelected = selectedSlotId === slot.id;
+                return (
+                  <button
+                    key={slot.id}
+                    data-testid={`time-slot-${slot.id}`}
+                    onClick={() => setSelectedSlotId(slot.id)}
+                    className={`w-full py-3 rounded-md border-2 text-sm font-medium transition-colors text-center ${
+                      isSlotSelected
+                        ? "border-[#C5A059] bg-[#C5A059] text-white"
+                        : "border-[#C5A059] bg-[#C5A059]/5 text-[#0F172A] hover:bg-[#C5A059]/15"
+                    }`}
+                  >
+                    {formatTime(slot.starts_at)}
+                    {slot.spots_remaining <= 3 && (
+                      <span className="ml-2 text-xs opacity-70">({slot.spots_remaining} spots left)</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {selectedSlotId && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-4"
+              >
+                <Button
+                  onClick={handleConfirm}
+                  disabled={isBooking}
+                  className="w-full bg-gradient-to-b from-[#D4B76E] via-[#C5A059] to-[#B8944E] text-white border border-[#D4B76E]/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] font-serif tracking-wide"
+                  data-testid="button-confirm-booking"
+                >
+                  {isBooking ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Booking...
+                    </>
+                  ) : (
+                    "Confirm Booking"
+                  )}
+                </Button>
+              </motion.div>
+            )}
+
+            {bookingError && (
+              <p className="text-sm text-red-500 mt-2 text-center" data-testid="text-booking-error">
+                {bookingError}
+              </p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
       <p className="text-xs text-muted-foreground mt-4 text-center">
-        Eastern Standard Time
+        All times shown in Eastern Time
       </p>
     </motion.div>
   );

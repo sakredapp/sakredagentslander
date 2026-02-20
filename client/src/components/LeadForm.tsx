@@ -47,7 +47,7 @@ export type FormStage = "form" | "calendar" | "booked";
 export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void; onStageChange?: (stage: FormStage) => void }) {
   const { mutate, isPending } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
-  const submittedData = useRef<{ name: string; email: string; leadId?: number }>({ name: "", email: "" });
+  const submittedData = useRef<{ name: string; email: string; phone: string; leadId?: number }>({ name: "", email: "", phone: "" });
 
   const form = useForm<InsertLead>({
     resolver: zodResolver(insertLeadSchema),
@@ -68,7 +68,7 @@ export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void;
 
   function onSubmit(data: InsertLead) {
     const fullName = `${data.firstName} ${data.lastName}`;
-    submittedData.current = { name: fullName, email: data.email };
+    submittedData.current = { name: fullName, email: data.email, phone: data.phone };
     mutate(data, {
       onSuccess: (lead: any) => {
         submittedData.current.leadId = lead?.id;
@@ -88,7 +88,7 @@ export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void;
           className="flex flex-col items-center justify-center py-6 text-center space-y-5"
         >
           <div className="w-full">
-            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} leadId={submittedData.current.leadId} onBooked={() => onStageChange?.("booked")} />
+            <BookingCalendar name={submittedData.current.name} email={submittedData.current.email} phone={submittedData.current.phone} leadId={submittedData.current.leadId} onBooked={() => onStageChange?.("booked")} />
           </div>
         </motion.div>
       </AnimatePresence>

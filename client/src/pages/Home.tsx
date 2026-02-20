@@ -505,7 +505,7 @@ export default function Home() {
               { q: "Do you provide leads?", a: "We provide access to vetted lead vendors at discounted rates and train you on organic lead generation. For agents hitting production targets, there's potential for lead costs to be partially covered at a reduced commission split." },
               { q: "Is this part-time possible?", a: "Yes. Many agents start part-time while transitioning. We prefer a plan to go full-time within 3-6 months." },
               { q: "Which states do you operate in?", a: "Varies by carrier. We can discuss your specific state during the intro call." },
-              { q: "What happens after I apply?", a: "You'll be directed to schedule a call via Calendly. If you register and don't attend, we'll call to reschedule." },
+              { q: "What happens after I apply?", a: "You'll schedule an opportunity call right away. You'll get a confirmation email with a Zoom link and calendar invite. If you can't make it, we'll reach out to reschedule." },
             ].map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-b border-[#C5A059]/10">
                 <AccordionTrigger className="text-base font-medium py-5 hover:no-underline" style={{ fontFamily: "'Playfair Display', serif" }} data-testid={`accordion-faq-${i}`}>

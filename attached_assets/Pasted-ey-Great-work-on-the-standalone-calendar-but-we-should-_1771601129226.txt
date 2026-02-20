@@ -1,0 +1,66 @@
+ey! Great work on the standalone calendar — but we should switch to hitting our CRM's scheduling API directly instead. That way everything flows through one system: the CRM automatically sends confirmation emails with Zoom links + .ics calendar invites, notifies the assigned agent, creates/matches the recruit record, and fires any workflow automations.
+
+Here's exactly what to change:
+
+REMOVE: Your standalone booking calendar / Supabase writes for bookings.
+
+REPLACE WITH: Two API calls to our CRM:
+
+Step 1 — Fetch Available Slots
+Public endpoint, no auth needed
+Returns available "Call w/ Sakred Admin" slots (Mon 12pm + Thu 4pm EST)
+Each slot includes id, starts_at, ends_at, spots_remaining, title
+Response is cached at Vercel edge (60s) so it's fast
+Use this to populate your slot picker in the dialog. Group by date, show the time, etc.
+
+Step 2 — Book the Slot
+After the recruit submits the form + picks a time:
+
+Public endpoint, no auth needed
+Returns: { success, booking_id, recruit_id, zoom_link, slot, email_sent }
+What the CRM does automatically on this call:
+
+Matches the recruit by email/phone/name — or auto-creates a new recruit record if not found
+Sets recruit status to call_scheduled with call_booked_at timestamp
+Sends the recruit a branded confirmation email with Zoom link + .ics calendar attachment
+Notifies the assigned agent via email + SMS
+Logs a call_booked event on the recruit timeline
+Fires any workflow auto-enrollment triggers (e.g., auto-enroll in a follow-up sequence)
+You don't need to handle any of that — just make the POST and show a success message.
+
+CORS
+Our API already allows these origins:
+
+https://sakredcrm.com
+https://www.sakredcrm.com
+https://sakredretreat.com
+https://www.sakredretreat.com
+*.vercel.app
+If your landing page is on a different domain, let me know and I'll add it to the allowlist.
+
+Recommended Flow
+Recruit fills out the form (name, email, phone, is_licensed, etc.)
+You save the recruit to Supabase recruits table as you already do (with sms_consent boolean)
+In the same dialog or next step, show the slot picker (from the GET call above)
+On slot selection + confirm → POST to /api/scheduling/book
+Show success: "You're booked! Check your email for a confirmation with the Zoom link."
+OR — simpler option: skip the in-page calendar and just redirect after form submit:
+
+This loads our pre-built booking page with the fields pre-filled. But the API approach gives you full control over the UI.
+
+sms_consent
+Confirm you're saving sms_consent: true/false on the recruit record based on the checkbox/opt-in on the form. Our workflows check this before sending any SMS.
+
+TL;DR: Replace your standalone calendar with two API calls (GET /api/scheduling/available + POST /api/scheduling/book). No auth needed. We handle confirmations, Zoom links, agent notifications, and workflow triggers on our end. Let me know what domain the landing page is on so I can verify CORS.> GET https://sakredcrm.com/api/scheduling/available?type=admin&weeks=4
+
+POST https://sakredcrm.com/api/scheduling/book
+Content-Type: application/json
+
+{
+"slot_id": "uuid-of-selected-slot",
+"email": "recruit@email.com",
+"name": "First Last",
+"phone": "+15551234567"
+}
+
+https://sakredcrm.com/book/intro?email={email}&name={first_name}%20{last_name}&phone={phone}
