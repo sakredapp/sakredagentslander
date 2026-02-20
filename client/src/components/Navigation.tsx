@@ -29,7 +29,7 @@ function NavLeadFormDialog({ onSuccess }: { onSuccess?: () => void }) {
         <DialogHeader className="text-center">
           <DialogTitle className="font-serif text-2xl text-center">Schedule Your Opportunity Call</DialogTitle>
           <DialogDescription className="text-center">
-            We'll hop on a Zoom to walk you through what it's like as a Sakred agent.
+            Join an Opportunity Call with Sakred Health — we'll walk you through the platform on Zoom.
           </DialogDescription>
         </DialogHeader>
       )}

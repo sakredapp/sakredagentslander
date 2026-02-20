@@ -67,7 +67,7 @@ function LeadFormDialogContent({ onSuccess }: { onSuccess?: () => void }) {
       {stage === "calendar" && (
         <DialogHeader className="text-center">
           <DialogTitle className="text-2xl text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Schedule Your Opportunity Call</DialogTitle>
-          <DialogDescription className="text-center">We'll hop on a Zoom to walk you through what it's like as a Sakred agent.</DialogDescription>
+          <DialogDescription className="text-center">Join an Opportunity Call with Sakred Health — we'll walk you through the platform on Zoom.</DialogDescription>
         </DialogHeader>
       )}
       {stage === "booked" && (
