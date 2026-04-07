@@ -19,7 +19,7 @@ import { LeadForm, type FormStage } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
-import { Search, Shield, FileText, Phone } from "lucide-react";
+import { Search, Shield, FileText, Phone, ChevronDown } from "lucide-react";
 import portalScreen1 from "@assets/IMG_6557_1771083947885.png";
 import portalScreen2 from "@assets/IMG_6558_1771083947885.jpeg";
 import portalScreen3 from "@assets/IMG_6559_1771083978264.jpeg";
@@ -150,6 +150,79 @@ const infrastructureItems = [
     summary: "Live sessions on products, compliance, and strategy",
     detail: "Every week we run live training covering new carrier products, compliance updates, sales strategy, and real case studies. There's also a dedicated recruiting call for agents building teams. These aren't optional webinars — they're working sessions designed to keep you sharp and connected to what's happening in the market."
   },
+];
+
+const carrierPartners = [
+  {
+    name: "Blue Cross Blue Shield",
+    products: ["Major Medical", "ACA / Marketplace Plans", "PPO, HMO & EPO Networks"],
+  },
+  {
+    name: "Cigna",
+    products: ["Major Medical", "PPO & HMO Networks"],
+  },
+  {
+    name: "Aetna",
+    products: ["Major Medical", "PPO Network"],
+  },
+  {
+    name: "UnitedHealthcare (UHOne)",
+    products: ["Fixed Indemnity", "Hospital Indemnity"],
+  },
+  {
+    name: "Ambetter",
+    products: ["ACA / Marketplace Plans"],
+  },
+  {
+    name: "Oscar Health",
+    products: ["ACA / Marketplace Plans"],
+  },
+  {
+    name: "Humana",
+    products: ["Major Medical", "Medicare Advantage", "Supplemental"],
+  },
+  {
+    name: "Allstate Health",
+    products: ["Fixed Indemnity", "Short-Term Medical", "Dental & DVH", "Supplemental", "Disability Income", "Senior Plans"],
+  },
+  {
+    name: "Manhattan Life",
+    products: ["Accident Coverage", "Critical Illness", "Disability Income", "Hospital Indemnity", "DVH & Dental", "Short-Term Care"],
+  },
+  {
+    name: "Enroll Prime",
+    products: ["Major Medical (Gold/Silver/Bronze)", "Limited Medical", "Dental & Vision"],
+  },
+  {
+    name: "IronE Health",
+    products: ["Major Medical (PSM Classic, HSA, Value, BCBS, Million)"],
+  },
+  {
+    name: "MedMax / MyFirstHealth / AHW",
+    products: ["Major Medical", "First Health Network"],
+  },
+  {
+    name: "Elite Health / ACUSA",
+    products: ["Limited Medical / Fixed Benefit", "First Health Network"],
+  },
+  {
+    name: "HealthSmart",
+    products: ["PPO Network", "Limited Medical Plans"],
+  },
+];
+
+const planCategories = [
+  { name: "Major Medical", desc: "Comprehensive health coverage (PPO, HMO, EPO)" },
+  { name: "ACA / Marketplace", desc: "Affordable Care Act compliant plans" },
+  { name: "Limited Medical", desc: "Budget-friendly plans with set benefit limits" },
+  { name: "Fixed Indemnity", desc: "Pays fixed dollar amounts per service or event" },
+  { name: "Short-Term Medical", desc: "Temporary coverage for gaps in insurance" },
+  { name: "Hospital Indemnity", desc: "Cash payouts for hospital stays" },
+  { name: "Dental & Vision", desc: "Standalone dental (PPO & Indemnity) and vision" },
+  { name: "DVH", desc: "Bundled Dental, Vision & Hearing coverage" },
+  { name: "Supplemental", desc: "Accident, Critical Illness, Cancer — pays on top of primary" },
+  { name: "Disability Income", desc: "Income replacement during disability" },
+  { name: "Medicare", desc: "Medicare Supplement & Medicare Advantage" },
 ];
 
 export default function Home() {
@@ -285,7 +358,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Client Portal */}
+      {/* Carrier Partners */}
+      <section id="partners" className="py-16 bg-[#F9F9F7]" data-testid="section-partners">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+              className="text-center mb-12"
+            >
+              <motion.div variants={fadeInUp}>
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Who We Work With</div>
+                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Carrier Partners</h2>
+              </motion.div>
+              <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6">
+                Access contracts with top-tier health insurance carriers. We handle the relationships — you focus on selling.
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={staggerContainer}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16"
+            >
+              {carrierPartners.map((carrier, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeInUp}
+                  className="gold-card p-6 space-y-3"
+                  data-testid={`card-carrier-${i}`}
+                >
+                  <h3 className="text-base font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {carrier.products.map((product, j) => (
+                      <span key={j} className="text-xs font-medium tracking-wide text-[#A68A4A] bg-[#C5A059]/8 px-3 py-1 rounded-full">{product}</span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeInUp} className="text-center mb-8">
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Can Sell</div>
+                <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Plan Categories</h3>
+              </motion.div>
+              <motion.div
+                variants={staggerContainer}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              >
+                {planCategories.map((cat, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeInUp}
+                    className="p-5 rounded-xl border border-[#C5A059]/15 bg-white/60"
+                    data-testid={`card-plan-category-${i}`}
+                  >
+                    <h4 className="text-sm font-medium text-[#0F172A] mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</h4>
+                    <p className="text-[#0F172A]/50 text-xs leading-relaxed">{cat.desc}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Portal */}}
       <section id="client-portal" className="pt-12 pb-16 bg-[#F9F9F7]" data-testid="section-client-portal">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto">

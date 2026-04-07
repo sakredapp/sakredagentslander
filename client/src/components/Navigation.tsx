@@ -66,6 +66,7 @@ export function Navigation() {
 
   const navLinks = [
     { label: "Opportunity", id: "opportunity" },
+    { label: "Partners", id: "partners" },
     { label: "Calculator", id: "calculator" },
     { label: "FAQ", id: "faq" },
   ];
