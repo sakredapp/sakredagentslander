@@ -433,7 +433,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Client Portal */}}
+      {/* Client Portal */}
       <section id="client-portal" className="pt-12 pb-16 bg-[#F9F9F7]" data-testid="section-client-portal">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto">
