@@ -358,7 +358,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Carrier Partners */}
+      {/* Carrier Partners & Plan Categories */}
       <section id="partners" className="py-16 bg-[#F9F9F7]" data-testid="section-partners">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
@@ -370,8 +370,8 @@ export default function Home() {
               className="text-center mb-10"
             >
               <motion.div variants={fadeInUp}>
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Who We Work With</div>
-                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Carrier Partners</h2>
+                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Can Sell</div>
+                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Carriers &amp; Products</h2>
               </motion.div>
               <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6">
                 Access contracts with top-tier health insurance carriers. We handle the relationships — you focus on selling.
@@ -383,41 +383,37 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
               variants={fadeInUp}
-              className="gold-card overflow-hidden mb-14"
+              className="gold-card overflow-hidden"
             >
-              <div className="divide-y divide-[#C5A059]/10">
-                {carrierPartners.map((carrier, i) => (
-                  <div key={i} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 px-6 py-4" data-testid={`card-carrier-${i}`}>
-                    <h3 className="text-sm font-medium shrink-0 sm:w-52" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</h3>
-                    <p className="text-xs text-[#0F172A]/50 leading-relaxed">{carrier.products.join(" · ")}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-            >
-              <motion.div variants={fadeInUp} className="text-center mb-6">
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Can Sell</div>
-                <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Plan Categories</h3>
-              </motion.div>
-              <motion.div variants={fadeInUp} className="gold-card overflow-hidden">
-                <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-[#C5A059]/10">
-                  {planCategories.map((cat, i) => (
-                    <div key={i} className="px-6 py-3 sm:border-b border-[#C5A059]/10 flex items-baseline gap-3" data-testid={`card-plan-category-${i}`}>
-                      <span className="text-[#C5A059] text-xs mt-0.5">&#8226;</span>
-                      <div>
-                        <span className="text-sm font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</span>
-                        <span className="text-[#0F172A]/40 text-xs ml-2">— {cat.desc}</span>
-                      </div>
-                    </div>
-                  ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#C5A059]/10">
+                {/* Left — Carrier Partners */}
+                <div className="p-6">
+                  <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-4">Carrier Partners</h3>
+                  <ul className="space-y-2.5">
+                    {carrierPartners.map((carrier, i) => (
+                      <li key={i} className="flex items-baseline gap-2.5 text-sm" data-testid={`card-carrier-${i}`}>
+                        <span className="text-[#C5A059] text-xs">&#8226;</span>
+                        <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </motion.div>
+                {/* Right — Plan Categories */}
+                <div className="p-6">
+                  <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-4">Plan Categories</h3>
+                  <ul className="space-y-2.5">
+                    {planCategories.map((cat, i) => (
+                      <li key={i} className="flex items-baseline gap-2.5 text-sm" data-testid={`card-plan-category-${i}`}>
+                        <span className="text-[#C5A059] text-xs">&#8226;</span>
+                        <div>
+                          <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</span>
+                          <span className="text-[#0F172A]/40 text-xs ml-1.5">— {cat.desc}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
