@@ -361,13 +361,13 @@ export default function Home() {
       {/* Carrier Partners */}
       <section id="partners" className="py-16 bg-[#F9F9F7]" data-testid="section-partners">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={staggerContainer}
-              className="text-center mb-12"
+              className="text-center mb-10"
             >
               <motion.div variants={fadeInUp}>
                 <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Who We Work With</div>
@@ -382,24 +382,17 @@ export default function Home() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              variants={staggerContainer}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16"
+              variants={fadeInUp}
+              className="gold-card overflow-hidden mb-14"
             >
-              {carrierPartners.map((carrier, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeInUp}
-                  className="gold-card p-6 space-y-3"
-                  data-testid={`card-carrier-${i}`}
-                >
-                  <h3 className="text-base font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {carrier.products.map((product, j) => (
-                      <span key={j} className="text-xs font-medium tracking-wide text-[#A68A4A] bg-[#C5A059]/8 px-3 py-1 rounded-full">{product}</span>
-                    ))}
+              <div className="divide-y divide-[#C5A059]/10">
+                {carrierPartners.map((carrier, i) => (
+                  <div key={i} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 px-6 py-4" data-testid={`card-carrier-${i}`}>
+                    <h3 className="text-sm font-medium shrink-0 sm:w-52" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</h3>
+                    <p className="text-xs text-[#0F172A]/50 leading-relaxed">{carrier.products.join(" · ")}</p>
                   </div>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </motion.div>
 
             <motion.div
@@ -408,25 +401,22 @@ export default function Home() {
               viewport={{ once: true, amount: 0.2 }}
               variants={staggerContainer}
             >
-              <motion.div variants={fadeInUp} className="text-center mb-8">
+              <motion.div variants={fadeInUp} className="text-center mb-6">
                 <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Can Sell</div>
                 <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Plan Categories</h3>
               </motion.div>
-              <motion.div
-                variants={staggerContainer}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-              >
-                {planCategories.map((cat, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeInUp}
-                    className="p-5 rounded-xl border border-[#C5A059]/15 bg-white/60"
-                    data-testid={`card-plan-category-${i}`}
-                  >
-                    <h4 className="text-sm font-medium text-[#0F172A] mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</h4>
-                    <p className="text-[#0F172A]/50 text-xs leading-relaxed">{cat.desc}</p>
-                  </motion.div>
-                ))}
+              <motion.div variants={fadeInUp} className="gold-card overflow-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-[#C5A059]/10">
+                  {planCategories.map((cat, i) => (
+                    <div key={i} className="px-6 py-3 sm:border-b border-[#C5A059]/10 flex items-baseline gap-3" data-testid={`card-plan-category-${i}`}>
+                      <span className="text-[#C5A059] text-xs mt-0.5">&#8226;</span>
+                      <div>
+                        <span className="text-sm font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</span>
+                        <span className="text-[#0F172A]/40 text-xs ml-2">— {cat.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </motion.div>
           </div>
