@@ -389,9 +389,9 @@ export default function Home() {
                 {/* Left — Carrier Partners */}
                 <div className="p-6">
                   <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-4">Carrier Partners</h3>
-                  <ul className="space-y-2.5">
+                  <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5">
                     {carrierPartners.map((carrier, i) => (
-                      <li key={i} className="flex items-baseline gap-2.5 text-sm" data-testid={`card-carrier-${i}`}>
+                      <li key={i} className="flex items-baseline gap-2 text-sm" data-testid={`card-carrier-${i}`}>
                         <span className="text-[#C5A059] text-xs">&#8226;</span>
                         <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</span>
                       </li>
