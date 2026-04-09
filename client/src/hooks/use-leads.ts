@@ -15,8 +15,14 @@ export function useCreateLead() {
       });
       
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || "Failed to submit application");
+        let message = "Failed to submit application";
+        try {
+          const error = await res.json();
+          message = error.message || message;
+        } catch {
+          // Response wasn't JSON
+        }
+        throw new Error(message);
       }
       
       return api.leads.create.responses[201].parse(await res.json());

@@ -65,10 +65,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const db = getDb();
     const [lead] = await db.insert(leads).values(input).returning();
 
-    // Fire-and-forget: forward to CRM webhook (don't block the response)
-    forwardToCRM(input).catch((err) =>
-      console.error("CRM webhook fire-and-forget error:", err)
-    );
+    // Forward to CRM webhook (awaited — Vercel kills fire-and-forget promises)
+    await forwardToCRM(input);
 
     return res.status(201).json(lead);
   } catch (err) {
