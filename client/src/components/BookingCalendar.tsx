@@ -150,6 +150,7 @@ export function BookingCalendar({ name, email, phone, leadId, onBooked }: Bookin
           email,
           name,
           phone,
+          recruit_id: leadId,
         }),
       });
       if (!res.ok) {

@@ -8,7 +8,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { slot_id, email, name, phone } = req.body;
+    const { slot_id, email, name, phone, recruit_id } = req.body;
 
     if (!slot_id || !email || !name || !phone) {
       return res.status(400).json({
@@ -19,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const response = await fetch(`${CRM_BASE_URL}/api/scheduling/book`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slot_id, email, name, phone }),
+      body: JSON.stringify({ slot_id, email, name, phone, recruit_id }),
     });
 
     if (!response.ok) {

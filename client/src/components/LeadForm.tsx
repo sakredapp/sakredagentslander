@@ -71,7 +71,7 @@ export function LeadForm({ onSuccess, onStageChange }: { onSuccess?: () => void;
     submittedData.current = { name: fullName, email: data.email, phone: data.phone };
     mutate(data, {
       onSuccess: (lead: any) => {
-        submittedData.current.leadId = lead?.id;
+        submittedData.current.leadId = lead?.id ?? lead?.recruit_id;
         setSubmitted(true);
         onStageChange?.("calendar");
         if (onSuccess) onSuccess();
