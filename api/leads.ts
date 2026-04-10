@@ -62,7 +62,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const input = insertLeadSchema.parse(req.body);
-    const db = getDb();
+
+    let db;
+    try {
+      db = getDb();
+    } catch (dbErr: any) {
+      console.error("DB connection setup failed:", dbErr);
+      return res.status(500).json({ message: "Database configuration error", detail: dbErr.message });
+    }
+
     const [lead] = await db.insert(leads).values(input).returning();
 
     // Forward to CRM webhook (awaited — Vercel kills fire-and-forget promises)
@@ -77,6 +85,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
     console.error("Error creating lead:", err);
-    return res.status(500).json({ message: "Internal server error" });
+    const detail = err instanceof Error ? err.message : String(err);
+    return res.status(500).json({ message: "Internal server error", detail });
   }
 }
