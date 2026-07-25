@@ -153,65 +153,6 @@ const infrastructureItems = [
   },
 ];
 
-const carrierPartners = [
-  {
-    name: "Blue Cross Blue Shield",
-    products: ["Major Medical", "ACA / Marketplace Plans", "PPO, HMO & EPO Networks"],
-  },
-  {
-    name: "Cigna",
-    products: ["Major Medical", "PPO & HMO Networks"],
-  },
-  {
-    name: "Aetna",
-    products: ["Major Medical", "PPO Network"],
-  },
-  {
-    name: "UnitedHealthcare (UHOne)",
-    products: ["Fixed Indemnity", "Hospital Indemnity"],
-  },
-  {
-    name: "Ambetter",
-    products: ["ACA / Marketplace Plans"],
-  },
-  {
-    name: "Oscar Health",
-    products: ["ACA / Marketplace Plans"],
-  },
-  {
-    name: "Humana",
-    products: ["Major Medical", "Medicare Advantage", "Supplemental"],
-  },
-  {
-    name: "Allstate Health",
-    products: ["Fixed Indemnity", "Short-Term Medical", "Dental & DVH", "Supplemental", "Disability Income", "Senior Plans"],
-  },
-  {
-    name: "Manhattan Life",
-    products: ["Accident Coverage", "Critical Illness", "Disability Income", "Hospital Indemnity", "DVH & Dental", "Short-Term Care"],
-  },
-  {
-    name: "Enroll Prime",
-    products: ["Major Medical (Gold/Silver/Bronze)", "Limited Medical", "Dental & Vision"],
-  },
-  {
-    name: "IronE Health",
-    products: ["Major Medical (PSM Classic, HSA, Value, BCBS, Million)"],
-  },
-  {
-    name: "MedMax / MyFirstHealth / AHW",
-    products: ["Major Medical", "First Health Network"],
-  },
-  {
-    name: "Elite Health / ACUSA",
-    products: ["Limited Medical / Fixed Benefit", "First Health Network"],
-  },
-  {
-    name: "HealthSmart",
-    products: ["PPO Network", "Limited Medical Plans"],
-  },
-];
-
 const planCategories = [
   { name: "Major Medical", desc: "Comprehensive health coverage (PPO, HMO, EPO)" },
   { name: "ACA / Marketplace", desc: "Affordable Care Act compliant plans" },
@@ -370,7 +311,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Carrier Partners & Plan Categories */}
+      {/* Products / Plan Categories — carrier brand names intentionally omitted (App Store 5.2 IP) */}
       <section id="partners" className="py-16 bg-[#F9F9F7]" data-testid="section-partners">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
@@ -383,10 +324,10 @@ export default function Home() {
             >
               <motion.div variants={fadeInUp}>
                 <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Can Sell</div>
-                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Carriers &amp; Products</h2>
+                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Products You Can Offer</h2>
               </motion.div>
               <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6">
-                Access contracts with top-tier health insurance carriers. We handle the relationships — you focus on selling.
+                A full lineup of private health, supplemental, and ancillary products. We handle contracting and back-office — you focus on selling.
               </motion.p>
             </motion.div>
 
@@ -397,34 +338,19 @@ export default function Home() {
               variants={fadeInUp}
               className="gold-card overflow-hidden"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#C5A059]/10">
-                {/* Left — Carrier Partners */}
-                <div className="p-6">
-                  <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-4">Carrier Partners</h3>
-                  <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5">
-                    {carrierPartners.map((carrier, i) => (
-                      <li key={i} className="flex items-baseline gap-2 text-sm" data-testid={`card-carrier-${i}`}>
-                        <span className="text-[#C5A059] text-xs">&#8226;</span>
-                        <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{carrier.name}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {/* Right — Plan Categories */}
-                <div className="p-6">
-                  <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-4">Plan Categories</h3>
-                  <ul className="space-y-2.5">
-                    {planCategories.map((cat, i) => (
-                      <li key={i} className="flex items-baseline gap-2.5 text-sm" data-testid={`card-plan-category-${i}`}>
-                        <span className="text-[#C5A059] text-xs">&#8226;</span>
-                        <div>
-                          <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</span>
-                          <span className="text-[#0F172A]/40 text-xs ml-1.5">— {cat.desc}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="p-6 md:p-8">
+                <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-5">Plan Categories</h3>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                  {planCategories.map((cat, i) => (
+                    <li key={i} className="flex items-baseline gap-2.5 text-sm" data-testid={`card-plan-category-${i}`}>
+                      <span className="text-[#C5A059] text-xs">&#8226;</span>
+                      <div>
+                        <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</span>
+                        <span className="text-[#0F172A]/40 text-xs ml-1.5">— {cat.desc}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           </div>
