@@ -21,9 +21,12 @@ import { ScrollProgress, Reveal, RevealStagger, RevealChild } from "@/components
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
 import { Search, Shield, FileText, Phone, ChevronDown } from "lucide-react";
-import portalScreen1 from "@assets/IMG_6557_1771083947885.png";
-import portalScreen2 from "@assets/IMG_6558_1771083947885.jpeg";
-import portalScreen3 from "@assets/IMG_6559_1771083978264.jpeg";
+// Updated Sakred Health app screenshots (2026-07-25) — served from the app's Supabase.
+// Center = home screen (hero); sides = the policy-portal + document library screens.
+const APP_SHOTS = "https://auth.sakredhealth.com/storage/v1/object/public/appdemoscreenshots";
+const portalScreen1 = `${APP_SHOTS}/policy%20portal%20.jpeg`;
+const portalScreen2 = `${APP_SHOTS}/homescreen%20.jpeg`;
+const portalScreen3 = `${APP_SHOTS}/library%20overview%20.jpeg`;
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -392,7 +395,7 @@ export default function Home() {
                 <div className="relative z-10 -mr-6" style={{ transform: "rotate(-8deg) translateY(-10px)" }}>
                   <img
                     src={portalScreen1}
-                    alt="Sakred Health portal - policy overview"
+                    alt="Sakred Health app - policy portal"
                     className="w-36 md:w-44 rounded-2xl shadow-2xl border border-[#C5A059]/20"
                     data-testid="img-portal-screen-1"
                   />
@@ -400,7 +403,7 @@ export default function Home() {
                 <div className="relative z-20" style={{ transform: "translateY(-20px)" }}>
                   <img
                     src={portalScreen2}
-                    alt="Sakred Health portal - search"
+                    alt="Sakred Health app - home screen"
                     className="w-40 md:w-52 rounded-2xl shadow-2xl border border-[#C5A059]/20"
                     data-testid="img-portal-screen-2"
                   />
@@ -408,7 +411,7 @@ export default function Home() {
                 <div className="relative z-10 -ml-6" style={{ transform: "rotate(8deg) translateY(-10px)" }}>
                   <img
                     src={portalScreen3}
-                    alt="Sakred Health portal - support"
+                    alt="Sakred Health app - document library"
                     className="w-36 md:w-44 rounded-2xl shadow-2xl border border-[#C5A059]/20"
                     data-testid="img-portal-screen-3"
                   />
