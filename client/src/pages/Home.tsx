@@ -385,10 +385,10 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeInUp}
-              className="flex justify-center items-end mb-24"
+              className="flex justify-center items-end mt-12 md:mt-16 mb-24"
               data-testid="portal-screenshots"
             >
-              <div className="relative flex items-end justify-center" style={{ height: "340px", width: "100%", maxWidth: "600px" }}>
+              <div className="relative flex items-end justify-center pt-8" style={{ width: "100%", maxWidth: "600px" }}>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="portal-glow rounded-full" style={{ width: "300px", height: "300px" }} />
                 </div>
