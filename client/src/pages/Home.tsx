@@ -156,20 +156,6 @@ const infrastructureItems = [
   },
 ];
 
-const planCategories = [
-  { name: "Major Medical", desc: "Comprehensive health coverage (PPO, HMO, EPO)" },
-  { name: "ACA / Marketplace", desc: "Affordable Care Act compliant plans" },
-  { name: "Limited Medical", desc: "Budget-friendly plans with set benefit limits" },
-  { name: "Fixed Indemnity", desc: "Pays fixed dollar amounts per service or event" },
-  { name: "Short-Term Medical", desc: "Temporary coverage for gaps in insurance" },
-  { name: "Hospital Indemnity", desc: "Cash payouts for hospital stays" },
-  { name: "Dental & Vision", desc: "Standalone dental (PPO & Indemnity) and vision" },
-  { name: "DVH", desc: "Bundled Dental, Vision & Hearing coverage" },
-  { name: "Supplemental", desc: "Accident, Critical Illness, Cancer — pays on top of primary" },
-  { name: "Disability Income", desc: "Income replacement during disability" },
-  { name: "Medicare", desc: "Medicare Supplement & Medicare Advantage" },
-];
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F9F9F7] text-[#0F172A]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -311,52 +297,6 @@ export default function Home() {
           <Reveal delay={0.1} className="max-w-4xl mx-auto">
             <CommissionCalculator />
           </Reveal>
-        </div>
-      </section>
-
-      {/* Products / Plan Categories — carrier brand names intentionally omitted (App Store 5.2 IP) */}
-      <section id="partners" className="py-16 bg-[#F9F9F7]" data-testid="section-partners">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-              className="text-center mb-10"
-            >
-              <motion.div variants={fadeInUp}>
-                <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Can Sell</div>
-                <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Products You Can Offer</h2>
-              </motion.div>
-              <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6">
-                A full lineup of private health, supplemental, and ancillary products. We handle contracting and back-office — you focus on selling.
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={fadeInUp}
-              className="gold-card overflow-hidden"
-            >
-              <div className="p-6 md:p-8">
-                <h3 className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase mb-5">Plan Categories</h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                  {planCategories.map((cat, i) => (
-                    <li key={i} className="flex items-baseline gap-2.5 text-sm" data-testid={`card-plan-category-${i}`}>
-                      <span className="text-[#C5A059] text-xs">&#8226;</span>
-                      <div>
-                        <span className="font-medium text-[#0F172A]" style={{ fontFamily: "'Playfair Display', serif" }}>{cat.name}</span>
-                        <span className="text-[#0F172A]/40 text-xs ml-1.5">— {cat.desc}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 
