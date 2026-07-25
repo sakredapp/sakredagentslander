@@ -127,7 +127,7 @@ export function CommissionCalculator() {
           ))}
 
           <div className="text-xs text-[#0F172A]/30 pt-6 italic">
-            Estimates only. Actual comp varies by carrier, persistency, and contracting.
+            Estimates only. Actual comp varies by plan, persistency, and contracting.
           </div>
         </div>
       </Card>

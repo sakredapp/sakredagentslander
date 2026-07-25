@@ -132,7 +132,7 @@ const infrastructureItems = [
   {
     title: "Proprietary Training Platform",
     summary: "On-demand access to structured coursework",
-    detail: "Our private training software covers everything from carrier product knowledge and compliance requirements to advanced sales techniques. Modules are self-paced with assessments, so you can train on your schedule. New content is added regularly as carriers update plans and guidelines change."
+    detail: "Our private training software covers everything from plan knowledge and compliance requirements to advanced sales techniques. Modules are self-paced with assessments, so you can train on your schedule. New content is added regularly as plans and guidelines change."
   },
   {
     title: "Scripts & Objection Handling",
@@ -147,12 +147,12 @@ const infrastructureItems = [
   {
     title: "Quoting & Enrollment Workflow",
     summary: "Streamlined process from first call to active policy",
-    detail: "Our step-by-step quoting workflow takes you from needs analysis through carrier selection, plan comparison, client presentation, and enrollment submission. You'll know exactly what to do at each stage — no guesswork. Includes carrier-specific submission checklists so nothing falls through the cracks."
+    detail: "Our step-by-step quoting workflow takes you from needs analysis through plan selection, comparison, client presentation, and enrollment submission. You'll know exactly what to do at each stage — no guesswork. Includes plan-specific submission checklists so nothing falls through the cracks."
   },
   {
     title: "Weekly Training & Team Calls",
     summary: "Live sessions on products, compliance, and strategy",
-    detail: "Every week we run live training covering new carrier products, compliance updates, sales strategy, and real case studies. There's also a dedicated recruiting call for agents building teams. These aren't optional webinars — they're working sessions designed to keep you sharp and connected to what's happening in the market."
+    detail: "Every week we run live training covering new plans, compliance updates, sales strategy, and real case studies. There's also a dedicated recruiting call for agents building teams. These aren't optional webinars — they're working sessions designed to keep you sharp and connected to what's happening in the market."
   },
 ];
 
@@ -185,7 +185,7 @@ export default function Home() {
             
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#0F172A]/55 max-w-2xl mx-auto leading-relaxed pt-4">
               Private healthcare is a recurring-commission line with compounding renewals.
-              We give you the carriers, contracts, training, and infrastructure to build a book that pays you month after month.
+              We give you the contracts, training, and infrastructure to build a book that pays you month after month.
             </motion.p>
 
             
@@ -291,7 +291,7 @@ export default function Home() {
               Model your residual income growth based on consistent monthly production.
             </p>
             <p className="text-[#0F172A]/40 text-sm leading-relaxed italic mt-2">
-              Estimates only. Actual comp varies by carrier, persistency, and contracting.
+              Estimates only. Actual comp varies by plan, persistency, and contracting.
             </p>
           </Reveal>
           <Reveal delay={0.1} className="max-w-4xl mx-auto">
@@ -373,7 +373,7 @@ export default function Home() {
               </motion.div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {[
-                  { icon: FileText, title: "Policy Overview at a Glance", desc: "Clients can view their active policies, carrier info, and coverage details (deductibles, copays, out-of-pocket max) all in one place." },
+                  { icon: FileText, title: "Policy Overview at a Glance", desc: "Clients can view their active policies, plan info, and coverage details (deductibles, copays, out-of-pocket max) all in one place." },
                   { icon: Search, title: "Full-Text Policy Search", desc: "No more digging through PDFs. Clients can search their policy documents instantly for specific terms, coverage questions, or benefits details." },
                   { icon: Shield, title: "Secure Document Access", desc: "All policy documents stored securely with private signed links, accessible anytime from their phone." },
                   { icon: Phone, title: "Direct Support Access", desc: "Clients can submit support requests and schedule callback appointments with their assigned agent, all from within the app." },
@@ -407,7 +407,7 @@ export default function Home() {
               Already selling life?
             </h2>
             <p className="text-[#0F172A]/55 text-lg leading-relaxed max-w-2xl mx-auto">
-              Keep your book, your upline, your carriers. We're not a life platform. We give you healthcare carrier access and infrastructure so you can add a recurring-commission line — without disrupting anything.
+              Keep your book, your upline, your contracts. We're not a life platform. We give you healthcare access and infrastructure so you can add a recurring-commission line — without disrupting anything.
             </p>
             <div className="pt-4">
               <Dialog>
@@ -432,11 +432,11 @@ export default function Home() {
                 <div className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase">Fast Track</div>
                 <h3 className="text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Licensed Agents</h3>
                 <p className="text-[#0F172A]/55 leading-relaxed">
-                  You already hold a Life &amp; Health license. You want access to healthcare carriers, higher splits, and real ownership of a compounding book.
+                  You already hold a Life &amp; Health license. You want access to healthcare plans, higher splits, and real ownership of a compounding book.
                 </p>
                 <ul className="space-y-2 text-[#0F172A]/65 text-sm">
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Fast track onboarding</li>
-                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Carrier contracting guidance</li>
+                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Contracting guidance</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Quoting + enrollment workflow</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Mentor assignment + weekly cadence</li>
                 </ul>
@@ -520,13 +520,13 @@ export default function Home() {
 
           <Accordion type="single" collapsible className="w-full">
             {[
-              { q: "Can I keep selling life with my current upline?", a: "Absolutely. We are not a life insurance platform and we don't onboard for life. We give you access to private healthcare carriers so you can help your existing clients (or new ones) secure health coverage. Your life business stays exactly where it is." },
+              { q: "Can I keep selling life with my current upline?", a: "Absolutely. We are not a life insurance platform and we don't onboard for life. We give you access to private healthcare plans so you can help your existing clients (or new ones) secure health coverage. Your life business stays exactly where it is." },
               { q: "Do I need to be licensed?", a: "Preferred. If you're not licensed yet, we'll guide you through the licensing process — it typically takes 1-2 weeks." },
               { q: "What's the weekly call?", a: "A brief overview call covering expectations, next steps, and current opportunities. It's how we stay aligned." },
               { q: "How fast can I start?", a: "Depends on your licensing and contracting status. Licensed agents can start within days." },
               { q: "Do you provide leads?", a: "We provide access to vetted lead vendors at discounted rates and train you on organic lead generation. For agents hitting production targets, there's potential for lead costs to be partially covered at a reduced commission split." },
               { q: "Is this part-time possible?", a: "Yes. Many agents start part-time while transitioning. We prefer a plan to go full-time within 3-6 months." },
-              { q: "Which states do you operate in?", a: "Varies by carrier. We can discuss your specific state during the intro call." },
+              { q: "Which states do you operate in?", a: "Varies by plan. We can discuss your specific state during the intro call." },
               { q: "What happens after I apply?", a: "You'll schedule an opportunity call right away. You'll get a confirmation email with a Zoom link and calendar invite. If you can't make it, we'll reach out to reschedule." },
             ].map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-b border-[#C5A059]/10">
