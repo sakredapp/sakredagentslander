@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { LeadForm, type FormStage } from "./LeadForm";
 import { motion, AnimatePresence } from "framer-motion";
-import logoSrc from "@assets/Sakred_(512_x_512_px_LOGO__1771013523114.png";
+import logoSrc from "@assets/full_png_image_sakred__1771270056819.png";
 
 function NavLeadFormDialog({ onSuccess }: { onSuccess?: () => void }) {
   const [stage, setStage] = useState<FormStage>("form");
