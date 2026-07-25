@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { LeadForm, type FormStage } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
+import { ScrollProgress, Reveal, RevealStagger, RevealChild } from "@/components/motion";
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
 import { Search, Shield, FileText, Phone, ChevronDown } from "lucide-react";
@@ -228,6 +229,7 @@ const planCategories = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F9F9F7] text-[#0F172A]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <ScrollProgress />
       <Navigation />
 
       {/* Hero — leads with the opportunity, not the audience */}
@@ -279,9 +281,17 @@ export default function Home() {
             <motion.div variants={fadeInUp} className="pt-12">
               <div className="inline-flex items-center gap-6 px-8 py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
                 <span className="text-sm font-medium text-[#0F172A]/70">Apply</span>
-                <span className="text-[#C5A059]">&#8594;</span>
+                <motion.span
+                  className="text-[#C5A059]"
+                  animate={{ x: [0, 4, 0], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0 }}
+                >&#8594;</motion.span>
                 <span className="text-sm font-medium text-[#0F172A]/70">Opportunity Call</span>
-                <span className="text-[#C5A059]">&#8594;</span>
+                <motion.span
+                  className="text-[#C5A059]"
+                  animate={{ x: [0, 4, 0], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+                >&#8594;</motion.span>
                 <span className="text-sm font-medium text-[#0F172A]/70">Onboarding</span>
               </div>
             </motion.div>
@@ -293,11 +303,12 @@ export default function Home() {
       <section id="opportunity" className="py-16 bg-white border-y border-[#C5A059]/10" data-testid="section-opportunity">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
+            <Reveal className="text-center mb-10">
               <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">The Market</div>
               <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Types of Clients</h2>
-            </div>
+            </Reveal>
 
+            <Reveal delay={0.1}>
             <Accordion type="multiple" className="w-full space-y-4">
               {clientTypes.map((client, i) => (
                 <AccordionItem
@@ -335,6 +346,7 @@ export default function Home() {
                 </AccordionItem>
               ))}
             </Accordion>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -342,7 +354,7 @@ export default function Home() {
       {/* Calculator */}
       <section id="calculator" className="pt-16 pb-12 bg-white" data-testid="section-calculator">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-10">
+          <Reveal className="text-center mb-10">
             <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Project Your Earnings</div>
             <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Income Calculator</h2>
             <p className="text-[#0F172A]/55 leading-relaxed text-lg max-w-2xl mx-auto mt-4">
@@ -351,10 +363,10 @@ export default function Home() {
             <p className="text-[#0F172A]/40 text-sm leading-relaxed italic mt-2">
               Estimates only. Actual comp varies by carrier, persistency, and contracting.
             </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
+          </Reveal>
+          <Reveal delay={0.1} className="max-w-4xl mx-auto">
             <CommissionCalculator />
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -520,7 +532,7 @@ export default function Home() {
       {/* Already Selling Life? — clean, on-brand */}
       <section className="py-16 bg-white border-y border-[#C5A059]/10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
+          <Reveal className="max-w-3xl mx-auto text-center space-y-6">
             <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase">For Life Insurance Agents</div>
             <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
               Already selling life?
@@ -538,14 +550,15 @@ export default function Home() {
                 <LeadFormDialogContent />
               </Dialog>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="py-16 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5" data-testid="card-licensed">
+          <RevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <RevealChild>
+            <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5 h-full" data-testid="card-licensed">
               <CardContent className="p-10 space-y-5">
                 <div className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase">Fast Track</div>
                 <h3 className="text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Licensed Agents</h3>
@@ -560,8 +573,10 @@ export default function Home() {
                 </ul>
               </CardContent>
             </Card>
+            </RevealChild>
 
-            <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5" data-testid="card-not-licensed">
+            <RevealChild>
+            <Card className="bg-white border-[#C5A059]/20 shadow-lg shadow-[#C5A059]/5 h-full" data-testid="card-not-licensed">
               <CardContent className="p-10 space-y-5">
                 <div className="text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase">Getting Started</div>
                 <h3 className="text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Not Licensed Yet</h3>
@@ -575,7 +590,8 @@ export default function Home() {
                 </ul>
               </CardContent>
             </Card>
-          </div>
+            </RevealChild>
+          </RevealStagger>
 
           <div className="text-center mt-12">
             <Dialog>
@@ -594,11 +610,12 @@ export default function Home() {
       <section id="infrastructure" className="py-16 bg-[#F9F9F7]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
+            <Reveal className="text-center mb-10">
               <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">What You Get</div>
               <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>Agent Infrastructure</h2>
-            </div>
-            
+            </Reveal>
+
+            <Reveal delay={0.1}>
             <Accordion type="multiple" className="w-full space-y-4">
               {infrastructureItems.map((item, i) => (
                 <AccordionItem
@@ -621,6 +638,7 @@ export default function Home() {
                 </AccordionItem>
               ))}
             </Accordion>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -628,8 +646,9 @@ export default function Home() {
       {/* FAQ */}
       <section id="faq" className="py-16 bg-white" data-testid="section-faq">
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+          <Reveal>
           <h2 className="text-3xl md:text-5xl font-medium mb-8 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>Frequently Asked Questions</h2>
-          
+
           <Accordion type="single" collapsible className="w-full">
             {[
               { q: "Can I keep selling life with my current upline?", a: "Absolutely. We are not a life insurance platform and we don't onboard for life. We give you access to private healthcare carriers so you can help your existing clients (or new ones) secure health coverage. Your life business stays exactly where it is." },
@@ -651,6 +670,7 @@ export default function Home() {
               </AccordionItem>
             ))}
           </Accordion>
+          </Reveal>
         </div>
       </section>
     </div>
