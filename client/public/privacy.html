@@ -24,6 +24,7 @@
   .updated{color:var(--ink-soft);font-size:15px;margin:0}
   main{padding:24px 0 8px}
   h2{font-size:21px;letter-spacing:-.01em;margin:34px 0 8px}
+  h3{font-size:17px;letter-spacing:-.01em;margin:22px 0 6px}
   p,li{color:#2d3748;font-size:16px}
   ul{padding-left:22px}li{margin:5px 0}
   .muted{color:var(--ink-soft);font-size:14.5px}
@@ -47,7 +48,7 @@
 <div class="hero">
   <div class="wrap">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: July 25, 2026</p>
+    <p class="updated">Last updated: August 2, 2026</p>
   </div>
 </div>
 
@@ -78,7 +79,8 @@
   </ul>
 
   <h2>3. AI processing</h2>
-  <p>The Service uses artificial intelligence to draft messages, summarize conversations, prioritize leads, and triage email. Relevant content may be processed by trusted AI infrastructure providers solely to deliver these features, under contractual terms (including, where health information is involved, a Business Associate Agreement). We do not sell your data, and we do not permit these providers to use it to train their general-purpose models.</p>
+  <p>The Service uses artificial intelligence to draft messages, summarize conversations, prioritize leads, triage email, and propose appointment times. All of this inference runs on <b>Amazon Bedrock</b>, inside our own AWS account, using Anthropic Claude models, under contractual terms (including, where health information is involved, a Business Associate Agreement). Amazon Bedrock does not retain prompts or responses after a request is served, does not use them to train or improve any model, and does not share them with the model provider.</p>
+  <p>We do not route any Service data through consumer AI products, model aggregators, model hubs, or third-party AI gateways, and we do not use your data — raw, aggregated, anonymized, or derived — to train, fine-tune, or improve our own or any third party's foundational or generalized AI/ML models. We do not sell your data.</p>
 
   <h2>4. How we share information</h2>
   <p>We do not sell personal information. We share it only as needed to run the Service and provide insurance products:</p>
@@ -94,7 +96,18 @@
   <p>The Service sends and receives text messages as part of our agents' outreach. Recipients may opt out at any time by replying STOP, which stops further messages and updates the contact's status; reply HELP for assistance. Message and data rates may apply. Messaging follows applicable carrier requirements and telemarketing/consent laws (including the TCPA and A2P 10DLC rules). Consent to receive messages is never shared with third parties for their own marketing.</p>
 
   <h2>6. Google user data</h2>
-  <p>If you connect a Google account, Sakred accesses Gmail and/or Google Calendar data only to provide the inbox triage, drafting, and calendar features you enable. Our use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including its Limited Use requirements. You can disconnect Google access at any time from within the Service or from your Google account settings.</p>
+  <p>Connecting a Google account is optional. If you connect one, Sakred accesses Gmail and/or Google Calendar data only to provide the inbox triage, reply drafting, and calendar/scheduling features you enable. You can disconnect Google access at any time from within the Service or from your Google account settings; disconnecting stops all further access.</p>
+
+  <h3>Limited Use</h3>
+  <p><b>Sakred's use of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</b></p>
+
+  <h3>Google user data and AI/ML</h3>
+  <p>We do not use, transfer, or sell Google user data — raw, aggregated, anonymized, or derived — to develop, improve, or train generalized or foundational artificial intelligence or machine learning models. Where a feature applies AI to Google user data, that processing happens only on Amazon Bedrock as described in section 3, under terms that prohibit retention and model training, and only to produce the output shown to the user who connected the account. Specifically:</p>
+  <ul>
+    <li><b>Google Calendar</b> — the AI scheduling assistant receives only free/busy time ranges, converted into a list of open appointment times. Event titles, descriptions, locations, attendees, and guest details are never sent to any AI model.</li>
+    <li><b>Gmail</b> — for users who enable the AI email inbox, message content from that user's own synced threads is used to produce a triage label and a suggested reply for that same user to review, edit, or discard.</li>
+  </ul>
+  <p>No Google user data is used to train models, build profiles, serve advertising, or produce any output outside the connecting user's own account.</p>
 
   <h2>7. Data retention</h2>
   <p>We retain personal information for as long as it is needed to provide the Service and service insurance policies, and thereafter as required to comply with legal, regulatory, and recordkeeping obligations, resolve disputes, and enforce agreements. Individuals may request access to or deletion of their information as described below.</p>
