@@ -20,7 +20,32 @@ import { CommissionCalculator } from "@/components/CommissionCalculator";
 import { ScrollProgress, Reveal, RevealStagger, RevealChild } from "@/components/motion";
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
-import { Search, Shield, FileText, Phone, ChevronDown } from "lucide-react";
+import {
+  Search,
+  Shield,
+  FileText,
+  Phone,
+  ChevronDown,
+  Bot,
+  CalendarCheck,
+  Flame,
+  RefreshCw,
+  PhoneCall,
+  Inbox,
+  Columns3,
+  CalendarDays,
+  FileSearch,
+  Stethoscope,
+  Smartphone,
+  Wallet,
+  Table2,
+  ShieldAlert,
+  Calculator,
+  Trophy,
+  ScrollText,
+  GraduationCap,
+  ClipboardCheck,
+} from "lucide-react";
 // Updated Sakred Health app screenshots (2026-07-25) — served from the app's Supabase.
 // Center = home screen (hero); sides = the policy-portal + document library screens.
 const APP_SHOTS = "https://auth.sakredhealth.com/storage/v1/object/public/appdemoscreenshots";
@@ -125,6 +150,11 @@ const clientTypes = [
 
 const infrastructureItems = [
   {
+    title: "The Sakred Platform",
+    summary: "Our own CRM, AI assistant, dialer, and commission tracking",
+    detail: "Every agent gets full access to the sales platform we built in-house — an AI assistant that texts and qualifies your leads the moment they land and books appointments straight onto your calendar, a power dialer with local caller ID, pipelines built per product line, a unified inbox, quoting and underwriting tools, and commission tracking that shows you what each case pays before you write it. It's on your desktop and in your pocket on iPhone and Android. See the full breakdown in the Platform section above.",
+  },
+  {
     title: "Assigned Mentor",
     summary: "One-on-one guidance from day one",
     detail: "Every new agent is paired with an experienced mentor who has built their own healthcare book. Your mentor walks you through your first cases, reviews your quoting process, and is available for real-time support as you ramp up. This isn't a group chat — it's a direct relationship with someone who's done what you're doing."
@@ -153,6 +183,141 @@ const infrastructureItems = [
     title: "Weekly Training & Team Calls",
     summary: "Live sessions on products, compliance, and strategy",
     detail: "Every week we run live training covering new plans, compliance updates, sales strategy, and real case studies. There's also a dedicated recruiting call for agents building teams. These aren't optional webinars — they're working sessions designed to keep you sharp and connected to what's happening in the market."
+  },
+];
+
+const platformGroups = [
+  {
+    kicker: "Leads Work Themselves",
+    heading: "An AI assistant on every lead",
+    intro:
+      "The moment a lead lands, it gets worked — not filed. You show up to conversations that are already warm.",
+    features: [
+      {
+        icon: Bot,
+        title: "AI Texts Every Lead Instantly",
+        desc: "Our AI assistant opens the conversation the minute a lead comes in, answers questions, works through objections, and qualifies. Nights, weekends, holidays.",
+      },
+      {
+        icon: CalendarCheck,
+        title: "It Books — It Doesn't Hand Off",
+        desc: "When a lead is ready, the AI puts the appointment straight on your calendar. You never sit in a message queue or babysit threads.",
+      },
+      {
+        icon: Flame,
+        title: "Hot Leads Worklist",
+        desc: "A ranked call list every morning: who to call first, why they're hot, what the AI already learned about them, and a suggested opener.",
+      },
+      {
+        icon: RefreshCw,
+        title: "Follow-Up That Never Quits",
+        desc: "Leads that go quiet get re-engaged automatically on a cadence tuned to the product. Nothing rots in your pipeline because you got busy.",
+      },
+    ],
+  },
+  {
+    kicker: "Your Desk",
+    heading: "Everything in one tab",
+    intro:
+      "Dialer, inbox, pipeline, calendar, quoting. No stitching together five subscriptions to run your day.",
+    features: [
+      {
+        icon: PhoneCall,
+        title: "Power Dialer",
+        desc: "One-click dialing from a local number the lead recognizes, with voicemail drop, call recording, and dispositions logged as you go.",
+      },
+      {
+        icon: Inbox,
+        title: "Unified Inbox",
+        desc: "Texts, emails, and call history for one person, in one thread. You always know what was already said before you pick up the phone.",
+      },
+      {
+        icon: Columns3,
+        title: "Pipelines Built Per Product",
+        desc: "Health, ACA, life, mortgage protection, IUL, final expense, annuity, supplemental — each with its own stages, because the sale isn't the same for each one.",
+      },
+      {
+        icon: CalendarDays,
+        title: "Calendar & Personal Booking Link",
+        desc: "Two-way Google Calendar sync, your own booking page, automatic reminders, and no-show follow-up handled for you.",
+      },
+      {
+        icon: FileSearch,
+        title: "Quoting & Policy Analyzer",
+        desc: "Plan documents with age-banded pricing built in, a quoter that prices off them, and an analyzer that reads a prospect's current coverage and explains it in plain English.",
+      },
+      {
+        icon: Stethoscope,
+        title: "Underwriting Reference",
+        desc: "A condition-by-category guide so you know how a case is likely to land before you spend a week submitting it.",
+      },
+      {
+        icon: Smartphone,
+        title: "iPhone & Android App",
+        desc: "Your leads, inbox, dialer, and calendar in your pocket. Sakred CRM ships on the App Store and Google Play — the same system, on the road.",
+      },
+    ],
+  },
+  {
+    kicker: "Your Money",
+    heading: "You always know what you're owed",
+    intro:
+      "Most agents find out what a case paid when the deposit hits. You'll know before you write it.",
+    features: [
+      {
+        icon: Table2,
+        title: "See Your Comp Before You Sell",
+        desc: "Your comp is published in the platform — what every plan and product pays you at your level, by age band. No guessing, no asking, no mystery grid.",
+      },
+      {
+        icon: Wallet,
+        title: "Commission Dashboard",
+        desc: "Every policy you write, what it pays, what's advanced versus as-earned, and when it's scheduled to land.",
+      },
+      {
+        icon: ShieldAlert,
+        title: "Chargeback & Persistency Tracking",
+        desc: "Early lapses get flagged and clawbacks get booked automatically, so a statement never surprises you and you can see which business is sticking.",
+      },
+      {
+        icon: Calculator,
+        title: "Calculator & 1099 Reports",
+        desc: "Model a case before you write it, and get clean, organized numbers when it's time to file.",
+      },
+      {
+        icon: Trophy,
+        title: "Production Scoreboard",
+        desc: "Where you stand, in real time. Healthy competition beats a monthly email nobody reads.",
+      },
+    ],
+  },
+  {
+    kicker: "Handled For You",
+    heading: "The parts you shouldn't have to think about",
+    intro:
+      "Compliance, training, and contracting run in the background so your day is selling, not admin.",
+    features: [
+      {
+        icon: Shield,
+        title: "Messaging Compliance, Automatic",
+        desc: "Registration for business texting, quiet hours in the client's local time, opt-outs honored instantly, and messaging that goes out under the correct licensed business name for the state.",
+      },
+      {
+        icon: GraduationCap,
+        title: "Academy, Built In",
+        desc: "Training modules on demand, organized by product line, right inside the platform you already work in.",
+      },
+      {
+        icon: ClipboardCheck,
+        title: "Contracting Tracker",
+        desc: "See exactly where every appointment stands instead of emailing someone to ask.",
+      },
+      {
+        icon: ScrollText,
+        title: "Client Records That Stay Put",
+        desc: "Policies, documents, service requests, and renewal dates live on the client record — so your book is an asset you can actually work, years later.",
+      },
+    ],
   },
 ];
 
@@ -185,7 +350,8 @@ export default function Home() {
             
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#0F172A]/55 max-w-2xl mx-auto leading-relaxed pt-4">
               Private healthcare is a recurring-commission line with compounding renewals.
-              We give you the contracts, training, and infrastructure to build a book that pays you month after month.
+              We give you the contracts, the training, and our own AI-powered sales platform
+              to build a book that pays you month after month.
             </motion.p>
 
             
@@ -300,6 +466,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Platform — the tech stack an agent gets */}
+      <section id="platform" className="py-16 bg-[#F9F9F7] border-y border-[#C5A059]/10" data-testid="section-platform">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-5xl mx-auto">
+            <Reveal className="text-center mb-4">
+              <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4">Your Tech Stack</div>
+              <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-platform-heading">
+                You don&rsquo;t just get contracts.<br className="hidden md:block" /> You get the platform.
+              </h2>
+              <p className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6" data-testid="text-platform-intro">
+                Most agencies hand you a login to someone else&rsquo;s CRM and wish you luck. We built our own — an
+                insurance sales platform with an AI assistant that works your leads, a dialer, pipelines for every
+                product line, and commission tracking that shows you what you&rsquo;re owed. Every Sakred agent gets it.
+              </p>
+              <p className="text-[#0F172A]/40 text-sm leading-relaxed italic mt-3">
+                Built in-house for our own agents. Not a reseller license.
+              </p>
+            </Reveal>
+
+            <div className="space-y-14 mt-14">
+              {platformGroups.map((group, gi) => (
+                <div key={gi} data-testid={`group-platform-${gi}`}>
+                  <Reveal className="mb-6">
+                    <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-2">{group.kicker}</div>
+                    <h3 className="text-2xl md:text-3xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {group.heading}
+                    </h3>
+                    <p className="text-[#0F172A]/55 leading-relaxed mt-3 max-w-2xl">{group.intro}</p>
+                  </Reveal>
+
+                  <RevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    {group.features.map((feature, fi) => (
+                      <RevealChild key={fi}>
+                        <div className="portal-card p-7 space-y-4 h-full" data-testid={`card-platform-${gi}-${fi}`}>
+                          <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
+                            <feature.icon className="w-5 h-5 text-[#C5A059]" />
+                          </div>
+                          <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{feature.title}</h4>
+                          <p className="text-[#0F172A]/55 text-sm leading-relaxed">{feature.desc}</p>
+                        </div>
+                      </RevealChild>
+                    ))}
+                  </RevealStagger>
+                </div>
+              ))}
+            </div>
+
+            <Reveal className="text-center mt-14">
+              <p className="text-[#0F172A]/55 leading-relaxed max-w-2xl mx-auto mb-6">
+                We&rsquo;ll walk you through the whole platform, live, on your opportunity call.
+              </p>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <GoldButton data-testid="button-apply-platform" className="text-base min-w-[220px]">
+                    See It On A Call
+                  </GoldButton>
+                </DialogTrigger>
+                <LeadFormDialogContent />
+              </Dialog>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* Client Portal */}
       <section id="client-portal" className="pt-12 pb-16 bg-[#F9F9F7]" data-testid="section-client-portal">
         <div className="container mx-auto px-4 md:px-6">
@@ -316,7 +546,7 @@ export default function Home() {
                 <h2 className="text-3xl md:text-5xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-portal-heading">Sakred Health Client Portal</h2>
               </motion.div>
               <motion.p variants={fadeInUp} className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6" data-testid="text-portal-intro">
-                As a Sakred Health insurance agent, you bring your clients more than just a policy — you give them a fully integrated healthcare portal built right into the Sakred Health wellness app.
+                You get the platform. Your clients get one too. As a Sakred Health insurance agent, you bring your clients more than just a policy — you give them a fully integrated healthcare portal built right into the Sakred Health wellness app.
               </motion.p>
             </motion.div>
 
@@ -438,6 +668,7 @@ export default function Home() {
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Fast track onboarding</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Contracting guidance</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Quoting + enrollment workflow</li>
+                  <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Full platform access from day one</li>
                   <li className="flex items-start gap-2"><span className="text-[#C5A059] mt-0.5">&#8226;</span> Mentor assignment + weekly cadence</li>
                 </ul>
               </CardContent>
@@ -525,6 +756,9 @@ export default function Home() {
               { q: "What's the weekly call?", a: "A brief overview call covering expectations, next steps, and current opportunities. It's how we stay aligned." },
               { q: "How fast can I start?", a: "Depends on your licensing and contracting status. Licensed agents can start within days." },
               { q: "Do you provide leads?", a: "We provide access to vetted lead vendors at discounted rates and train you on organic lead generation. For agents hitting production targets, there's potential for lead costs to be partially covered at a reduced commission split." },
+              { q: "Do I need my own CRM?", a: "No. Every Sakred agent gets access to the sales platform we built in-house — AI that works your leads, a power dialer, pipelines per product line, a unified inbox, quoting tools, and commission tracking. If you're already paying for a CRM, a dialer, and a texting tool, you can stop." },
+              { q: "What does the AI actually do?", a: "It's an assistant, not a robot that replaces you. It texts every new lead the moment it lands, answers questions, works through objections, and qualifies. When the lead is ready, it books the appointment directly on your calendar — you don't sit in a message queue or chase cold leads. You show up to conversations that are already warm." },
+              { q: "Can I see what a case pays before I write it?", a: "Yes. Your comp is published in the platform — what each plan and product pays you at your level, by age band — along with a calculator, a commission dashboard showing advanced versus as-earned, persistency and chargeback tracking, and 1099 reports at tax time." },
               { q: "Is this part-time possible?", a: "Yes. Many agents start part-time while transitioning. We prefer a plan to go full-time within 3-6 months." },
               { q: "Which states do you operate in?", a: "Varies by plan. We can discuss your specific state during the intro call." },
               { q: "What happens after I apply?", a: "You'll schedule an opportunity call right away. You'll get a confirmation email with a Zoom link and calendar invite. If you can't make it, we'll reach out to reschedule." },
