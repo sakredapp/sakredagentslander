@@ -810,17 +810,18 @@ export default function Home() {
           >
             Sakred Agents
           </div>
-          <nav className="flex items-center gap-6 text-sm text-[#0F172A]/60">
-            <a href="/privacy" className="hover:text-[#C5A059]" data-testid="link-footer-privacy">
+          {/* py-2.5 gives these a ~44px touch height on phones; they were 20px. */}
+          <nav className="flex flex-wrap justify-center items-center gap-x-6 text-sm text-[#0F172A]/60">
+            <a href="/privacy" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-privacy">
               Privacy Policy
             </a>
-            <a href="/terms" className="hover:text-[#C5A059]" data-testid="link-footer-terms">
+            <a href="/terms" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-terms">
               Terms of Service
             </a>
-            <a href="/support" className="hover:text-[#C5A059]" data-testid="link-footer-support">
+            <a href="/support" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-support">
               Support
             </a>
-            <a href="/delete-account" className="hover:text-[#C5A059]" data-testid="link-footer-delete">
+            <a href="/delete-account" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-delete">
               Delete Account
             </a>
           </nav>

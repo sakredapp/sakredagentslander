@@ -38,7 +38,7 @@ function Figure({
   return (
     <figure className="portal-card p-6 md:p-8 m-0" data-testid={`figure-${kicker.toLowerCase().replace(/\s+/g, "-")}`}>
       <figcaption className="mb-6">
-        <div className="text-[0.65rem] font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-2">{kicker}</div>
+        <div className="text-xs font-medium tracking-[0.22em] text-[#A68A4A] uppercase mb-2">{kicker}</div>
         <h4 className="text-xl md:text-2xl font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
           {title}
         </h4>
@@ -189,7 +189,7 @@ export function PipelineLadder() {
           className="md:hidden pointer-events-none absolute inset-y-0 right-0 w-12 z-10 bg-gradient-to-l from-white to-transparent"
         />
         <div className="overflow-x-auto -mx-2 px-2">
-          <div className="flex items-stretch gap-2 min-w-[640px]">
+          <div className="flex items-stretch gap-2 min-w-[700px]">
           {JOURNEY.map((col, i) => (
             <div key={col.stage} className="flex items-stretch gap-2 flex-1">
               <div
@@ -197,12 +197,12 @@ export function PipelineLadder() {
                   col.accent ? "border-[#C5A059]/45 bg-[#C5A059]/[0.07]" : "border-[#C5A059]/20 bg-white"
                 }`}
               >
-                <div className="text-[0.6rem] font-medium tracking-[0.18em] text-[#A68A4A] uppercase mb-2.5">
+                <div className="text-[0.7rem] font-medium tracking-[0.14em] text-[#A68A4A] uppercase mb-2.5">
                   {col.stage}
                 </div>
                 <ul className="list-none p-0 m-0 space-y-1.5">
                   {col.items.map((it) => (
-                    <li key={it} className="text-[0.7rem] leading-snug text-[#0F172A]/70">
+                    <li key={it} className="text-xs leading-snug text-[#0F172A]/70">
                       {it}
                     </li>
                   ))}
@@ -222,7 +222,7 @@ export function PipelineLadder() {
       <p className="md:hidden text-[#0F172A]/40 text-xs mt-3 text-center">Swipe the board to see every stage &rarr;</p>
 
       <div className="mt-6 rounded-lg border border-[#C5A059]/25 bg-[#C5A059]/[0.05] p-5">
-        <div className="text-[0.6rem] font-medium tracking-[0.18em] text-[#A68A4A] uppercase mb-1.5">
+        <div className="text-[0.7rem] font-medium tracking-[0.14em] text-[#A68A4A] uppercase mb-1.5">
           Every appointment round, tracked separately
         </div>
         <p className="text-[#0F172A]/55 text-sm leading-relaxed mb-4">
@@ -235,7 +235,7 @@ export function PipelineLadder() {
               <div className="text-xs font-medium text-[#0F172A]/80 mb-2">{round}</div>
               <ul className="list-none p-0 m-0 space-y-1">
                 {ROUND_OUTCOMES.map((o) => (
-                  <li key={o} className="text-[0.68rem] leading-snug text-[#0F172A]/50">
+                  <li key={o} className="text-[0.72rem] leading-snug text-[#0F172A]/50">
                     {o}
                   </li>
                 ))}

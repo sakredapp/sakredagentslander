@@ -86,6 +86,14 @@
   background-position: right center;
 }
 
+/* The CTA rendered 36px tall — under the 44px touch-target floor. Raise it on
+   touch devices only, so desktop/nav proportions are untouched. */
+@media (pointer: coarse) {
+  .gold-glow-btn {
+    min-height: 44px;
+  }
+}
+
 .portal-glow {
   box-shadow: 0 0 60px 20px rgba(197, 160, 89, 0.15), 0 0 120px 40px rgba(197, 160, 89, 0.08);
 }

@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# AI answer engines are explicitly allowed. Agents researching an opportunity
+# increasingly ask an assistant before they ever hit a search box, and blocking
+# Google-Extended in particular is how a site quietly disappears from AI
+# Overviews while still ranking in ordinary results. Nothing here is behind
+# auth, so there is nothing to protect by tightening this.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.sakredagents.com/sitemap.xml
