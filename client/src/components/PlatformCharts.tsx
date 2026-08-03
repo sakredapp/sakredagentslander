@@ -181,8 +181,15 @@ export function PipelineLadder() {
       title="Thirty-one dispositions. One board."
       note="The live disposition list from the platform. Every lead sits in exactly one of these, which is what lets the dialer know who to call next and the assistant know whether to keep texting. Terminal outcomes — Not Interested, Wrong Number, Do Not Contact, Disqualified, Unresponsive — sit at the end of the board so the working funnel reads left to right."
     >
-      <div className="overflow-x-auto -mx-2 px-2">
-        <div className="flex items-stretch gap-2 min-w-[640px]">
+      {/* The board is a left-to-right funnel, so it scrolls rather than stacks on
+          narrow screens. The fade + hint are the affordance that it scrolls at all. */}
+      <div className="relative">
+        <div
+          aria-hidden="true"
+          className="md:hidden pointer-events-none absolute inset-y-0 right-0 w-12 z-10 bg-gradient-to-l from-white to-transparent"
+        />
+        <div className="overflow-x-auto -mx-2 px-2">
+          <div className="flex items-stretch gap-2 min-w-[640px]">
           {JOURNEY.map((col, i) => (
             <div key={col.stage} className="flex items-stretch gap-2 flex-1">
               <div
@@ -206,10 +213,13 @@ export function PipelineLadder() {
                   &rarr;
                 </div>
               )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
+      <p className="md:hidden text-[#0F172A]/40 text-xs mt-3 text-center">Swipe the board to see every stage &rarr;</p>
 
       <div className="mt-6 rounded-lg border border-[#C5A059]/25 bg-[#C5A059]/[0.05] p-5">
         <div className="text-[0.6rem] font-medium tracking-[0.18em] text-[#A68A4A] uppercase mb-1.5">

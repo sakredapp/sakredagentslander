@@ -385,7 +385,7 @@ export default function Home() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="pt-12">
-              <div className="inline-flex items-center gap-6 px-8 py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
+              <div className="inline-flex items-center max-w-full gap-3 px-5 py-3 sm:gap-6 sm:px-8 sm:py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
                 <span className="text-sm font-medium text-[#0F172A]/70">Apply</span>
                 <motion.span
                   className="text-[#C5A059]"
@@ -547,7 +547,10 @@ export default function Home() {
       </section>
 
       {/* Client Portal */}
-      <section id="client-portal" className="pt-12 pb-16 bg-[#F9F9F7]" data-testid="section-client-portal">
+      {/* overflow-x-clip: the rotated phone screenshots below extend a few px past
+          the viewport at <=430px and made the whole page scroll sideways. `clip`
+          rather than `hidden` so this doesn't become a scroll container. */}
+      <section id="client-portal" className="pt-12 pb-16 bg-[#F9F9F7] overflow-x-clip" data-testid="section-client-portal">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto">
             <motion.div
