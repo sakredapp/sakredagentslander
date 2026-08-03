@@ -441,13 +441,6 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-medium mb-6" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-about-heading">
                 What Sakred Agents is
               </h2>
-              {/* The consent screen is branded "Sakred CRM"; this site is branded
-                  "Sakred Agents". State that they are the same product, or a
-                  reviewer arriving from the consent screen sees a mismatch. */}
-              <p className="text-sm text-[#0F172A]/45 mb-6" data-testid="text-about-name-note">
-                Also referred to as <strong className="font-medium text-[#0F172A]/60">Sakred CRM</strong> &mdash;
-                the same application.
-              </p>
               <div className="space-y-4 text-[#0F172A]/65 text-lg leading-relaxed">
                 <p data-testid="text-about-summary">
                   <strong className="text-[#0F172A]">Sakred Agents</strong> is a customer relationship

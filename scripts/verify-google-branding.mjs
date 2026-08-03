@@ -69,13 +69,13 @@ const checks = [
     fix: "Keep the 'Why the app asks for Google access' paragraph and the Limited Use sentence.",
   },
   {
-    name: "both product names appear (consent screen says 'Sakred CRM')",
-    // The consent screen / Cloud project is branded "Sakred CRM"; this site is
-    // branded "Sakred Agents". If the home page only carries one of them, a
-    // reviewer arriving from the consent screen cannot tell it is the same app,
-    // which fails "accurately represent and identify your app".
-    pass: /Sakred Agents/i.test(noJsText) && /Sakred CRM/i.test(noJsText),
-    fix: "The no-JS block must name BOTH 'Sakred Agents' and 'Sakred CRM' and say they are the same application.",
+    name: "the app name matches the OAuth consent screen",
+    // The consent screen's App name is "Sakred Agents". Google requires the home
+    // page to "accurately represent and identify your app", which means the name
+    // a user just saw on the consent screen has to be the name on this page.
+    // If the App name is ever changed in the Cloud console, change it here too.
+    pass: /Sakred Agents/i.test(noJsText),
+    fix: "The no-JS block must name the app exactly as the OAuth consent screen does: 'Sakred Agents'.",
   },
   {
     name: "privacy policy is linked from the home page",
