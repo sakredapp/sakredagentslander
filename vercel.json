@@ -29,6 +29,10 @@
       "destination": "/terms.html"
     },
     {
+      "source": "/crm",
+      "destination": "/crm.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
