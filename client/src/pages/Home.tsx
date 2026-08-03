@@ -814,6 +814,9 @@ export default function Home() {
             <a href="/privacy" className="hover:text-[#C5A059]" data-testid="link-footer-privacy">
               Privacy Policy
             </a>
+            <a href="/terms" className="hover:text-[#C5A059]" data-testid="link-footer-terms">
+              Terms of Service
+            </a>
             <a href="/support" className="hover:text-[#C5A059]" data-testid="link-footer-support">
               Support
             </a>
