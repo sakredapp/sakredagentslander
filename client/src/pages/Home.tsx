@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { LeadForm, type FormStage } from "@/components/LeadForm";
 import { CommissionCalculator } from "@/components/CommissionCalculator";
+import { CadenceTimeline, PipelineLadder, CommissionCurve } from "@/components/PlatformCharts";
 import { ScrollProgress, Reveal, RevealStagger, RevealChild } from "@/components/motion";
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
@@ -152,7 +153,7 @@ const infrastructureItems = [
   {
     title: "The Sakred Platform",
     summary: "Our own CRM, AI assistant, dialer, and commission tracking",
-    detail: "Every agent gets full access to the sales platform we built in-house — an AI assistant that texts and qualifies your leads the moment they land and books appointments straight onto your calendar, a power dialer with local caller ID, pipelines built per product line, a unified inbox, quoting and underwriting tools, and commission tracking that shows you what each case pays before you write it. It's on your desktop and in your pocket on iPhone and Android. See the full breakdown in the Platform section above.",
+    detail: "Every agent gets full access to the sales platform we built in-house — an AI assistant that texts and qualifies your leads the moment they land and books appointments straight onto your calendar, a power dialer with local caller ID, a 31-stage pipeline board, a unified inbox, quoting and underwriting tools, and commission tracking that shows you what each case pays before you write it. It's on your desktop and in your pocket on iPhone and Android. See the full breakdown in the Platform section above.",
   },
   {
     title: "Assigned Mentor",
@@ -233,8 +234,8 @@ const platformGroups = [
       },
       {
         icon: Columns3,
-        title: "Pipelines Built Per Product",
-        desc: "Health, ACA, life, mortgage protection, IUL, final expense, annuity, supplemental — each with its own stages, because the sale isn't the same for each one.",
+        title: "One Board, Every Stage",
+        desc: "31 dispositions on a single pipeline board — including three appointment rounds tracked separately, each with its own no-show, reschedule, and sat-without-follow-up. Nothing gets filed under a vague \"follow up.\"",
       },
       {
         icon: CalendarDays,
@@ -319,6 +320,15 @@ const platformGroups = [
       },
     ],
   },
+];
+
+// One figure per platform group, by index. Group 3 ("Handled For You") gets none
+// — it's the section that should read as a short list, not another diagram.
+const PLATFORM_FIGURES: (React.ReactNode | null)[] = [
+  <CadenceTimeline />,
+  <PipelineLadder />,
+  <CommissionCurve />,
+  null,
 ];
 
 export default function Home() {
@@ -509,6 +519,12 @@ export default function Home() {
                       </RevealChild>
                     ))}
                   </RevealStagger>
+
+                  {PLATFORM_FIGURES[gi] && (
+                    <Reveal delay={0.1} className="mt-8">
+                      {PLATFORM_FIGURES[gi]}
+                    </Reveal>
+                  )}
                 </div>
               ))}
             </div>
@@ -776,6 +792,35 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* Google's OAuth branding review checks the home page for the app name
+          and a reachable privacy policy link. The page had neither — no footer
+          existed at all — which is what failed the "Homepage requirements"
+          check. The name here must stay exactly "Sakred Agents": it has to
+          match the OAuth consent screen's app name character for character. */}
+      <footer className="border-t border-[#C5A059]/15 py-10 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div
+            className="text-lg font-semibold text-[#0F172A]"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+            data-testid="text-footer-brand"
+          >
+            Sakred Agents
+          </div>
+          <nav className="flex items-center gap-6 text-sm text-[#0F172A]/60">
+            <a href="/privacy" className="hover:text-[#C5A059]" data-testid="link-footer-privacy">
+              Privacy Policy
+            </a>
+            <a href="/support" className="hover:text-[#C5A059]" data-testid="link-footer-support">
+              Support
+            </a>
+            <a href="/delete-account" className="hover:text-[#C5A059]" data-testid="link-footer-delete">
+              Delete Account
+            </a>
+          </nav>
+          <div className="text-sm text-[#0F172A]/45">© 2026 Sakred Health</div>
+        </div>
+      </footer>
     </div>
   );
 }
