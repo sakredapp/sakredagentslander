@@ -405,8 +405,65 @@ export default function Home() {
         </div>
       </section>
 
+      {/* What the application is, and why it asks for Google data.
+          Google's OAuth branding review rejected this site because the home page
+          "does not explain the purpose of your app" — the rest of the page sells
+          the agent opportunity and never says what the software does, or why it
+          requests Calendar and Gmail access. That has to be stated plainly, in
+          public, above the fold-ish, and it has to match the consent screen. */}
+      <section id="about" className="py-16 bg-white border-y border-[#C5A059]/10" data-testid="section-about">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto">
+            <Reveal>
+              <div className="text-xs font-medium tracking-[0.25em] text-[#A68A4A] uppercase mb-4" data-testid="text-about-eyebrow">About the application</div>
+              <h2 className="text-3xl md:text-4xl font-medium mb-6" style={{ fontFamily: "'Playfair Display', serif" }} data-testid="text-about-heading">
+                What Sakred Agents is
+              </h2>
+              <div className="space-y-4 text-[#0F172A]/65 text-lg leading-relaxed">
+                <p data-testid="text-about-summary">
+                  <strong className="text-[#0F172A]">Sakred Agents</strong> is a customer relationship
+                  management (CRM) and sales-automation application for licensed insurance agents. Agents
+                  sign in to manage their leads and clients, work a pipeline, send and receive text
+                  messages and email, place and receive calls, and schedule appointments. An AI assistant
+                  helps by texting new leads, answering questions, and booking the appointment on the
+                  agent's calendar.
+                </p>
+                <p data-testid="text-about-google">
+                  Connecting a Google account is optional, and an agent can disconnect it at any time.
+                  When an agent chooses to connect one, Sakred Agents uses it only to run the scheduling
+                  and email features they enabled: it reads their Google Calendar availability so it only
+                  offers times they are genuinely free, creates and updates appointments it books on that
+                  calendar, sends their follow-up email from their own address, and — for agents who turn
+                  it on — reads their own inbox to sort it and draft replies they review before sending.
+                </p>
+                <p data-testid="text-about-limited-use">
+                  Google user data is never used to train any artificial-intelligence or machine-learning
+                  model, and is never sold or shared for advertising. Our use of information received from
+                  Google APIs adheres to the{" "}
+                  <a
+                    href="https://developers.google.com/terms/api-services-user-data-policy"
+                    rel="noopener"
+                    className="text-[#C5A059] hover:underline"
+                    data-testid="link-about-google-policy"
+                  >
+                    Google API Services User Data Policy
+                  </a>
+                  , including the Limited Use requirements.
+                </p>
+                <p className="text-base" data-testid="text-about-links">
+                  Read our{" "}
+                  <a href="/privacy" className="text-[#C5A059] hover:underline" data-testid="link-about-privacy">Privacy Policy</a>
+                  {" "}and{" "}
+                  <a href="/terms" className="text-[#C5A059] hover:underline" data-testid="link-about-terms">Terms of Service</a>.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* Client Types — who's buying and what they pay */}
-      <section id="opportunity" className="py-16 bg-white border-y border-[#C5A059]/10" data-testid="section-opportunity">
+      <section id="opportunity" className="py-16 bg-[#F9F9F7] border-y border-[#C5A059]/10" data-testid="section-opportunity">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <Reveal className="text-center mb-10">
