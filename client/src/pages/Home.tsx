@@ -347,7 +347,7 @@ export default function Home() {
           >
             <motion.div variants={fadeInUp} className="mb-4">
               <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-[#A68A4A] uppercase border border-[#C5A059]/30 rounded-full bg-[#C5A059]/5">
-                Private Healthcare &middot; Recurring Commissions
+                Private Healthcare &middot; Recurring Commissions &middot; Custom CRM
               </span>
             </motion.div>
             
@@ -360,11 +360,11 @@ export default function Home() {
             
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#0F172A]/55 max-w-2xl mx-auto leading-relaxed pt-4">
               Private healthcare is a recurring-commission line with compounding renewals.
-              We give you the contracts, the training, and our own AI-powered sales platform
-              to build a book that pays you month after month.
+              Every Sakred agent gets access to <strong className="font-medium text-[#0F172A]/80">Sakred CRM</strong> &mdash;
+              our own custom-built CRM and AI sales platform &mdash; plus the contracts and
+              training to build a book that pays you month after month.
             </motion.p>
 
-            
             <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Dialog>
                 <DialogTrigger asChild>
@@ -383,6 +383,28 @@ export default function Home() {
                 View Income Calculator
               </Button>
             </motion.div>
+
+            {/* Google's OAuth branding review rejected this domain for not explaining
+                what the application is, so the hero states it plainly. It sits below
+                the CTAs deliberately: the first paragraph already names Sakred CRM, and
+                putting this block above the buttons pushed "Apply to Join" off a phone
+                screen. The #about section carries the full statement and the
+                Google-data justification — keep the three copies in sync. */}
+            <motion.p variants={fadeInUp} className="text-base text-[#0F172A]/45 max-w-2xl mx-auto leading-relaxed pt-10" data-testid="text-hero-app-purpose">
+              <strong className="font-medium text-[#0F172A]/60">Sakred CRM</strong> is the customer relationship
+              management app our agents work in every day: track your clients and their policies, manage a
+              sales pipeline, book and run appointments, place and receive calls, send and receive texts and
+              email, run marketing campaigns, and track your commissions, renewals and payouts &mdash; with an
+              AI assistant that texts new leads and books the appointment on your calendar.{" "}
+              <button
+                type="button"
+                onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+                className="text-[#C5A059] hover:underline font-medium"
+                data-testid="link-hero-about"
+              >
+                What the app does &rarr;
+              </button>
+            </motion.p>
 
             <motion.div variants={fadeInUp} className="pt-12">
               <div className="inline-flex items-center max-w-full gap-3 px-5 py-3 sm:gap-6 sm:px-8 sm:py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
@@ -423,10 +445,11 @@ export default function Home() {
                 <p data-testid="text-about-summary">
                   <strong className="text-[#0F172A]">Sakred Agents</strong> is a customer relationship
                   management (CRM) and sales-automation application for licensed insurance agents. Agents
-                  sign in to manage their leads and clients, work a pipeline, send and receive text
-                  messages and email, place and receive calls, and schedule appointments. An AI assistant
-                  helps by texting new leads, answering questions, and booking the appointment on the
-                  agent's calendar.
+                  sign in to track their clients and the policies they hold, manage a sales pipeline from
+                  new lead to issued policy, schedule and run appointments, place and receive calls, send
+                  and receive text messages and email, run marketing campaigns, and track their commissions,
+                  renewals and payouts. An AI assistant helps by texting new leads, answering their
+                  questions, and booking the appointment on the agent&rsquo;s calendar.
                 </p>
                 <p data-testid="text-about-google">
                   Connecting a Google account is optional, and an agent can disconnect it at any time.
