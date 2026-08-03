@@ -21,32 +21,8 @@ import { CadenceTimeline, PipelineLadder, CommissionCurve } from "@/components/P
 import { ScrollProgress, Reveal, RevealStagger, RevealChild } from "@/components/motion";
 import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
-import {
-  Search,
-  Shield,
-  FileText,
-  Phone,
-  ChevronDown,
-  Bot,
-  CalendarCheck,
-  Flame,
-  RefreshCw,
-  PhoneCall,
-  Inbox,
-  Columns3,
-  CalendarDays,
-  FileSearch,
-  Stethoscope,
-  Smartphone,
-  Wallet,
-  Table2,
-  ShieldAlert,
-  Calculator,
-  Trophy,
-  ScrollText,
-  GraduationCap,
-  ClipboardCheck,
-} from "lucide-react";
+// Only the client-portal cards use icons now — the platform section is icon-free.
+import { Search, Shield, FileText, Phone } from "lucide-react";
 // Updated Sakred Health app screenshots (2026-07-25) — served from the app's Supabase.
 // Center = home screen (hero); sides = the policy-portal + document library screens.
 const APP_SHOTS = "https://auth.sakredhealth.com/storage/v1/object/public/appdemoscreenshots";
@@ -195,22 +171,18 @@ const platformGroups = [
       "The moment a lead lands, it gets worked — not filed. You show up to conversations that are already warm.",
     features: [
       {
-        icon: Bot,
         title: "AI Texts Every Lead Instantly",
         desc: "Our AI assistant opens the conversation the minute a lead comes in, answers questions, works through objections, and qualifies. Nights, weekends, holidays.",
       },
       {
-        icon: CalendarCheck,
         title: "It Books — It Doesn't Hand Off",
         desc: "When a lead is ready, the AI puts the appointment straight on your calendar. You never sit in a message queue or babysit threads.",
       },
       {
-        icon: Flame,
         title: "Hot Leads Worklist",
         desc: "A ranked call list every morning: who to call first, why they're hot, what the AI already learned about them, and a suggested opener.",
       },
       {
-        icon: RefreshCw,
         title: "Follow-Up That Never Quits",
         desc: "Leads that go quiet get re-engaged automatically on a cadence tuned to the product. Nothing rots in your pipeline because you got busy.",
       },
@@ -223,37 +195,30 @@ const platformGroups = [
       "Dialer, inbox, pipeline, calendar, quoting. No stitching together five subscriptions to run your day.",
     features: [
       {
-        icon: PhoneCall,
         title: "Power Dialer",
         desc: "One-click dialing from a local number the lead recognizes, with voicemail drop, call recording, and dispositions logged as you go.",
       },
       {
-        icon: Inbox,
         title: "Unified Inbox",
         desc: "Texts, emails, and call history for one person, in one thread. You always know what was already said before you pick up the phone.",
       },
       {
-        icon: Columns3,
         title: "One Board, Every Stage",
         desc: "31 dispositions on a single pipeline board — including three appointment rounds tracked separately, each with its own no-show, reschedule, and sat-without-follow-up. Nothing gets filed under a vague \"follow up.\"",
       },
       {
-        icon: CalendarDays,
         title: "Calendar & Personal Booking Link",
         desc: "Two-way Google Calendar sync, your own booking page, automatic reminders, and no-show follow-up handled for you.",
       },
       {
-        icon: FileSearch,
         title: "Quoting & Policy Analyzer",
         desc: "Plan documents with age-banded pricing built in, a quoter that prices off them, and an analyzer that reads a prospect's current coverage and explains it in plain English.",
       },
       {
-        icon: Stethoscope,
         title: "Underwriting Reference",
         desc: "A condition-by-category guide so you know how a case is likely to land before you spend a week submitting it.",
       },
       {
-        icon: Smartphone,
         title: "iPhone & Android App",
         desc: "Your leads, inbox, dialer, and calendar in your pocket. Sakred CRM ships on the App Store and Google Play — the same system, on the road.",
       },
@@ -266,27 +231,22 @@ const platformGroups = [
       "Most agents find out what a case paid when the deposit hits. You'll know before you write it.",
     features: [
       {
-        icon: Table2,
         title: "See Your Comp Before You Sell",
         desc: "Your comp is published in the platform — what every plan and product pays you at your level, by age band. No guessing, no asking, no mystery grid.",
       },
       {
-        icon: Wallet,
         title: "Commission Dashboard",
         desc: "Every policy you write, what it pays, what's advanced versus as-earned, and when it's scheduled to land.",
       },
       {
-        icon: ShieldAlert,
         title: "Chargeback & Persistency Tracking",
         desc: "Early lapses get flagged and clawbacks get booked automatically, so a statement never surprises you and you can see which business is sticking.",
       },
       {
-        icon: Calculator,
         title: "Calculator & 1099 Reports",
         desc: "Model a case before you write it, and get clean, organized numbers when it's time to file.",
       },
       {
-        icon: Trophy,
         title: "Production Scoreboard",
         desc: "Where you stand, in real time. Healthy competition beats a monthly email nobody reads.",
       },
@@ -299,22 +259,18 @@ const platformGroups = [
       "Compliance, training, and contracting run in the background so your day is selling, not admin.",
     features: [
       {
-        icon: Shield,
         title: "Messaging Compliance, Automatic",
         desc: "Registration for business texting, quiet hours in the client's local time, opt-outs honored instantly, and messaging that goes out under the correct licensed business name for the state.",
       },
       {
-        icon: GraduationCap,
         title: "Academy, Built In",
         desc: "Training modules on demand, organized by product line, right inside the platform you already work in.",
       },
       {
-        icon: ClipboardCheck,
         title: "Contracting Tracker",
         desc: "See exactly where every appointment stands instead of emailing someone to ask.",
       },
       {
-        icon: ScrollText,
         title: "Client Records That Stay Put",
         desc: "Policies, documents, service requests, and renewal dates live on the client record — so your book is an asset you can actually work, years later.",
       },
@@ -360,9 +316,8 @@ export default function Home() {
             
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-[#0F172A]/55 max-w-2xl mx-auto leading-relaxed pt-4">
               Private healthcare is a recurring-commission line with compounding renewals.
-              Every Sakred agent gets access to <strong className="font-medium text-[#0F172A]/80">Sakred CRM</strong> &mdash;
-              our own custom-built CRM and AI sales platform &mdash; plus the contracts and
-              training to build a book that pays you month after month.
+              You get the contracts, the training, and our own custom-built CRM &mdash;
+              everything you need to build a book that pays you month after month.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -383,28 +338,6 @@ export default function Home() {
                 View Income Calculator
               </Button>
             </motion.div>
-
-            {/* Google's OAuth branding review rejected this domain for not explaining
-                what the application is, so the hero states it plainly. It sits below
-                the CTAs deliberately: the first paragraph already names Sakred CRM, and
-                putting this block above the buttons pushed "Apply to Join" off a phone
-                screen. The #about section carries the full statement and the
-                Google-data justification — keep the three copies in sync. */}
-            <motion.p variants={fadeInUp} className="text-base text-[#0F172A]/45 max-w-2xl mx-auto leading-relaxed pt-10" data-testid="text-hero-app-purpose">
-              <strong className="font-medium text-[#0F172A]/60">Sakred CRM</strong> is the customer relationship
-              management app our agents work in every day: track your clients and their policies, manage a
-              sales pipeline, book and run appointments, place and receive calls, send and receive texts and
-              email, run marketing campaigns, and track your commissions, renewals and payouts &mdash; with an
-              AI assistant that texts new leads and books the appointment on your calendar.{" "}
-              <button
-                type="button"
-                onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-                className="text-[#C5A059] hover:underline font-medium"
-                data-testid="link-hero-about"
-              >
-                What the app does &rarr;
-              </button>
-            </motion.p>
 
             <motion.div variants={fadeInUp} className="pt-12">
               <div className="inline-flex items-center max-w-full gap-3 px-5 py-3 sm:gap-6 sm:px-8 sm:py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
@@ -586,14 +519,15 @@ export default function Home() {
                     <p className="text-[#0F172A]/55 leading-relaxed mt-3 max-w-2xl">{group.intro}</p>
                   </Reveal>
 
-                  <RevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {/* No icon tiles. A grid of little gold squares is noise on a list
+                      that reads better as plain type separated by hairlines. */}
+                  <RevealStagger className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
                     {group.features.map((feature, fi) => (
                       <RevealChild key={fi}>
-                        <div className="portal-card p-7 space-y-4 h-full" data-testid={`card-platform-${gi}-${fi}`}>
-                          <div className="w-10 h-10 rounded-lg bg-[#C5A059]/10 flex items-center justify-center">
-                            <feature.icon className="w-5 h-5 text-[#C5A059]" />
-                          </div>
-                          <h4 className="text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>{feature.title}</h4>
+                        <div className="py-5 border-t border-[#C5A059]/15 h-full" data-testid={`card-platform-${gi}-${fi}`}>
+                          <h4 className="text-lg font-medium mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                            {feature.title}
+                          </h4>
                           <p className="text-[#0F172A]/55 text-sm leading-relaxed">{feature.desc}</p>
                         </div>
                       </RevealChild>
