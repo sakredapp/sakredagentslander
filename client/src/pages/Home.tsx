@@ -899,6 +899,13 @@ export default function Home() {
           </div>
           {/* py-2.5 gives these a ~44px touch height on phones; they were 20px. */}
           <nav className="flex flex-wrap justify-center items-center gap-x-6 text-sm text-[#0F172A]/60">
+            {/* Ties the marketing domain to the app domain. The OAuth redirect
+                URIs are on sakredcrm.com while the consent screen's home page is
+                here, and nothing on this site previously connected the two — a
+                reviewer had no way to see they are one product. */}
+            <a href="https://www.sakredcrm.com" rel="noopener" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-signin">
+              Agent Sign In
+            </a>
             <a href="/privacy" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-privacy">
               Privacy Policy
             </a>
