@@ -487,8 +487,8 @@ export default function Home() {
               </h2>
               <p className="text-[#0F172A]/55 text-lg leading-relaxed max-w-3xl mx-auto mt-6" data-testid="text-platform-intro">
                 Most agencies hand you a login to someone else&rsquo;s CRM and wish you luck. We built our own — an
-                insurance sales platform with an AI assistant that works your leads, a dialer, pipelines for every
-                product line, and commission tracking that shows you what you&rsquo;re owed. Every Sakred agent gets it.
+                insurance sales platform with an AI assistant that works your leads, a dialer, a 31-stage pipeline
+                board, and commission tracking that shows you what you&rsquo;re owed. Every Sakred agent gets it.
               </p>
               <p className="text-[#0F172A]/40 text-sm leading-relaxed italic mt-3">
                 Built in-house for our own agents. Not a reseller license.
@@ -772,7 +772,7 @@ export default function Home() {
               { q: "What's the weekly call?", a: "A brief overview call covering expectations, next steps, and current opportunities. It's how we stay aligned." },
               { q: "How fast can I start?", a: "Depends on your licensing and contracting status. Licensed agents can start within days." },
               { q: "Do you provide leads?", a: "We provide access to vetted lead vendors at discounted rates and train you on organic lead generation. For agents hitting production targets, there's potential for lead costs to be partially covered at a reduced commission split." },
-              { q: "Do I need my own CRM?", a: "No. Every Sakred agent gets access to the sales platform we built in-house — AI that works your leads, a power dialer, pipelines per product line, a unified inbox, quoting tools, and commission tracking. If you're already paying for a CRM, a dialer, and a texting tool, you can stop." },
+              { q: "Do I need my own CRM?", a: "No. Every Sakred agent gets access to the sales platform we built in-house — AI that works your leads, a power dialer, a 31-stage pipeline board, a unified inbox, quoting tools, and commission tracking. If you're already paying for a CRM, a dialer, and a texting tool, you can stop." },
               { q: "What does the AI actually do?", a: "It's an assistant, not a robot that replaces you. It texts every new lead the moment it lands, answers questions, works through objections, and qualifies. When the lead is ready, it books the appointment directly on your calendar — you don't sit in a message queue or chase cold leads. You show up to conversations that are already warm." },
               { q: "Can I see what a case pays before I write it?", a: "Yes. Your comp is published in the platform — what each plan and product pays you at your level, by age band — along with a calculator, a commission dashboard showing advanced versus as-earned, persistency and chargeback tracking, and 1099 reports at tax time." },
               { q: "Is this part-time possible?", a: "Yes. Many agents start part-time while transitioning. We prefer a plan to go full-time within 3-6 months." },
