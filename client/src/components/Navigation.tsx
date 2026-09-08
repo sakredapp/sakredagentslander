@@ -12,6 +12,7 @@ import {
 import { LeadForm, type FormStage } from "./LeadForm";
 import { motion, AnimatePresence } from "framer-motion";
 import logoSrc from "@assets/full_png_image_sakred__1771270056819.png";
+import { SIGN_IN_URL } from "@/lib/app-url";
 
 function NavLeadFormDialog({ onSuccess }: { onSuccess?: () => void }) {
   const [stage, setStage] = useState<FormStage>("form");
@@ -97,6 +98,19 @@ export function Navigation() {
             </button>
           ))}
           
+          {/* Sign In sits BEFORE Apply, and is the quieter of the two on
+              purpose. This is a recruiting site: most visitors are strangers and
+              Apply is the conversion. But every agent we already have arrives
+              here too — they type the brand, not a bookmark — and until now the
+              only way in was a link buried in the footer. */}
+          <a
+            href={SIGN_IN_URL}
+            data-testid="link-signin-nav"
+            className="text-sm font-medium text-[#0F172A]/60 hover:text-[#0F172A] transition-colors tracking-wide"
+          >
+            Sign In
+          </a>
+
           <Dialog>
             <DialogTrigger asChild>
               <button
@@ -150,6 +164,13 @@ export function Navigation() {
                 </DialogTrigger>
                 <NavLeadFormDialog onSuccess={() => setMobileMenuOpen(false)} />
               </Dialog>
+              <a
+                href={SIGN_IN_URL}
+                data-testid="link-signin-mobile"
+                className="w-full text-center text-base font-medium text-[#0F172A]/70 py-3"
+              >
+                Already an agent? Sign in
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

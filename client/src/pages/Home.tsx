@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { SIGN_IN_URL } from "@/lib/app-url";
 import {
   Accordion,
   AccordionContent,
@@ -338,6 +339,20 @@ export default function Home() {
                 View Income Calculator
               </Button>
             </motion.div>
+
+            {/* Not a third button. An existing agent needs a door, not a CTA —
+                making this look like the other two would compete with Apply,
+                which is what this page is for. */}
+            <motion.p variants={fadeInUp} className="pt-4 text-sm text-[#0F172A]/50">
+              Already a Sakred agent?{" "}
+              <a
+                href={SIGN_IN_URL}
+                data-testid="link-signin-hero"
+                className="text-[#C5A059] font-medium hover:underline"
+              >
+                Sign in to the platform
+              </a>
+            </motion.p>
 
             <motion.div variants={fadeInUp} className="pt-12">
               <div className="inline-flex items-center max-w-full gap-3 px-5 py-3 sm:gap-6 sm:px-8 sm:py-4 border border-[#C5A059]/20 rounded-full bg-white/60 backdrop-blur-sm">
@@ -830,7 +845,7 @@ export default function Home() {
                 URIs are on sakredcrm.com while the consent screen's home page is
                 here, and nothing on this site previously connected the two — a
                 reviewer had no way to see they are one product. */}
-            <a href="https://www.sakredcrm.com" rel="noopener" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-signin">
+            <a href={SIGN_IN_URL} rel="noopener" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-signin">
               Agent Sign In
             </a>
             <a href="/privacy" className="hover:text-[#C5A059] py-2.5" data-testid="link-footer-privacy">
