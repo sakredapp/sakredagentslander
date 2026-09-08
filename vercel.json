@@ -32,5 +32,27 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://app.sakredagents.com/login",
+      "permanent": false
+    },
+    {
+      "source": "/signin",
+      "destination": "https://app.sakredagents.com/login",
+      "permanent": false
+    },
+    {
+      "source": "/sign-in",
+      "destination": "https://app.sakredagents.com/login",
+      "permanent": false
+    },
+    {
+      "source": "/app",
+      "destination": "https://app.sakredagents.com/login",
+      "permanent": false
+    }
   ]
 }
